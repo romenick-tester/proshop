@@ -7,3 +7,7 @@ html {
   padding: 0;
   margin: 0;
 }
+
+main {
+  min-height: 90vh;
+}
