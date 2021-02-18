@@ -1,5 +1,5 @@
 import React from "react";
-import { useGlobalContext } from "../_context/globalContext";
+import { useGlobalContext } from "../manager/context/globalContext";
 import { Row, Col } from "react-bootstrap";
 import { Product } from "../components";
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
+import { RatingStar } from "./subcomponents";
 
 function Product({ product }) {
     const { 
@@ -20,7 +21,7 @@ function Product({ product }) {
                 </Link>
                 <Card.Text as="div">
                     <div className="my-3">
-                        {rating} ⭐ from {numReviews} reviews
+                        <RatingStar values={{rating, numReviews}} />
                     </div>
                 </Card.Text>
                 <Card.Text as="h3">

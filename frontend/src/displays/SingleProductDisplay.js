@@ -1,5 +1,5 @@
 import React from "react";
-import { useGlobalContext } from "../_context/globalContext";
+import { useGlobalContext } from "../manager/context/globalContext";
 
 function SingleProductDisplay({ match }) {
     const { products } = useGlobalContext();
