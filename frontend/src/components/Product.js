@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
-import { RatingStar } from "./subcomponents";
+import RatingStar from "./RatingStar";
 
 function Product({ product }) {
     const { 

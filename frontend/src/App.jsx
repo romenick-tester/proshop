@@ -15,8 +15,8 @@ function App() {
             <main>
                 <Container>
                     <Switch>
-                        <Route path="/" exact component={HomeDisplay} />
                         <Route path="/product/:id" component={SingleProductDisplay} />
+                        <Route path="/" exact component={HomeDisplay} />
                         <Route path="*" component={ErrorDisplay} />
                     </Switch>
                 </Container>
