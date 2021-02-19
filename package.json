@@ -4,8 +4,8 @@
   "description": "web eccomerce site",
   "main": "index.js",
   "scripts": {
-    "start": "cd backend && node server.js",
-    "server": "cd backend && nodemon server.js",
+    "start": "cd backend && node server",
+    "server": "cd backend && nodemon server",
     "client": "cd frontend && npm start",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
