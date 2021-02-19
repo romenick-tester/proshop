@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { AppProvider } from "./manager/context/globalContext";
+import { AppProvider } from "./manager";
 import App from "./App";
-import "./manager/bootstrap.min.css";
-import "./manager/index.css";
+import "./manager/css/bootstrap.min.css";
+import "./manager/css/index.css";
 
 ReactDOM.render(
     <AppProvider>

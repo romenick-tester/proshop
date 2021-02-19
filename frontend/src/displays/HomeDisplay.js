@@ -1,10 +1,14 @@
 import React from "react";
 import { useGlobalContext } from "../manager/context/globalContext";
 import { Row, Col } from "react-bootstrap";
-import { Product } from "../components";
+import { Message, Product } from "../components";
 
 function HomeDisplay() {
-    const { products } = useGlobalContext();
+    const { products, loading } = useGlobalContext();
+
+    if(loading) {
+        return <Message variant="info">Loading...</Message>
+    }
     
     return (
         <>

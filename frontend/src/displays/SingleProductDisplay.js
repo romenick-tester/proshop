@@ -1,17 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useGlobalContext } from "../manager/context/globalContext";
+import { useFetch } from "../manager";
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
 import { RatingStar, Message } from "../components";
 
 function SingleProductDisplay({ match }) {
     const productID = match.params.id;
-    const { products } = useGlobalContext();
+    const { loading, data: product } = useFetch(`/api/products/${productID}`);
 
-    const product = products.find((item) => item.id === productID);
-
-    if(!product) {
-        return <Message variant="warning">Error...</Message>;
+    if(loading) {
+        return <Message variant="info">Loading...</Message>;
     }
 
     const { name, image, description, price, countInStock, rating, numReviews } = product;
