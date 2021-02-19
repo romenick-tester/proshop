@@ -1,5 +1,11 @@
-const test = (req,res) => {
-    res.send("test route");
+const { data } = require("../manager")
+
+const getAllProducts = (req,res) => {
+    const { products } = data;
+    
+    res.json(products);
 }
 
-module.exports = { test };
+
+
+module.exports = { getAllProducts };
