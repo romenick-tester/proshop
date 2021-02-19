@@ -1,15 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useGlobalContext } from "../manager/context/globalContext";
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
-import { RatingStar } from "../components";
+import { RatingStar, Message } from "../components";
 
 function SingleProductDisplay({ match }) {
     const productID = match.params.id;
     const { products } = useGlobalContext();
 
-    const product = products.find((item) => item.id === productID); 
-    const { name, image, description, brand, price, countInStock, rating, numReviews } = product;
+    const product = products.find((item) => item.id === productID);
+
+    if(!product) {
+        return <Message variant="warning">Error...</Message>;
+    }
+
+    const { name, image, description, price, countInStock, rating, numReviews } = product;
     return (
         <>
             <Link to="/" className="btn btn-light my-2 rounded">Go back</Link>
