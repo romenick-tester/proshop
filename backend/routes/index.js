@@ -1,3 +1,3 @@
-const productsRoutes = require("./productsRoutes");
+const { productsRoutes } = require("./api");
 
 module.exports = { productsRoutes };

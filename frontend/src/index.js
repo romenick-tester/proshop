@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { AppProvider } from "./manager";
+import { ProductsProvider } from "./settings";
 import App from "./App";
-import "./manager/css/bootstrap.min.css";
-import "./manager/css/index.css";
+import "./settings/css/bootstrap.min.css";
+import "./settings/css/index.css";
 
 ReactDOM.render(
-    <AppProvider>
+    <ProductsProvider>
         <App/>
-    </AppProvider>, document.getElementById("root")
+    </ProductsProvider>, document.getElementById("root")
 );

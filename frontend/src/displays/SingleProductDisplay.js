@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useFetch } from "../manager";
+import { useFetch } from "../settings";
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
 import { RatingStar, Message } from "../components";
 

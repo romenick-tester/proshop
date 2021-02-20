@@ -7,7 +7,7 @@ const db = process.env.MONGODB_URI || "mongodb://localhost:27017";
 
 const connectDB = async() => {
     try {
-        await mongoose.connect(db, {
+        const conn = await mongoose.connect(db, {
             dbName: "proshop",
             useNewUrlParser: true,
             useUnifiedTopology: true,
@@ -15,9 +15,9 @@ const connectDB = async() => {
             useFindAndModify: false
         })
 
-        console.log("mongodb connected...");
+        console.log(`Mongodb connected on ${conn.connection.host}`);
     } catch (error) {
-        console.error(error.message);
+        console.error(`Error: ${error.message}`);
         process.exit(1); //exit with failure
     }
 }

@@ -1,9 +1,9 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-const AppContext = createContext();
+const ProductsContext = createContext();
 
-const AppProvider = ({ children }) => {
-    const [loading, setLoading] = useState(false);
+const ProductsProvider = ({ children }) => {
+    const [loading, setLoading] = useState(true);
     const [products, setProducts] = useState([]);
 
     const fetchProducts = async() => {
@@ -13,13 +13,14 @@ const AppProvider = ({ children }) => {
             const data = await res.json();
 
             if(data) {
-                setLoading(false);
                 setProducts(data);
-            } else {
                 setLoading(false);
-                console.log("failed to fetch data!");
+            } else {
+                setProducts([]);
+                setLoading(false);
             }
         } catch (error) {
+            setLoading(false);
             console.error(error);
         }
     }
@@ -28,17 +29,15 @@ const AppProvider = ({ children }) => {
         fetchProducts();
     }, [])
 
-    const values = { value: { products, loading } }
-
     return (
-        <AppContext.Provider {...values}>
+        <ProductsContext.Provider value={{products, loading}}>
             {children}
-        </AppContext.Provider>
+        </ProductsContext.Provider>
     )
 }
 
-const useGlobalContext = () => {
-    return useContext(AppContext);
+const useProductsContext = () => {
+    return useContext(ProductsContext);
 }
 
-export { AppProvider, useGlobalContext };
+export { ProductsProvider, useProductsContext };
