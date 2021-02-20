@@ -7,7 +7,9 @@
     "start": "cd backend && node server",
     "server": "cd backend && nodemon server",
     "client": "cd frontend && npm start",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "data:import": "cd backend && node ./settings/seeder",
+    "data:destroy": "cd backend && node ./settings/seeder -d"
   },
   "author": "Romenick Tester",
   "license": "MIT",
