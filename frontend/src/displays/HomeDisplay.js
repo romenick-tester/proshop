@@ -1,13 +1,13 @@
 import React from "react";
 import { useProductsContext } from "../settings";
 import { Row, Col } from "react-bootstrap";
-import { Message, Product } from "../components";
+import { Message, Product, Loader } from "../components";
 
 function HomeDisplay() {
     const { loading, products, error } = useProductsContext();
 
     if(loading) {
-        return <Message variant="info">Loading...</Message>
+        return <Loader />
     }
 
     if(error) {

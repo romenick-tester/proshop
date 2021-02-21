@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
-import { RatingStar, Message } from "../components";
+import { RatingStar, Message, Loader } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails } from "../settings"
 
@@ -17,7 +17,7 @@ function SingleProductDisplay({ match }) {
     }, [productID, dispatch])
 
     if(loading) {
-        return <Message variant="info">Loading...</Message>;
+        return <Loader/>;
     }
     
     if(error) {
