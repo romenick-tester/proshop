@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useFetch } from "../settings";
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
 import { RatingStar, Message } from "../components";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductDetails } from "../settings"
 
 function SingleProductDisplay({ match }) {
     const productID = match.params.id;
-    const { loading, data: product } = useFetch(`/api/products/${productID}`);
+    const dispatch = useDispatch();
+
+    const state = useSelector(state => state.productDetails);
+    const { loading, error, product } = state;
+
+    useEffect(() => {
+        dispatch(getProductDetails(productID))
+    }, [productID, dispatch])
 
     if(loading) {
         return <Message variant="info">Loading...</Message>;
+    }
+    
+    if(error) {
+        return <Message variant="danger">{error}</Message>;
     }
 
     const { name, image, description, price, countInStock, rating, numReviews } = product;

@@ -1,3 +1,3 @@
-import { counterReducer } from "./sampleReducers";
+import { productListReducer, productDetailsReducer } from "./productReducers";
 
-export { counterReducer };
+export { productListReducer, productDetailsReducer };

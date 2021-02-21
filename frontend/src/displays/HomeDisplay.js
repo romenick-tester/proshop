@@ -2,23 +2,21 @@ import React from "react";
 import { useProductsContext } from "../settings";
 import { Row, Col } from "react-bootstrap";
 import { Message, Product } from "../components";
-import { useDispatch, useSelector } from "react-redux";
-import { TEST, counterAction } from "../settings"
 
 function HomeDisplay() {
-    const { loading, products } = useProductsContext();
-
-    const dispatch = useDispatch();
-
-    const counterState = useSelector(state => state.counter);
+    const { loading, products, error } = useProductsContext();
 
     if(loading) {
         return <Message variant="info">Loading...</Message>
     }
 
+    if(error) {
+        return <Message variant="danger">{error}</Message>
+    }
+
     return (
         <>
-        <h1>Latest Products {counterState}</h1>
+        <h1>Latest Products</h1>
         <Row>
             {products.map((product) => {
                 return (

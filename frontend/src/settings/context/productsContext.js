@@ -1,36 +1,19 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductList } from ".."
 
 const ProductsContext = createContext();
 
 const ProductsProvider = ({ children }) => {
-    const [loading, setLoading] = useState(true);
-    const [products, setProducts] = useState([]);
-
-    const fetchProducts = async() => {
-        setLoading(true);
-        try {
-            const res = await fetch("/api/products");
-            const data = await res.json();
-
-            if(data) {
-                setProducts(data);
-                setLoading(false);
-            } else {
-                setProducts([]);
-                setLoading(false);
-            }
-        } catch (error) {
-            setLoading(false);
-            console.error(error);
-        }
-    }
+    const dispatch = useDispatch();
+    const state = useSelector(state => state.productList);
 
     useEffect(() => {
-        fetchProducts();
-    }, [])
+        dispatch(getProductList());
+    }, [dispatch])
 
     return (
-        <ProductsContext.Provider value={{products, loading}}>
+        <ProductsContext.Provider value={{...state}}>
             {children}
         </ProductsContext.Provider>
     )

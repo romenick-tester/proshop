@@ -1,3 +1,3 @@
-import { counterAction } from "./sampleActions";
+import { getProductList, getProductDetails } from "./productActions";
 
-export { counterAction };
+export { getProductList, getProductDetails };

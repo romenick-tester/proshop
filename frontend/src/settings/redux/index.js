@@ -1,10 +1,8 @@
-import { counterReducer } from "./reducers";
-import { counterAction } from "./actions";
-import { TEST } from "./constants"
+import { productListReducer, productDetailsReducer } from "./reducers";
+import { getProductList, getProductDetails } from "./actions";
 import store from "./store";
 
 export {
-    counterReducer, 
-    counterAction,
-    TEST, 
+    productListReducer, productDetailsReducer,
+    getProductList, getProductDetails,
     store };
