@@ -1,3 +1,4 @@
 const productsRoutes = require("./productsRoutes");
+const userRoutes = require("./userRoutes");
 
-module.exports = { productsRoutes };
+module.exports = { productsRoutes, userRoutes };
