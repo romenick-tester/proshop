@@ -5,7 +5,8 @@ import {Header, Footer} from "./components";
 import {
     HomeDisplay, 
     SingleProductDisplay,
-    ErrorDisplay
+    ErrorDisplay,
+    CartDisplay,
 } from "./displays";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
             <main>
                 <Container>
                     <Switch>
+                        <Route path="/cart/:id?" component={CartDisplay} />
                         <Route path="/product/:id" component={SingleProductDisplay} />
                         <Route path="/" exact component={HomeDisplay} />
                         <Route path="*" component={ErrorDisplay} />
