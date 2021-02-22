@@ -15,6 +15,7 @@ const ProductSchema = new Schema({
     category:       { type: String, required: true },
     description:    { type: String, required: true },
     review:         [ ReviewSchema ],
+    numReviews:     { type: Number, required: true, default: 0 },
     rating:         { type: Number, required: true, default: 0 },
     price:          { type: Number, required: true, default: 0 },
     countInStock:   { type: Number, required: true, default: 0 },

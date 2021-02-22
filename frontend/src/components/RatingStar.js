@@ -2,8 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { BsStar, BsStarHalf, BsStarFill } from "react-icons/bs";
 
-function RatingStar({ values, color }) {
-    const { rating, numReviews } = values;
+function RatingStar({ rating, reviews, color }) {
 
     const props = { style: { color }, className: "star" }
     
@@ -25,19 +24,21 @@ function RatingStar({ values, color }) {
                 {rating >= 5 ? <BsStarFill/> : rating >= 4.5 ? <BsStarHalf/> : <BsStar/>}
             </span>
             <small>
-                {" "} | {" "} from <strong> {numReviews} reviews </strong> 
+                {" "} | {" "} from <strong> {reviews} reviews </strong> 
             </small>
         </div>
     )
 }
 
 RatingStar.defaultProps = {
-    values: { rating: 1, numReviews: 1 },
+    rating: 1, 
+    reviews: 0,
     color: "yellow"
 }
 
 RatingStar.propTypes = {
-    values: PropTypes.object.isRequired,
+    rating: PropTypes.number.isRequired,
+    reviews: PropTypes.number.isRequired,
     color: PropTypes.string.isRequired,
 }
 

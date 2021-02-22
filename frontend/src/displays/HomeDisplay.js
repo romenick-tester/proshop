@@ -1,7 +1,7 @@
 import React from "react";
 import { useProductsContext } from "../settings";
 import { Row, Col } from "react-bootstrap";
-import { Message, Product, Loader } from "../components";
+import { Alert, Product, Loader } from "../components";
 
 function HomeDisplay() {
     const { loading, products, error } = useProductsContext();
@@ -11,7 +11,7 @@ function HomeDisplay() {
     }
 
     if(error) {
-        return <Message variant="danger">{error}</Message>
+        return <Alert variant="danger">{error}</Alert>
     }
 
     return (

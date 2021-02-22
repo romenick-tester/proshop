@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
-import { RatingStar, Message, Loader } from "../components";
+import { RatingStar, Alert, Loader } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails } from "../settings"
 
@@ -21,7 +21,7 @@ function SingleProductDisplay({ match }) {
     }
     
     if(error) {
-        return <Message variant="danger">{error}</Message>;
+        return <Alert variant="warning">{error}</Alert>;
     }
 
     const { name, image, description, price, countInStock, rating, numReviews } = product;
@@ -38,7 +38,7 @@ function SingleProductDisplay({ match }) {
                             <h3>{name}</h3>
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <RatingStar values={{rating, numReviews}} />
+                            <RatingStar rating={rating} reviews={numReviews} />
                         </ListGroup.Item>
                         <ListGroup.Item>
                             Price: {price} pound

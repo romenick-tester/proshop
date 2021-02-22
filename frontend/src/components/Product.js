@@ -16,12 +16,12 @@ function Product({ product }) {
             <Card.Body>
                 <Link to={`/product/${_id}`}>
                     <Card.Title as="div">
-                        <strong>{name}</strong>
+                        <h5>{name}</h5>
                     </Card.Title>
                 </Link>
                 <Card.Text as="div">
                     <div className="my-3">
-                        <RatingStar values={{rating, numReviews}} />
+                        <RatingStar rating={rating} reviews={numReviews}/>
                     </div>
                 </Card.Text>
                 <Card.Text as="h3">

@@ -11,6 +11,8 @@ const getAllProducts = asyncHandler( async(req,res) => {
         return res.status(404).json({ errors: [{ msg: "products not found!" }] });
     }
 
+    //throw new Error("some error"); for testing...
+
     res.json(products);
 })
 
