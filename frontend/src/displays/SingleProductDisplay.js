@@ -12,6 +12,7 @@ function SingleProductDisplay({ match, history }) {
 
     useEffect(() => {
         getProductID(productID);
+        // eslint-disable-next-line
     }, [productID])
 
     function addToCart() {

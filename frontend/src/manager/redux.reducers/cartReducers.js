@@ -1,4 +1,4 @@
-import { CART_ADD_ITEM, CART_REMOVE_ITEM } from "../constants/cartConstants";
+import { CART_ADD_ITEM, CART_REMOVE_ITEM } from "../redux.constants/cartConstants";
 
 export const cartReducer = (state = { cartItem: [] }, action) => {
     const { type, payload } = action;
