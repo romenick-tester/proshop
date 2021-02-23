@@ -1,9 +1,7 @@
-import { useFetch } from "./utils";
-import { useProductsContext, ProductsProvider } from "./context";
+import { useGlobalContext, AppProvider } from "./global.context";
 import { getProductList, getProductDetails, productListReducer, productDetailsReducer, store } from "./redux";
 
 export { 
-    useProductsContext, ProductsProvider, 
+    useGlobalContext, AppProvider, 
     getProductList, getProductDetails, productListReducer, productDetailsReducer, store, 
-    useFetch, 
 };

@@ -1,11 +1,11 @@
 import React from "react";
-import { useProductsContext } from "../settings";
+import { useGlobalContext } from "../manager";
 import { Row, Col } from "react-bootstrap";
 import { Alert, Product, Loader } from "../components";
 
 function HomeDisplay() {
-    const { loading, products, error } = useProductsContext();
-
+    const { loading, error, products } = useGlobalContext();
+    
     if(loading) {
         return <Loader />
     }

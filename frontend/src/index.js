@@ -1,16 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { ProductsProvider, store } from "./settings";
+import { AppProvider, store } from "./manager";
 
 import App from "./App";
-import "./settings/css/bootstrap.min.css";
-import "./settings/css/index.css";
+import "./manager/css/bootstrap.min.css";
+import "./manager/css/custom.inline.css";
 
 ReactDOM.render(
     <Provider store={store}>
-        <ProductsProvider>
+        <AppProvider>
             <App/>
-        </ProductsProvider>
+        </AppProvider>
     </Provider>, document.getElementById("root")
 );

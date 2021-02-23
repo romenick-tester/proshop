@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useGlobalContext } from "../manager"
 import { Row, Col, Image, ListGroup, Card, Button, Form } from "react-bootstrap";
 import { RatingStar, Alert, Loader } from "../components";
-import { useDispatch, useSelector } from "react-redux";
-import { getProductDetails } from "../settings";
 
 function SingleProductDisplay({ match, history }) {
     const [qty, setQty] = useState(1);
-
     const productID = match.params.id;
-    const dispatch = useDispatch();
-
-    const state = useSelector(state => state.productDetails);
-    const { loading, error, product } = state;
+    
+    const { err: error, load: loading, details: product , getProductID } = useGlobalContext();
 
     useEffect(() => {
-        dispatch(getProductDetails(productID))
-    }, [productID, dispatch])
+        getProductID(productID);
+    }, [productID])
 
     function addToCart() {
         history.push(`/cart/${productID}?qty=${qty}`);
