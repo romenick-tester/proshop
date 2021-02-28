@@ -1,11 +1,12 @@
-import { useGlobalContext, AppProvider } from "./context";
-import { getProductList, getProductDetails } from "./redux.actions/productActions";
-import { addToCart, removeFromCart } from "./redux.actions/cartActions";
-import store from "./store";
+import { useGlobalContext, AppProvider } from "./source/context";
+import { getProductList,getProductDetails, addToCart, removeFromCart, store } from "./redux";
 
 export { 
-    useGlobalContext, AppProvider, 
-    getProductList, getProductDetails, 
-    addToCart, removeFromCart,
     store, 
+    useGlobalContext, 
+    AppProvider, 
+    getProductList, 
+    getProductDetails, 
+    addToCart, 
+    removeFromCart,
 };

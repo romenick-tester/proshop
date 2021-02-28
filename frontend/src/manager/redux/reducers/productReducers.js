@@ -5,7 +5,7 @@ import {
     PRODUCT_DETAILS_REQUEST, 
     PRODUCT_DETAILS_SUCCESS, 
     PRODUCT_DETAILS_ERROR 
-} from "../redux.constants/productConstants";
+} from "../constants/productConstants";
 
 const productListReducer = (state = { products: [] }, action) => {
     const { type, payload } = action;

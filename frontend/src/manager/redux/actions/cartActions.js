@@ -2,7 +2,7 @@ import axios from "axios";
 import { 
     CART_ADD_ITEM, 
     CART_REMOVE_ITEM 
-} from "../redux.constants/cartConstants";
+} from "../constants/cartConstants";
 
 export const addToCart = (id, qty) => async(dispatch, getState) => {
     try {

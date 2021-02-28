@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useGlobalContext } from "../manager"
+import { useDispatch, useSelector } from "react-redux";
+import { getProductDetails } from "../manager"
 import { Row, Col, Image, ListGroup, Card, Button, Form } from "react-bootstrap";
 import { RatingStar, Alert, Loader } from "../components";
 
 function SingleProductDisplay({ match, history }) {
+    const dispatch = useDispatch();
     const [qty, setQty] = useState(1);
     const productID = match.params.id;
-    
-    const { err: error, load: loading, details: product , getProductID } = useGlobalContext();
 
     useEffect(() => {
-        getProductID(productID);
-        // eslint-disable-next-line
-    }, [productID])
+        if(productID){
+            dispatch(getProductDetails(productID))
+        }
+    }, [dispatch, productID])
 
-    function addToCart() {
-        history.push(`/cart/${productID}?qty=${qty}`);
-    }
+    const productDetails = useSelector(state => state.productDetails);
+    const { loading, error, product: details } = productDetails;
 
     if(loading) {
         return <Loader/>;
@@ -26,6 +26,12 @@ function SingleProductDisplay({ match, history }) {
     if(error) {
         return <Alert variant="warning">{error}</Alert>;
     }
+
+    function addToCart() {
+        history.push(`/cart/${productID}?qty=${qty}`);
+    }
+
+    const product = details ? details : {};
 
     const { name, image, description, price, countInStock, rating, numReviews } = product;
     return (

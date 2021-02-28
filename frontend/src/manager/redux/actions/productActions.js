@@ -6,7 +6,7 @@ import {
     PRODUCT_DETAILS_REQUEST, 
     PRODUCT_DETAILS_SUCCESS, 
     PRODUCT_DETAILS_ERROR 
-} from "../redux.constants/productConstants";
+} from "../constants/productConstants";
 
 export const getProductList = () => async(dispatch) => {
     try {

@@ -4,8 +4,8 @@ import { Provider } from "react-redux";
 import { AppProvider, store } from "./manager";
 
 import App from "./App";
-import "./manager/css.inline.styling/bootstrap.min.css";
-import "./manager/css.inline.styling/index.css";
+import "./manager/source/bootstrap.min.css";
+import "./manager/source/index.css";
 
 ReactDOM.render(
     <Provider store={store}>

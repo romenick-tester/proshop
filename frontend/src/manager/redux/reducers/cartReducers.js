@@ -1,4 +1,4 @@
-import { CART_ADD_ITEM, CART_REMOVE_ITEM } from "../redux.constants/cartConstants";
+import { CART_ADD_ITEM, CART_REMOVE_ITEM } from "../constants/cartConstants";
 
 export const cartReducer = (state = { cartItem: [] }, action) => {
     const { type, payload } = action;
@@ -17,9 +17,9 @@ export const cartReducer = (state = { cartItem: [] }, action) => {
             } else {
                 return { ...state, cartItems: [...state.cartItems, item] };
             }
+            
         case CART_REMOVE_ITEM:
-
-
+            
             return { ...state };
         
         default:

@@ -1,16 +1,14 @@
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { Message } from "../components";
-import { useDispatch, useSelector } from "react-redux";
+import { Row, Col, Form, Button, Card } from "react-bootstrap";
 import { addToCart, removeFromCart } from "../manager";
-import { Row, Col, ListGroup, Image, Form, Button, Card } from "react-bootstrap";
+import { Cart, Message } from "../components";
 
 function CartDisplay({ match, location, history }) {
+    const dispatch = useDispatch();
     const productID = match.params.id;
     const qty = location.search ? Number(location.search.split("=")[1]) : 1;
-
-    const dispatch = useDispatch();
-    const { cartItems } = useSelector((state) => state.cart);
 
     useEffect(() => {
         if(productID) {
@@ -19,11 +17,11 @@ function CartDisplay({ match, location, history }) {
     }, [productID, qty, dispatch])
 
     return (
-        <div>
-            {cartItems && cartItems.map((item) => {
-                return <h6>{item.name}</h6>
-            })}
-        </div>
+        <Row>
+            <Col md={8}>
+                <Cart />
+            </Col>
+        </Row>
     )
 }
 

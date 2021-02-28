@@ -1,10 +1,18 @@
 import React from "react";
-import { useGlobalContext } from "../manager";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductList } from "../manager";
 import { Row, Col } from "react-bootstrap";
 import { Alert, Product, Loader } from "../components";
 
 function HomeDisplay() {
-    const { loading, error, products } = useGlobalContext();
+    const dispatch = useDispatch();
+
+    React.useEffect(() => {
+        dispatch(getProductList());
+    }, [dispatch])
+
+    const productList = useSelector(state => state.productList);
+    const { loading, error, products } = productList;
     
     if(loading) {
         return <Loader />

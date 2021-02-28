@@ -5,7 +5,9 @@ import RatingStar from "./RatingStar";
 import Message from "./Message";
 import Loader from "./Loader";
 import Alert from "./Alert";
+import Cart from "./Cart";
+import CartItem from "./CartItem";
 
 export {
-    Header, Footer, Product, RatingStar, Message, Loader, Alert,
+    Header, Footer, Product, RatingStar, Message, Loader, Alert, Cart, CartItem,
 };
