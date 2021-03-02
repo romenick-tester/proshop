@@ -1,7 +1,7 @@
 const { getAllProducts, getProductByID } = require("./productsControllers");
-const { userDetails } = require("./userControllers");
+const { userDetails, loginUser, registerUser } = require("./userControllers");
 
 module.exports = {
     getAllProducts, getProductByID,
-    userDetails
+    userDetails, loginUser, registerUser,
 }
