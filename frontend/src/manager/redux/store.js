@@ -8,9 +8,6 @@ import {
     cartReducer, authReducer,
 } from "./reducers";
 
-const cartItemsLocalStorage = localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : [];
-const tokenLocalStorage = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null;
-
 const reducers = combineReducers({
     productList: productListReducer,
     productDetails: productDetailsReducer,
@@ -18,14 +15,7 @@ const reducers = combineReducers({
     auth: authReducer,
 });
 
-const initialState = {
-    cart: { cartItems: cartItemsLocalStorage },
-    auth: {
-        auth_loading: false,
-        isAuthenticated: tokenLocalStorage ? true : false,
-        user: { token: tokenLocalStorage ? tokenLocalStorage : null }
-    }
-};
+const initialState = {};
 
 const middlewares = [thunk];
 

@@ -1,6 +1,12 @@
 import { CART_ADD_ITEM, CART_REMOVE_ITEM } from "../constants/cartConstants";
 
-export const cartReducer = (state = { cartItems: [] }, action) => {
+const cartItemsLocalStorage = localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : [];
+
+const cart_initial_state = {
+    cartItems: cartItemsLocalStorage
+}
+
+export const cartReducer = (state = cart_initial_state, action) => {
     const { type, payload } = action;
 
     switch(type) {

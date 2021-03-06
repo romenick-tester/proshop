@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../manager";
+import { USER_REGISTER_ERROR } from "../manager/redux/constants/userConstants"
 import { Form, Button, Row, Col } from "react-bootstrap";
-import { FormContainer } from "../components";
+import { FormContainer, Loader, Message } from "../components";
 
-function RegisterDisplay() {
+function RegisterDisplay({ history, location }) {
     const [form, setForm] = useState({
         name: "",
         email: "",
@@ -15,15 +16,22 @@ function RegisterDisplay() {
 
     const { name, email, password, password2 } = form;
 
-    const redirect = "";
+    const redirect = location.search ? location.search.split("=")[1] : "/";
 
     const dispatch = useDispatch();
+    const { auth_loading: loading, auth_error: error, isAuthenticated } = useSelector(state => state.auth);
+
+    useEffect(() => {
+        if (!loading && isAuthenticated) {
+            history.push(redirect);
+        }
+    }, [loading, isAuthenticated, redirect])
 
     const submitHandler = (e) => {
         e.preventDefault();
 
         if (password !== password2) {
-            console.log("Password do not match!");
+            dispatch({ type: USER_REGISTER_ERROR, payload: "Password do not match!" });
         } else {
             dispatch(registerUser({ name, email, password }));
         }
@@ -32,6 +40,7 @@ function RegisterDisplay() {
     return (
         <FormContainer>
             <h1>Register</h1>
+            {loading ? <Loader /> : error && <Message variant="danger">{error}</Message>}
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId="name">
                     <Form.Label>Full Name</Form.Label>
@@ -73,7 +82,7 @@ function RegisterDisplay() {
             <Row>
                 <Col>
                     Already registered ? {" "}
-                    <Link to={redirect ? `/auth/login?redirect=${redirect}` : "/auth/login"}>
+                    <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
                         Login
                     </Link>
                 </Col>

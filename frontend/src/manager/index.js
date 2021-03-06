@@ -7,6 +7,7 @@ import {
     registerUser,
     loginUser,
     logoutUser,
+    reAuthenticate,
 } from "./redux";
 
 export { 
@@ -16,5 +17,5 @@ export {
     addToCart, 
     removeFromCart,
     registerUser,
-    loginUser, logoutUser,
+    loginUser, logoutUser, reAuthenticate,
 };

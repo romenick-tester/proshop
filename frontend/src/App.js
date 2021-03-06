@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
+import styled from "styled-components";
 import { Container } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { reAuthenticate } from "./manager";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import {Header, Footer} from "./components";
 import {
@@ -12,24 +15,37 @@ import {
 } from "./displays";
 
 function App() {
+    const dispatch = useDispatch();
+    const { user: { token } } = useSelector(state => state.auth);
+
+    useEffect(() => {
+        if (token) {
+            dispatch(reAuthenticate());
+        }
+    }, [token]);
+
     return (
         <Router>
             <Header/>
-            <main>
+            <Main>
                 <Container>
                     <Switch>
-                        <Route path="/auth/register" component={RegisterDisplay} />
-                        <Route path="/auth/login" component={LoginDisplay} />
+                        <Route path="/register" component={RegisterDisplay} />
+                        <Route path="/login" component={LoginDisplay} />
                         <Route path="/cart/:id?" component={CartDisplay} />
                         <Route path="/product/:id" component={SingleProductDisplay} />
                         <Route path="/" exact component={HomeDisplay} />
                         <Route path="*" component={ErrorDisplay} />
                     </Switch>
                 </Container>
-            </main>
+            </Main>
             <Footer/>
         </Router>
     )
 }
+
+const Main = styled.main`
+    height: 90vh;
+`
 
 export default App;

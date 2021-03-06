@@ -6,7 +6,8 @@ import {
     USER_LOGOUT,
     USER_REGISTER_REQUEST,
     USER_REGISTER_SUCCESS,
-    USER_REGISTER_ERROR
+    USER_REGISTER_ERROR,
+    USER_RE_AUTHENTICATE,
 } from "../constants/userConstants";
 
 export const loginUser = (form) => async (dispatch) => {
@@ -26,8 +27,11 @@ export const loginUser = (form) => async (dispatch) => {
 
         localStorage.setItem("token", JSON.stringify(data.token));
     } catch (error) {
-        console.error(error.message);
-        dispatch({ type: USER_LOGIN_ERROR });
+        const msg = error.response
+            && error.response.data.message
+            ? error.response.data.message
+            : error.message;
+        dispatch({ type: USER_LOGIN_ERROR, payload: msg });
     }
 }
 
@@ -48,9 +52,16 @@ export const registerUser = (form) => async (dispatch) => {
 
         localStorage.setItem("token", JSON.stringify(data.token));
     } catch (error) {
-        console.error(error.message);
-        dispatch({ type: USER_REGISTER_ERROR });
+        const msg = error.response
+            && error.response.data.message
+            ? error.response.data.message
+            : error.message;
+        dispatch({ type: USER_REGISTER_ERROR, payload: msg });
     }
+}
+
+export const reAuthenticate = () => (dispatch) => {
+    dispatch({ type: USER_RE_AUTHENTICATE });
 }
 
 export const logoutUser = () => (dispatch) => {

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../manager";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import { FormContainer } from "../components";
+import { Message, Loader, FormContainer } from "../components";
 
-function LoginDisplay() {
+function LoginDisplay({ location, history }) {
     const [form, setForm] = useState({
         email: "",
         password: ""
@@ -13,19 +13,28 @@ function LoginDisplay() {
 
     const { email, password } = form;
 
-    const redirect = "";
+    const redirect = location.search ? location.search.split("=")[1] : "/";
+
+    const boxRef = useRef(null);
 
     const dispatch = useDispatch();
+    const { auth_loading: loading, auth_error: error, isAuthenticated } = useSelector(state => state.auth);
+
+    useEffect(() => {
+        if (!loading && isAuthenticated) {
+            history.push(redirect);
+        }
+    }, [loading, isAuthenticated, redirect])
 
     const submitHandler = (e) => {
         e.preventDefault();
-        console.log(form);
-        //dispatch(loginUser(form));
+        dispatch(loginUser(form));
     }
 
     return (
         <FormContainer>
             <h1>Sign In</h1>
+            {loading ? <Loader /> : error && <Message variant="danger">{error}</Message>}
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId="email">
                     <Form.Label>Email Address</Form.Label>
@@ -49,7 +58,7 @@ function LoginDisplay() {
             <Row>
                 <Col>
                     New Customer ? {" "}
-                    <Link to={redirect ? `/auth/register?redirect=${redirect}` : "/auth/register"}>
+                    <Link to={redirect ? `/register?redirect=${redirect}` : "/register"}>
                         Register
                     </Link>
                 </Col>
