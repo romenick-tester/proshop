@@ -1,12 +1,20 @@
-import { useGlobalContext, AppProvider } from "./source/context";
-import { getProductList,getProductDetails, addToCart, removeFromCart, store } from "./redux";
+import {
+    store,
+    getProductList,
+    getProductDetails,
+    addToCart,
+    removeFromCart,
+    registerUser,
+    loginUser,
+    logoutUser,
+} from "./redux";
 
 export { 
-    store, 
-    useGlobalContext, 
-    AppProvider, 
+    store,
     getProductList, 
     getProductDetails, 
     addToCart, 
     removeFromCart,
+    registerUser,
+    loginUser, logoutUser,
 };

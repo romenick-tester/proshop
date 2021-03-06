@@ -17,7 +17,7 @@ function Headers() {
                             <LinkContainer to="/cart">
                                 <Nav.Link><FaShoppingCart/> Cart</Nav.Link>
                             </LinkContainer>
-                            <LinkContainer to="/login">
+                            <LinkContainer to="/auth/login">
                                 <Nav.Link><FaSignInAlt/> Sign In</Nav.Link>
                             </LinkContainer>
                         </Nav>

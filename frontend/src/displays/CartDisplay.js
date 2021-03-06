@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { Row, Col, Form, Button, Card } from "react-bootstrap";
-import { addToCart, removeFromCart } from "../manager";
-import { Cart, Message } from "../components";
+import { Row, Col } from "react-bootstrap";
+import { addToCart } from "../manager";
+import { Cart } from "../components";
 
-function CartDisplay({ match, location, history }) {
+function CartDisplay({ match, location }) {
     const dispatch = useDispatch();
     const productID = match.params.id;
     const qty = location.search ? Number(location.search.split("=")[1]) : 1;

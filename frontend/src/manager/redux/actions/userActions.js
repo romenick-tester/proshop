@@ -27,7 +27,7 @@ export const loginUser = (form) => async (dispatch) => {
         localStorage.setItem("token", JSON.stringify(data.token));
     } catch (error) {
         console.error(error.message);
-        dispatc({ type: USER_LOGIN_ERROR });
+        dispatch({ type: USER_LOGIN_ERROR });
     }
 }
 
@@ -49,10 +49,11 @@ export const registerUser = (form) => async (dispatch) => {
         localStorage.setItem("token", JSON.stringify(data.token));
     } catch (error) {
         console.error(error.message);
-        dispatc({ type: USER_REGISTER_ERROR });
+        dispatch({ type: USER_REGISTER_ERROR });
     }
 }
 
 export const logoutUser = () => (dispatch) => {
+    localStorage.removeItem("token");
     dispatch({ type: USER_LOGOUT });
 }

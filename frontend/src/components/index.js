@@ -7,7 +7,8 @@ import Loader from "./Loader";
 import Alert from "./Alert";
 import Cart from "./Cart";
 import CartItem from "./CartItem";
+import FormContainer from "./FormContainer";
 
 export {
-    Header, Footer, Product, RatingStar, Message, Loader, Alert, Cart, CartItem,
+    Header, Footer, Product, RatingStar, Message, Loader, Alert, Cart, CartItem, FormContainer,
 };

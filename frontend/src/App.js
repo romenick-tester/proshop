@@ -7,6 +7,8 @@ import {
     SingleProductDisplay,
     ErrorDisplay,
     CartDisplay,
+    LoginDisplay,
+    RegisterDisplay,
 } from "./displays";
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
             <main>
                 <Container>
                     <Switch>
+                        <Route path="/auth/register" component={RegisterDisplay} />
+                        <Route path="/auth/login" component={LoginDisplay} />
                         <Route path="/cart/:id?" component={CartDisplay} />
                         <Route path="/product/:id" component={SingleProductDisplay} />
                         <Route path="/" exact component={HomeDisplay} />

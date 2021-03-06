@@ -7,6 +7,9 @@ import {
     addToCart, 
     removeFromCart,
 } from "./actions/cartActions";
+import {
+    registerUser, loginUser, logoutUser
+} from "./actions/userActions";
 
 
 export {
@@ -14,5 +17,6 @@ export {
     getProductList, 
     getProductDetails, 
     addToCart, 
-    removeFromCart, 
+    removeFromCart,
+    registerUser, loginUser, logoutUser,
 };
