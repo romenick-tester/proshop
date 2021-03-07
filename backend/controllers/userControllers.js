@@ -5,15 +5,59 @@ const { User } = require("../settings");
 
 //route:        GET /api/users
 //desc:         return current user's details
-//access:       public
+//access:       private
 const userDetails = asyncHandler( async(req,res) => {
-    const user = await User.findOne({ _id: req.user.id });
+    const user = await User.findById(req.user.id);
 
-    if (!user) {
-        res.status(404)
-        throw new Error("user not found!")
+    if (user) {
+        res.json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            isAdmin: user.isAdmin,
+            // token: jwt.sign({
+            //     id: user._id,
+            //     isAdmin: user.isAdmin
+            // }, process.env.JWT_SECRET, { expiresIn: 36000 }),
+        })
+
     } else {
-        res.json(user);
+        res.status(404)
+        throw new Error("User not found!")
+    }
+});
+
+//route:        PUT /api/users
+//desc:         update current user's details
+//access:       private
+const updateUserDetails = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user.id);
+
+    if (user) {
+        user.name = req.body.name || user.name;
+        user.email = req.body.email || user.email;
+        user.isAdmin = req.body.isAdmin || user.isAdmin;
+
+        user.password = req.body.password
+            ? await bcrypt.hash(req.body.password, await bcrypt.genSalt(10))
+            : user.password;
+
+        const updatedDetails = await user.save();
+
+        res.send({
+            _id: updatedDetails._id,
+            name: updatedDetails.name,
+            email: updatedDetails.email,
+            isAdmin: updatedDetails.isAdmin,
+            token: jwt.sign({
+                id: updatedDetails._id,
+                isAdmin: updatedDetails.isAdmin
+            }, process.env.JWT_SECRET, { expiresIn: 36000 }),
+        })
+
+    } else {
+        res.status(404)
+        throw new Error("User not found!")
     }
 });
 
@@ -84,4 +128,15 @@ const loginUser = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = { userDetails, loginUser, registerUser };
+const getAllUsers = asyncHandler(async (req, res) => {
+    const users = await User.find({}).select("-password");
+
+    if (!users) {
+        res.status(404)
+        throw new Error("There are no users on the database.")
+    }
+
+    res.json(users);
+})
+
+module.exports = { userDetails, loginUser, registerUser, updateUserDetails, getAllUsers };

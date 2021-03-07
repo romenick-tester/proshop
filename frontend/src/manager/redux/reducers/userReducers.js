@@ -1,4 +1,7 @@
 import {
+    USER_DETAILS_REQUEST,
+    USER_DETAILS_SUCCESS,
+    USER_DETAILS_ERROR,
     USER_LOGIN_REQUEST,
     USER_LOGIN_SUCCESS,
     USER_LOGIN_ERROR,
@@ -6,7 +9,10 @@ import {
     USER_REGISTER_SUCCESS,
     USER_REGISTER_ERROR,
     USER_RE_AUTHENTICATE,
-    USER_LOGOUT
+    USER_LOGOUT,
+    USER_GET_ALL_REQUEST,
+    USER_GET_ALL_SUCCESS,
+    USER_GET_ALL_ERROR
 } from "../constants/userConstants";
 
 const tokenLocalStorage = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null;
@@ -38,14 +44,74 @@ export const authReducer = (state = auth_initial_state, action) => {
         case USER_REGISTER_ERROR:
         case USER_LOGIN_ERROR:
             localStorage.removeItem("token");
-            return { ...state, auth_loading: false, auth_error: payload, isAuthenticated: false, user: null };
+            return { ...state, auth_loading: false, auth_error: payload, isAuthenticated: false, user: {} };
 
         case USER_LOGOUT:
             localStorage.removeItem("token");
             return { ...state, auth_loading: false, auth_error: payload, isAuthenticated: false, user: {} };
 
-        
         default:
             return state;
+    }
+}
+
+const user_details_initial_state = {
+    user_details_loading: false,
+    user_details_error: false,
+    user_details: {}
+}
+
+export const userDetailsReducer = (state = user_details_initial_state, action) => {
+    const { type, payload } = action;
+
+    switch (type) {
+
+        case USER_DETAILS_REQUEST:
+            return {
+                user_details_loading: true,
+                user_details_error: false,
+                user_details: {}
+            }
+
+        case USER_DETAILS_SUCCESS:
+            return {
+                user_details_loading: false,
+                user_details_error: false,
+                user_details: payload
+            }
+
+        case USER_DETAILS_ERROR:
+            return {
+                user_details_loading: false,
+                user_details_error: true,
+                user_details: {}
+            }
+
+        default:
+            return state;
+    }
+}
+
+const all_users_initial_state = {
+    all_users_loading: false,
+    all_users_error: false,
+    all_users: []
+}
+
+export const allUsersReducer = (state = all_users_initial_state, action) => {
+    const { type, payload } = action;
+
+    switch (type) {
+        case USER_GET_ALL_REQUEST:
+            return { ...state, all_users_loading: true, all_users_error: false, all_users: [] }
+
+        case USER_GET_ALL_SUCCESS:
+            return { ...state, all_users_loading: false, all_users_error: false, all_users: payload }
+
+        case USER_GET_ALL_ERROR:
+            return { ...state, all_users_loading: true, all_users_error: true, all_users: [] }
+
+        default:
+            return state
     }
 }

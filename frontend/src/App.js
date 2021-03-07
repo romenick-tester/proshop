@@ -4,7 +4,7 @@ import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { reAuthenticate } from "./manager";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import {Header, Footer} from "./components";
+import { Header, Footer, ViewUsers } from "./components";
 import {
     HomeDisplay, 
     SingleProductDisplay,
@@ -39,6 +39,7 @@ function App() {
                     </Switch>
                 </Container>
             </Main>
+            <ViewUsers />
             <Footer/>
         </Router>
     )
