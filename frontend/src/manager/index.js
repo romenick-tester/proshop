@@ -8,7 +8,7 @@ import {
     loginUser,
     logoutUser,
     reAuthenticate,
-    getAllUsers,
+    getAllMembers,
 } from "./redux";
 
 export { 
@@ -21,5 +21,5 @@ export {
     loginUser,
     logoutUser,
     reAuthenticate,
-    getAllUsers
+    getAllMembers
 };

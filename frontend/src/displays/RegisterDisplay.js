@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../manager";
@@ -18,6 +18,8 @@ function RegisterDisplay({ history, location }) {
 
     const redirect = location.search ? location.search.split("=")[1] : "/";
 
+    const nameInputRef = useRef(null);
+
     const dispatch = useDispatch();
     const { auth_loading: loading, auth_error: error, isAuthenticated } = useSelector(state => state.auth);
 
@@ -25,7 +27,11 @@ function RegisterDisplay({ history, location }) {
         if (!loading && isAuthenticated) {
             history.push(redirect);
         }
-    }, [loading, isAuthenticated, redirect])
+    }, [loading, isAuthenticated, redirect, history])
+
+    useEffect(() => {
+        nameInputRef.current.focus();
+    });
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -46,6 +52,7 @@ function RegisterDisplay({ history, location }) {
                     <Form.Label>Full Name</Form.Label>
                     <Form.Control
                         type="text"
+                        ref={nameInputRef}
                         placeholder="Enter Full Name"
                         value={name}
                         onChange={(e) => setForm({ ...form, name: e.target.value })} />

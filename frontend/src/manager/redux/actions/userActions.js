@@ -1,8 +1,11 @@
 import axios from "axios";
 import {
-    USER_GET_ALL_REQUEST,
-    USER_GET_ALL_SUCCESS,
-    USER_GET_ALL_ERROR,
+    ALL_MEMBERS_REQUEST,
+    ALL_MEMBERS_SUCCESS,
+    ALL_MEMBERS_ERROR,
+    USER_DETAILS_REQUEST,
+    USER_DETAILS_SUCCESS,
+    USER_DETAILS_ERROR,
     USER_LOGIN_REQUEST,
     USER_LOGIN_SUCCESS,
     USER_LOGIN_ERROR,
@@ -63,16 +66,16 @@ export const registerUser = (form) => async (dispatch) => {
     }
 }
 
-export const getAllUsers = () => async (dispatch) => {
-    dispatch({ type: USER_GET_ALL_REQUEST });
+export const getAllMembers = () => async (dispatch) => {
+    dispatch({ type: ALL_MEMBERS_REQUEST });
 
     try {
         const { data } = await axios.get("/api/users/all");
 
-        dispatch({ type: USER_GET_ALL_SUCCESS, payload: data });
+        dispatch({ type: ALL_MEMBERS_SUCCESS, payload: data });
 
     } catch (error) {
-        dispatch({ type: USER_GET_ALL_ERROR });
+        dispatch({ type: ALL_MEMBERS_ERROR });
     }
 }
 

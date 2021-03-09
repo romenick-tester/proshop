@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllUsers } from "../manager";
+import { getAllMembers } from "../manager";
 
 function ViewUsers() {
     const dispatch = useDispatch();
     const {
-        all_users_loading: loading,
-        all_users_error: error,
-        all_users: users
-    } = useSelector(state => state.users);
+        members_loading: loading,
+        members_error: error,
+        members,
+    } = useSelector(state => state.members);
 
     useEffect(() => {
-        dispatch(getAllUsers());
+        dispatch(getAllMembers());
     }, [dispatch]);
 
     if (loading) {
@@ -23,14 +23,12 @@ function ViewUsers() {
         return <Wrapper><h4>error...</h4></Wrapper>
     }
 
-    console.log(users);
-
     return (
         <Wrapper>
-            <h4>current users:</h4>
+            <h6>current members:</h6>
             <ul>
-                {users.map((user) => {
-                    return <li key={user._id}>{user.name} {user.isAdmin ? "(admin)" : ""}</li>
+                {members.map((member) => {
+                    return <li key={member._id}>{member.name} {member.isAdmin ? "(admin)" : ""}</li>
                 })}
             </ul>
         </Wrapper>

@@ -10,9 +10,9 @@ import {
     USER_REGISTER_ERROR,
     USER_RE_AUTHENTICATE,
     USER_LOGOUT,
-    USER_GET_ALL_REQUEST,
-    USER_GET_ALL_SUCCESS,
-    USER_GET_ALL_ERROR
+    ALL_MEMBERS_REQUEST,
+    ALL_MEMBERS_SUCCESS,
+    ALL_MEMBERS_ERROR
 } from "../constants/userConstants";
 
 const tokenLocalStorage = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null;
@@ -92,24 +92,24 @@ export const userDetailsReducer = (state = user_details_initial_state, action) =
     }
 }
 
-const all_users_initial_state = {
-    all_users_loading: false,
-    all_users_error: false,
-    all_users: []
+const members_initial_state = {
+    members_loading: false,
+    members_error: false,
+    members: []
 }
 
-export const allUsersReducer = (state = all_users_initial_state, action) => {
+export const allMembersReducer = (state = members_initial_state, action) => {
     const { type, payload } = action;
 
     switch (type) {
-        case USER_GET_ALL_REQUEST:
-            return { ...state, all_users_loading: true, all_users_error: false, all_users: [] }
+        case ALL_MEMBERS_REQUEST:
+            return { ...state, members_loading: true, members_error: false, members: [] }
 
-        case USER_GET_ALL_SUCCESS:
-            return { ...state, all_users_loading: false, all_users_error: false, all_users: payload }
+        case ALL_MEMBERS_SUCCESS:
+            return { ...state, members_loading: false, members_error: false, members: payload }
 
-        case USER_GET_ALL_ERROR:
-            return { ...state, all_users_loading: true, all_users_error: true, all_users: [] }
+        case ALL_MEMBERS_ERROR:
+            return { ...state, members_loading: true, members_error: true, members: [] }
 
         default:
             return state

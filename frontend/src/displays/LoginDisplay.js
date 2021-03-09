@@ -15,7 +15,7 @@ function LoginDisplay({ location, history }) {
 
     const redirect = location.search ? location.search.split("=")[1] : "/";
 
-    const boxRef = useRef(null);
+    const emailInputRef = useRef(null);
 
     const dispatch = useDispatch();
     const { auth_loading: loading, auth_error: error, isAuthenticated } = useSelector(state => state.auth);
@@ -24,7 +24,11 @@ function LoginDisplay({ location, history }) {
         if (!loading && isAuthenticated) {
             history.push(redirect);
         }
-    }, [loading, isAuthenticated, redirect])
+    }, [loading, isAuthenticated, redirect, history])
+
+    useEffect(() => {
+        emailInputRef.current.focus();
+    });
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -40,15 +44,18 @@ function LoginDisplay({ location, history }) {
                     <Form.Label>Email Address</Form.Label>
                     <Form.Control
                         type="email"
+                        ref={emailInputRef}
                         placeholder="Enter Email"
-                        value={email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
+                        value={email}
+                        onChange={(e) => setForm({ ...form, email: e.target.value })} />
                 </Form.Group>
                 <Form.Group controlId="password">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
                         type="password"
                         placeholder="Enter Password"
-                        value={password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
+                        value={password}
+                        onChange={(e) => setForm({ ...form, password: e.target.value })} />
                 </Form.Group>
                 <Button type="submit" variant="primary">
                     Sign In
