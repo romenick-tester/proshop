@@ -40,14 +40,14 @@ function App() {
                     </Switch>
                 </Container>
             </Main>
-            <ViewUsers />
+            {/* <ViewUsers /> */}
             <Footer/>
         </Router>
     )
 }
 
 const Main = styled.main`
-    height: 90vh;
+    height: 95vh;
 `
 
 export default App;
