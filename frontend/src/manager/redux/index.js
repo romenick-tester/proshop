@@ -8,7 +8,7 @@ import {
     removeFromCart,
 } from "./actions/cartActions";
 import {
-    registerUser, loginUser, logoutUser, reAuthenticate, getAllMembers,
+    registerUser, loginUser, logoutUser, reAuthenticate, getAllMembers, getUserDetails,
 } from "./actions/userActions";
 
 
@@ -22,5 +22,6 @@ export {
     loginUser,
     logoutUser,
     reAuthenticate,
-    getAllMembers
+    getAllMembers,
+    getUserDetails
 };

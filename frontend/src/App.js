@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { reAuthenticate } from "./manager";
+import { reAuthenticate, getUserDetails } from "./manager";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Header, Footer, ViewUsers } from "./components";
 import {
@@ -21,6 +21,7 @@ function App() {
     useEffect(() => {
         if (token) {
             dispatch(reAuthenticate());
+            dispatch(getUserDetails(token));
         }
     }, [token]);
 

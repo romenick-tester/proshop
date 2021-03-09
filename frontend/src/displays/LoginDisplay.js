@@ -28,7 +28,7 @@ function LoginDisplay({ location, history }) {
 
     useEffect(() => {
         emailInputRef.current.focus();
-    });
+    }, []);
 
     const submitHandler = (e) => {
         e.preventDefault();

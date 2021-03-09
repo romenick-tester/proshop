@@ -17,7 +17,7 @@ const reducers = combineReducers({
     cart: cartReducer,
     auth: authReducer,
     members: allMembersReducer,
-    user: userDetailsReducer,
+    userDetails: userDetailsReducer,
 });
 
 const initialState = {};

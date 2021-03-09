@@ -31,7 +31,7 @@ function RegisterDisplay({ history, location }) {
 
     useEffect(() => {
         nameInputRef.current.focus();
-    });
+    }, []);
 
     const submitHandler = (e) => {
         e.preventDefault();

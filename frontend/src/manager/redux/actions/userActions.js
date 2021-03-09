@@ -66,6 +66,28 @@ export const registerUser = (form) => async (dispatch) => {
     }
 }
 
+export const getUserDetails = (token) => async (dispatch) => {
+    dispatch({ type: USER_DETAILS_REQUEST })
+    try {
+
+        const config = {
+            headers: {
+                "Auth-Token": `${token}`
+            }
+        }
+
+        const { data } = await axios.get("/api/users", config);
+
+        dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
+    } catch (error) {
+        const msg = error.response
+            && error.response.data.message
+            ? error.response.data.message
+            : error.message;
+        dispatch({ type: USER_DETAILS_ERROR, payload: msg });
+    }
+}
+
 export const getAllMembers = () => async (dispatch) => {
     dispatch({ type: ALL_MEMBERS_REQUEST });
 
