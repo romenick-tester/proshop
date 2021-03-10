@@ -12,6 +12,8 @@ import {
     CartDisplay,
     LoginDisplay,
     RegisterDisplay,
+    PrivateRoute,
+    DashboardDisplay,
 } from "./displays";
 
 function App() {
@@ -31,6 +33,7 @@ function App() {
             <Main>
                 <Container>
                     <Switch>
+                        <PrivateRoute path="/dashboard" component={DashboardDisplay} />
                         <Route path="/register" component={RegisterDisplay} />
                         <Route path="/login" component={LoginDisplay} />
                         <Route path="/cart/:id?" component={CartDisplay} />

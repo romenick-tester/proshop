@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../manager";
 import { LinkContainer } from "react-router-bootstrap";
 import { Container, Navbar, Nav } from "react-bootstrap";
-import {FaShoppingCart, FaSignInAlt } from "react-icons/fa";
+import { FaShoppingCart, FaSignInAlt, FaUserAlt } from "react-icons/fa";
 
 function Headers() {
     const dispatch = useDispatch();
@@ -23,9 +23,14 @@ function Headers() {
                                 <Nav.Link><FaShoppingCart/> Cart</Nav.Link>
                             </LinkContainer>
                             {!loading && isAuthenticated ? (
-                                <LinkContainer to="" onClick={() => dispatch(logoutUser())}>
-                                    <Nav.Link><FaSignInAlt /> Logout</Nav.Link>
-                                </LinkContainer>
+                                <>
+                                    <LinkContainer to="/dashboard">
+                                        <Nav.Link><FaUserAlt /> User</Nav.Link>
+                                    </LinkContainer>
+                                    <LinkContainer to="" onClick={() => dispatch(logoutUser())}>
+                                        <Nav.Link><FaSignInAlt /> Logout</Nav.Link>
+                                    </LinkContainer>
+                                </>
                             ) : (
                                 <LinkContainer to="/login">
                                     <Nav.Link><FaSignInAlt/> Sign In</Nav.Link>

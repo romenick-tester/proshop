@@ -5,6 +5,7 @@ import CartDisplay from "./CartDisplay";
 import LoginDisplay from "./LoginDisplay";
 import RegisterDisplay from "./RegisterDisplay";
 import PrivateRoute from "./PrivateRoute";
+import DashboardDisplay from "./DashboardDisplay";
 
 export {
     HomeDisplay,
@@ -14,4 +15,5 @@ export {
     RegisterDisplay,
     LoginDisplay,
     PrivateRoute,
+    DashboardDisplay,
 };

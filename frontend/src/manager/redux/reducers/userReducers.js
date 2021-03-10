@@ -12,7 +12,10 @@ import {
     USER_LOGOUT,
     ALL_MEMBERS_REQUEST,
     ALL_MEMBERS_SUCCESS,
-    ALL_MEMBERS_ERROR
+    ALL_MEMBERS_ERROR,
+    USER_UPDATE_DETAILS_REQUEST,
+    USER_UPDATE_DETAILS_SUCCESS,
+    USER_UPDATE_DETAILS_ERROR
 } from "../constants/userConstants";
 
 const tokenLocalStorage = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null;
@@ -57,7 +60,7 @@ export const authReducer = (state = auth_initial_state, action) => {
 
 const user_details_initial_state = {
     user_details_loading: false,
-    user_details_error: false,
+    user_details_error: null,
     user_details: {}
 }
 
@@ -66,24 +69,27 @@ export const userDetailsReducer = (state = user_details_initial_state, action) =
 
     switch (type) {
 
+        case USER_UPDATE_DETAILS_REQUEST:
         case USER_DETAILS_REQUEST:
             return {
                 user_details_loading: true,
-                user_details_error: false,
+                user_details_error: null,
                 user_details: {}
             }
 
+        case USER_UPDATE_DETAILS_SUCCESS:
         case USER_DETAILS_SUCCESS:
             return {
                 user_details_loading: false,
-                user_details_error: false,
+                user_details_error: null,
                 user_details: payload
             }
 
+        case USER_UPDATE_DETAILS_ERROR:
         case USER_DETAILS_ERROR:
             return {
                 user_details_loading: false,
-                user_details_error: true,
+                user_details_error: payload,
                 user_details: {}
             }
 

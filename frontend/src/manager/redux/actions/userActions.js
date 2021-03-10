@@ -6,6 +6,9 @@ import {
     USER_DETAILS_REQUEST,
     USER_DETAILS_SUCCESS,
     USER_DETAILS_ERROR,
+    USER_UPDATE_DETAILS_REQUEST,
+    USER_UPDATE_DETAILS_SUCCESS,
+    USER_UPDATE_DETAILS_ERROR,
     USER_LOGIN_REQUEST,
     USER_LOGIN_SUCCESS,
     USER_LOGIN_ERROR,
@@ -63,6 +66,36 @@ export const registerUser = (form) => async (dispatch) => {
             ? error.response.data.message
             : error.message;
         dispatch({ type: USER_REGISTER_ERROR, payload: msg });
+    }
+}
+
+export const updateUserDetails = (form) => async (dispatch, getState) => {
+    dispatch({ type: USER_UPDATE_DETAILS_REQUEST });
+
+    try {
+        const { auth: { user } } = getState();
+
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "Auth-Token": `${user.token}`
+            }
+        }
+
+        const body = JSON.stringify(form);
+
+        const { data } = await axios.put("/api/users", body, config);
+
+        dispatch({ type: USER_UPDATE_DETAILS_SUCCESS, payload: data });
+        dispatch(getUserDetails(data.token));
+
+        localStorage.setItem("token", JSON.stringify(data.token));
+    } catch (error) {
+        const msg = error.response
+            && error.response.data.message
+            ? error.response.data.message
+            : error.message;
+        dispatch({ type: USER_UPDATE_DETAILS_ERROR, payload: msg });
     }
 }
 
