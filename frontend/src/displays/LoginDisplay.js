@@ -13,18 +13,18 @@ function LoginDisplay({ location, history }) {
 
     const { email, password } = form;
 
-    const redirect = location.search ? location.search.split("=")[1] : "/";
+    //const redirect = location.search ? location.search.split("=")[1] : "/dashboard";
 
     const emailInputRef = useRef(null);
 
     const dispatch = useDispatch();
-    const { auth_loading: loading, auth_error: error, isAuthenticated } = useSelector(state => state.auth);
+    const { loading, error, authenticated } = useSelector(state => state.auth);
 
     useEffect(() => {
-        if (!loading && isAuthenticated) {
-            history.push(redirect);
+        if (!loading && authenticated) {
+            history.push("/dashboard");
         }
-    }, [loading, isAuthenticated, redirect, history])
+    }, [loading, authenticated, history])
 
     useEffect(() => {
         emailInputRef.current.focus();
@@ -47,15 +47,18 @@ function LoginDisplay({ location, history }) {
                         ref={emailInputRef}
                         placeholder="Enter Email"
                         value={email}
-                        onChange={(e) => setForm({ ...form, email: e.target.value })} />
+                        onChange={(e) => setForm({ ...form, email: e.target.value })}
+                        required />
                 </Form.Group>
                 <Form.Group controlId="password">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
                         type="password"
                         placeholder="Enter Password"
+                        minLength={6}
                         value={password}
-                        onChange={(e) => setForm({ ...form, password: e.target.value })} />
+                        onChange={(e) => setForm({ ...form, password: e.target.value })}
+                        required />
                 </Form.Group>
                 <Button type="submit" variant="primary">
                     Sign In
@@ -65,7 +68,7 @@ function LoginDisplay({ location, history }) {
             <Row>
                 <Col>
                     New Customer ? {" "}
-                    <Link to={redirect ? `/register?redirect=${redirect}` : "/register"}>
+                    <Link to="/register" >
                         Register
                     </Link>
                 </Col>

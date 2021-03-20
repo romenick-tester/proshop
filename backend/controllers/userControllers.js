@@ -7,19 +7,11 @@ const { User } = require("../settings");
 //desc:         return current user's details
 //access:       private
 const userDetails = asyncHandler( async(req,res) => {
-    const user = await User.findById(req.user.id);
+    const user = await User.findById(req.user.id).select(["isAdmin", "name", "email", "_id"]);
 
     if (user) {
-        res.json({
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            isAdmin: user.isAdmin,
-            // token: jwt.sign({
-            //     id: user._id,
-            //     isAdmin: user.isAdmin
-            // }, process.env.JWT_SECRET, { expiresIn: 36000 }),
-        })
+
+        res.status(200).json({ user })
 
     } else {
         res.status(404)
@@ -31,75 +23,68 @@ const userDetails = asyncHandler( async(req,res) => {
 //desc:         update current user's details
 //access:       private
 const updateUserDetails = asyncHandler(async (req, res) => {
-    const user = await User.findById(req.user.id);
+    const { name, email, password } = req.body;
 
-    if (user) {
-        user.name = req.body.name || user.name;
-        user.email = req.body.email || user.email;
-        user.isAdmin = req.body.isAdmin || user.isAdmin;
+    const emailCheck = await User.findOne({ email });
 
-        user.password = req.body.password
-            ? await bcrypt.hash(req.body.password, await bcrypt.genSalt(10))
-            : user.password;
-
-        const updatedDetails = await user.save();
-
-        res.send({
-            _id: updatedDetails._id,
-            name: updatedDetails.name,
-            email: updatedDetails.email,
-            isAdmin: updatedDetails.isAdmin,
-            token: jwt.sign({
-                id: updatedDetails._id,
-                isAdmin: updatedDetails.isAdmin
-            }, process.env.JWT_SECRET, { expiresIn: 36000 }),
-        })
-
-    } else {
-        res.status(404)
-        throw new Error("User not found!")
+    if (emailCheck) {
+        throw new Error("This is email already exist!");
     }
+
+    let user = await User.findById(req.user.id);
+
+    if (!user) {
+        throw new Error("User not found!");
+    }
+
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+
+    if (password) {
+        const salt = await bcrypt.genSalt(10);
+
+        const hashPassword = await bcrypt.hash(password, salt);
+
+        user.password = hashPassword || user.password;
+    }
+
+    await user.save();
+
+    res.status(200).json({ msg: "User details updated!" });
 });
 
 //route:        POST /api/users/register
 //desc:         register user & return token
 //access:       public
 const registerUser = asyncHandler(async (req, res) => {
-    let user = await User.findOne({ email: req.body.email });
+    const { name, email, password } = req.body;
+
+    let user = await User.findOne({ email });
 
     if (user) {
         res.status(400)
-        throw new Error("this user already taken!")
-    }
-
-    user = new User({
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password,
-    })
-
-    const salt = await bcrypt.genSalt(10);
-
-    user.password = await bcrypt.hash(req.body.password, salt);
-
-    const newUser = await user.save();
-
-    if (newUser) {
-
-        res.json({
-            _id: newUser._id,
-            name: newUser.name,
-            email: newUser.email,
-            isAdmin: newUser.isAdmin,
-            token: jwt.sign({
-                id: newUser._id,
-                isAdmin: newUser.isAdmin
-            }, process.env.JWT_SECRET, { expiresIn: 36000 }),
-        });
+        throw new Error("this user already taken!");
 
     } else {
-        res.status(400)
-        throw new Error("invalid user credentials!")
+        user = new User({
+            name,
+            email,
+            password,
+        });
+
+        const salt = await bcrypt.genSalt(10);
+
+        const hashPassword = await bcrypt.hash(password, salt);
+
+        user.password = hashPassword;
+
+        const newUser = await user.save();
+
+        const payload = { id: newUser._id, isAdmin: newUser.isAdmin };
+
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 36000 });
+
+        res.status(201).json({ token });
     }
 });
 
@@ -111,16 +96,11 @@ const loginUser = asyncHandler(async (req, res) => {
 
     if (user && (await bcrypt.compare(req.body.password, user.password))) {
 
-        res.json({
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            isAdmin: user.isAdmin,
-            token: jwt.sign({
-                id: user._id,
-                isAdmin: user.isAdmin
-            }, process.env.JWT_SECRET, { expiresIn: 36000 }),
-        });
+        const payload = { id: user._id, isAdmin: user.isAdmin };
+
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 36000 });
+
+        res.status(200).json({ token });
 
     } else {
         res.status(401)
@@ -128,15 +108,4 @@ const loginUser = asyncHandler(async (req, res) => {
     }
 });
 
-const getAllUsers = asyncHandler(async (req, res) => {
-    const users = await User.find({}).select("-password");
-
-    if (!users) {
-        res.status(404)
-        throw new Error("There are no users on the database.")
-    }
-
-    res.json(users);
-})
-
-module.exports = { userDetails, loginUser, registerUser, updateUserDetails, getAllUsers };
+module.exports = { userDetails, loginUser, registerUser, updateUserDetails };

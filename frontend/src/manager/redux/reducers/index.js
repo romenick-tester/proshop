@@ -1,12 +1,9 @@
 import { cartReducer } from "./cartReducers";
-import { productListReducer, productDetailsReducer } from "./productReducers";
-import { authReducer, allMembersReducer, userDetailsReducer } from "./userReducers";
+import productReducer from "./productReducers";
+import authReducer from "./userReducers";
 
 export {
     cartReducer,
-    productListReducer,
-    productDetailsReducer,
+    productReducer,
     authReducer,
-    allMembersReducer,
-    userDetailsReducer,
 };

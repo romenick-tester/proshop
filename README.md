@@ -23,3 +23,7 @@
 | "mongoose": "^5.11.15" |
 | "morgan": "^1.10.0" |
 | "multer": "^1.4.2" |
+
+
+### TASKS TO COMPLETE:
+1. refactor product redux

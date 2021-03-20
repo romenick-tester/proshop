@@ -13,7 +13,7 @@ const getAllProducts = asyncHandler( async(req,res) => {
 
     //throw new Error("some error"); for testing...
 
-    res.json(products);
+    res.json({ products });
 })
 
 //route:        GET /api/products/:product_id
@@ -26,7 +26,7 @@ const getProductByID = asyncHandler(async(req,res) => {
         return res.status(404).json({ errors: [{ msg: "product not found!" }] })
     }
 
-    res.json(product);
+    res.json({ product });
 })
 
 module.exports = { getAllProducts, getProductByID };

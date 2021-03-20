@@ -8,12 +8,12 @@ import { Row, Col, Image, ListGroup, Form, Button } from "react-bootstrap";
 function CartItem({item}) {
     const dispatch = useDispatch();
 
-    const { product, name, image, price, countInStock, qty } = item;
-    
     function removeFromCartHandler(id) {
         dispatch(removeFromCart(id));
     }
-    
+
+    const { product, name, image, price, countInStock, qty } = item;
+
     return (
         <ListGroup.Item>
             <Row className="justify-text-center">

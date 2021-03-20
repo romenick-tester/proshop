@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetails } from "../manager"
+import { getProduct } from "../manager"
 import { Row, Col, Image, ListGroup, Card, Button, Form } from "react-bootstrap";
 import { RatingStar, Alert, Loader } from "../components";
 
 function SingleProductDisplay({ match, history }) {
-    const dispatch = useDispatch();
     const [qty, setQty] = useState(1);
-    const productID = match.params.id;
+
+    const productId = match.params.id;
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        if(productID){
-            dispatch(getProductDetails(productID))
+        if (productId) {
+            dispatch(getProduct(productId))
         }
-    }, [dispatch, productID])
+    }, [dispatch, productId])
 
-    const productDetails = useSelector(state => state.productDetails);
-    const { loading, error, product: details } = productDetails;
+    const productDetails = useSelector(state => state.product);
+    const { loading, error, product } = productDetails;
 
     if(loading) {
         return <Loader/>;
@@ -28,12 +30,11 @@ function SingleProductDisplay({ match, history }) {
     }
 
     function addToCart() {
-        history.push(`/cart/${productID}?qty=${qty}`);
+        history.push(`/cart/${productId}?qty=${qty}`);
     }
 
-    const product = details ? details : {};
-
     const { name, image, description, price, countInStock, rating, numReviews } = product;
+
     return (
         <>
             <Link to="/" className="btn btn-light my-2 rounded">Go back</Link>

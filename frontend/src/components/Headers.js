@@ -7,7 +7,7 @@ import { FaShoppingCart, FaSignInAlt, FaUserAlt } from "react-icons/fa";
 
 function Headers() {
     const dispatch = useDispatch();
-    const { auth_loading: loading, isAuthenticated } = useSelector(state => state.auth);
+    const { loading, authenticated } = useSelector(state => state.auth);
 
     return (
         <header>
@@ -22,10 +22,10 @@ function Headers() {
                             <LinkContainer to="/cart">
                                 <Nav.Link><FaShoppingCart/> Cart</Nav.Link>
                             </LinkContainer>
-                            {!loading && isAuthenticated ? (
+                            {!loading && authenticated ? (
                                 <>
                                     <LinkContainer to="/dashboard">
-                                        <Nav.Link><FaUserAlt /> User</Nav.Link>
+                                        <Nav.Link><FaUserAlt /> Dashboard</Nav.Link>
                                     </LinkContainer>
                                     <LinkContainer to="" onClick={() => dispatch(logoutUser())}>
                                         <Nav.Link><FaSignInAlt /> Logout</Nav.Link>

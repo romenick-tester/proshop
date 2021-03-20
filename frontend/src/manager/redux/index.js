@@ -1,28 +1,26 @@
 import store from "./store";
 import {
-    getProductList, 
-    getProductDetails, 
+    getProducts,
+    getProduct,
 } from "./actions/productActions";
 import { 
     addToCart, 
     removeFromCart,
 } from "./actions/cartActions";
 import {
-    registerUser, loginUser, logoutUser, reAuthenticate, getAllMembers, getUserDetails, updateUserDetails
+    registerUser, loginUser, logoutUser, getDetails, updateDetails,
 } from "./actions/userActions";
 
 
 export {
     store,
-    getProductList, 
-    getProductDetails, 
+    getProducts,
+    getProduct,
     addToCart, 
     removeFromCart,
     registerUser,
     loginUser,
     logoutUser,
-    reAuthenticate,
-    getAllMembers,
-    getUserDetails,
-    updateUserDetails,
+    getDetails,
+    updateDetails,
 };

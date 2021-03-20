@@ -1,26 +1,16 @@
 import axios from "axios";
 import {
-    ALL_MEMBERS_REQUEST,
-    ALL_MEMBERS_SUCCESS,
-    ALL_MEMBERS_ERROR,
-    USER_DETAILS_REQUEST,
-    USER_DETAILS_SUCCESS,
-    USER_DETAILS_ERROR,
-    USER_UPDATE_DETAILS_REQUEST,
-    USER_UPDATE_DETAILS_SUCCESS,
-    USER_UPDATE_DETAILS_ERROR,
-    USER_LOGIN_REQUEST,
-    USER_LOGIN_SUCCESS,
-    USER_LOGIN_ERROR,
+    USER_REQUEST,
+    USER_LOGIN,
+    USER_REGISTER,
+    USER_ERROR,
     USER_LOGOUT,
-    USER_REGISTER_REQUEST,
-    USER_REGISTER_SUCCESS,
-    USER_REGISTER_ERROR,
-    USER_RE_AUTHENTICATE,
+    USER_DETAILS,
+    UPDATE_ERROR,
 } from "../constants/userConstants";
 
 export const loginUser = (form) => async (dispatch) => {
-    dispatch({ type: USER_LOGIN_REQUEST })
+    dispatch({ type: USER_REQUEST })
     try {
         const config = {
             headers: {
@@ -32,20 +22,23 @@ export const loginUser = (form) => async (dispatch) => {
 
         const { data } = await axios.post("/api/users/login", body, config);
 
-        dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
+        dispatch({ type: USER_LOGIN, payload: data });
 
         localStorage.setItem("token", JSON.stringify(data.token));
+
     } catch (error) {
         const msg = error.response
             && error.response.data.message
             ? error.response.data.message
             : error.message;
-        dispatch({ type: USER_LOGIN_ERROR, payload: msg });
+
+        dispatch({ type: USER_ERROR, payload: { error: msg } });
     }
 }
 
 export const registerUser = (form) => async (dispatch) => {
-    dispatch({ type: USER_REGISTER_REQUEST })
+    dispatch({ type: USER_REQUEST });
+
     try {
         const config = {
             headers: {
@@ -57,51 +50,24 @@ export const registerUser = (form) => async (dispatch) => {
 
         const { data } = await axios.post("/api/users/register", body, config);
 
-        dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
+        dispatch({ type: USER_REGISTER, payload: data });
 
         localStorage.setItem("token", JSON.stringify(data.token));
+
     } catch (error) {
         const msg = error.response
             && error.response.data.message
             ? error.response.data.message
             : error.message;
-        dispatch({ type: USER_REGISTER_ERROR, payload: msg });
+
+        dispatch({ type: USER_ERROR, payload: { error: msg } });
     }
 }
 
-export const updateUserDetails = (form) => async (dispatch, getState) => {
-    dispatch({ type: USER_UPDATE_DETAILS_REQUEST });
+export const getDetails = () => async (dispatch, getState) => {
+     try {
 
-    try {
-        const { auth: { user } } = getState();
-
-        const config = {
-            headers: {
-                "Content-Type": "application/json",
-                "Auth-Token": `${user.token}`
-            }
-        }
-
-        const body = JSON.stringify(form);
-
-        const { data } = await axios.put("/api/users", body, config);
-
-        dispatch({ type: USER_UPDATE_DETAILS_SUCCESS, payload: data });
-        dispatch(getUserDetails(data.token));
-
-        localStorage.setItem("token", JSON.stringify(data.token));
-    } catch (error) {
-        const msg = error.response
-            && error.response.data.message
-            ? error.response.data.message
-            : error.message;
-        dispatch({ type: USER_UPDATE_DETAILS_ERROR, payload: msg });
-    }
-}
-
-export const getUserDetails = (token) => async (dispatch) => {
-    dispatch({ type: USER_DETAILS_REQUEST })
-    try {
+        const { auth: { token } } = getState();
 
         const config = {
             headers: {
@@ -109,36 +75,50 @@ export const getUserDetails = (token) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.get("/api/users", config);
+        const { data } = await axios.get("/api/users/user", config);
 
-        dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
+        dispatch({ type: USER_DETAILS, payload: data });
+
     } catch (error) {
         const msg = error.response
             && error.response.data.message
             ? error.response.data.message
             : error.message;
-        dispatch({ type: USER_DETAILS_ERROR, payload: msg });
+
+         dispatch({ type: USER_ERROR, payload: { error: msg } });
     }
 }
 
-export const getAllMembers = () => async (dispatch) => {
-    dispatch({ type: ALL_MEMBERS_REQUEST });
-
+export const updateDetails = (form) => async (dispatch, getState) => {
     try {
-        const { data } = await axios.get("/api/users/all");
+        const { auth: { token } } = getState();
 
-        dispatch({ type: ALL_MEMBERS_SUCCESS, payload: data });
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "Auth-Token": `${token}`
+            }
+        }
+
+        const body = JSON.stringify(form);
+
+        const { data } = await axios.put("/api/users/user", body, config);
+
+        if (data.msg) {
+            console.log(data.msg);
+            dispatch(getDetails());
+        }
 
     } catch (error) {
-        dispatch({ type: ALL_MEMBERS_ERROR });
+        const msg = error.response
+            && error.response.data.message
+            ? error.response.data.message
+            : error.message;
+        
+        dispatch({ type: UPDATE_ERROR, payload: { error: msg } })
     }
-}
-
-export const reAuthenticate = () => (dispatch) => {
-    dispatch({ type: USER_RE_AUTHENTICATE });
-}
+};
 
 export const logoutUser = () => (dispatch) => {
-    localStorage.removeItem("token");
     dispatch({ type: USER_LOGOUT });
-}
+};

@@ -8,8 +8,9 @@ import Alert from "./Alert";
 import Cart from "./Cart";
 import CartItem from "./CartItem";
 import FormContainer from "./FormContainer";
-import ViewUsers from "./ViewUsers";
+import DashboardForm from "./DashboardForm";
+import DashboardOrders from "./DashboardOrders";
 
 export {
-    Header, Footer, Product, RatingStar, Message, Loader, Alert, Cart, CartItem, FormContainer, ViewUsers,
+    Header, Footer, Product, RatingStar, Message, Loader, Alert, Cart, CartItem, FormContainer, DashboardForm, DashboardOrders,
 };

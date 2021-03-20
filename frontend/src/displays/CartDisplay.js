@@ -5,15 +5,18 @@ import { addToCart } from "../manager";
 import { Cart } from "../components";
 
 function CartDisplay({ match, location }) {
-    const dispatch = useDispatch();
-    const productID = match.params.id;
+
+    const productId = match.params.id;
+
     const qty = location.search ? Number(location.search.split("=")[1]) : 1;
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        if(productID) {
-            dispatch(addToCart(productID, qty))
+        if (productId) {
+            dispatch(addToCart(productId, qty))
         }
-    }, [productID, qty, dispatch])
+    }, [productId, qty, dispatch])
 
     return (
         <Row>

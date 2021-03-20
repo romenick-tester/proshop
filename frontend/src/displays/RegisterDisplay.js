@@ -2,11 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../manager";
-import { USER_REGISTER_ERROR } from "../manager/redux/constants/userConstants"
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { FormContainer, Loader, Message } from "../components";
 
-function RegisterDisplay({ history, location }) {
+function RegisterDisplay({ history }) {
     const [form, setForm] = useState({
         name: "",
         email: "",
@@ -16,30 +15,32 @@ function RegisterDisplay({ history, location }) {
 
     const { name, email, password, password2 } = form;
 
-    const redirect = location.search ? location.search.split("=")[1] : "/";
+    //const redirect = location.search ? location.search.split("=")[1] : "/";
 
-    const nameInputRef = useRef(null);
+    const nameRef = useRef(null);
+    const passwordRef = useRef(null);
 
     const dispatch = useDispatch();
-    const { auth_loading: loading, auth_error: error, isAuthenticated } = useSelector(state => state.auth);
+    const { loading, error, authenticated } = useSelector(state => state.auth);
 
     useEffect(() => {
-        if (!loading && isAuthenticated) {
-            history.push(redirect);
+        if (!loading && authenticated) {
+            history.push("/dashboard");
         }
-    }, [loading, isAuthenticated, redirect, history])
+    }, [loading, authenticated, history])
 
     useEffect(() => {
-        nameInputRef.current.focus();
+        nameRef.current.focus();
     }, []);
 
     const submitHandler = (e) => {
         e.preventDefault();
 
         if (password !== password2) {
-            dispatch({ type: USER_REGISTER_ERROR, payload: "Password do not match!" });
+            passwordRef.current.classList.add("form-alert");
+
         } else {
-            dispatch(registerUser({ name, email, password }));
+            dispatch(registerUser(form));
         }
     }
 
@@ -52,10 +53,11 @@ function RegisterDisplay({ history, location }) {
                     <Form.Label>Full Name</Form.Label>
                     <Form.Control
                         type="text"
-                        ref={nameInputRef}
+                        ref={nameRef}
                         placeholder="Enter Full Name"
                         value={name}
-                        onChange={(e) => setForm({ ...form, name: e.target.value })} />
+                        onChange={(e) => setForm({ ...form, name: e.target.value })}
+                        required />
                 </Form.Group>
                 <Form.Group controlId="email">
                     <Form.Label>Email Address</Form.Label>
@@ -63,20 +65,26 @@ function RegisterDisplay({ history, location }) {
                         type="email"
                         placeholder="Enter Email"
                         value={email}
-                        onChange={(e) => setForm({ ...form, email: e.target.value })} />
+                        onChange={(e) => setForm({ ...form, email: e.target.value })}
+                        required />
                 </Form.Group>
                 <Form.Group controlId="password">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
                         type="password"
+                        minLength={6}
+                        ref={passwordRef}
                         placeholder="Enter Password"
                         value={password}
-                        onChange={(e) => setForm({ ...form, password: e.target.value })} />
+                        onChange={(e) => setForm({ ...form, password: e.target.value })}
+                        required />
                 </Form.Group>
                 <Form.Group controlId="password2">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
                         type="password"
+                        minLength={6}
+                        ref={passwordRef}
                         placeholder="Confirm Password"
                         value={password2}
                         onChange={(e) => setForm({ ...form, password2: e.target.value })} />
@@ -89,7 +97,7 @@ function RegisterDisplay({ history, location }) {
             <Row>
                 <Col>
                     Already registered ? {" "}
-                    <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
+                    <Link to="/login">
                         Login
                     </Link>
                 </Col>

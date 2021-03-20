@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductList } from "../manager";
+import { getProducts } from "../manager";
 import { Row, Col } from "react-bootstrap";
 import { Alert, Product, Loader } from "../components";
 
@@ -8,10 +8,10 @@ function HomeDisplay() {
     const dispatch = useDispatch();
 
     React.useEffect(() => {
-        dispatch(getProductList());
+        dispatch(getProducts());
     }, [dispatch])
 
-    const productList = useSelector(state => state.productList);
+    const productList = useSelector(state => state.product);
     const { loading, error, products } = productList;
     
     if(loading) {
