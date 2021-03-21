@@ -5,7 +5,7 @@ import { updateDetails } from "../../manager";
 import { Message } from "../reuseable";
 
 function DashboardForm({ user }) {
-    const [name, setName] = useState(user.name);
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");

@@ -27,6 +27,7 @@ export const loginUser = (form) => async (dispatch) => {
         localStorage.setItem("token", JSON.stringify(data.token));
 
     } catch (error) {
+        localStorage.removeItem("token");
         const msg = error.response
             && error.response.data.message
             ? error.response.data.message
@@ -55,11 +56,11 @@ export const registerUser = (form) => async (dispatch) => {
         localStorage.setItem("token", JSON.stringify(data.token));
 
     } catch (error) {
+        localStorage.removeItem("token");
         const msg = error.response
             && error.response.data.message
             ? error.response.data.message
             : error.message;
-
         dispatch({ type: USER_ERROR, payload: { error: msg } });
     }
 }
@@ -115,10 +116,12 @@ export const updateDetails = (form) => async (dispatch, getState) => {
             ? error.response.data.message
             : error.message;
         
+        console.log(msg);
         dispatch({ type: UPDATE_ERROR, payload: { error: msg } })
     }
 };
 
 export const logoutUser = () => (dispatch) => {
+    localStorage.removeItem("token");
     dispatch({ type: USER_LOGOUT });
 };

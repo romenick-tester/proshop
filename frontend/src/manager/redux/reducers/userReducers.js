@@ -23,9 +23,11 @@ const userReducer = (state = initialState, action) => {
 
     switch (type) {
         case USER_REQUEST:
-            return { ...state, loading: true };
+            return {
+                ...state,
+                loading: true,
+            };
 
-        case USER_DETAILS:
         case USER_REGISTER:
         case USER_LOGIN:
             return {
@@ -36,8 +38,16 @@ const userReducer = (state = initialState, action) => {
                 error: null,
             };
         
+        case USER_DETAILS:
+            return {
+                ...state,
+                ...payload,
+                loading: false,
+                authenticated: true,
+                error: null,
+            }
+
         case USER_ERROR:
-            localStorage.removeItem("token");
             return {
                 ...state,
                 ...payload,
@@ -49,12 +59,11 @@ const userReducer = (state = initialState, action) => {
         case UPDATE_ERROR:
             return {
                 ...state,
-                error: payload.error,
+                ...payload,
                 loading: false,
             }
 
         case USER_LOGOUT:
-            localStorage.removeItem("token");
             return {
                 ...state,
                 loading: false,

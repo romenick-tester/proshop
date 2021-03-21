@@ -2,13 +2,13 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../manager";
 import { LinkContainer } from "react-router-bootstrap";
-import { Container, Navbar, Nav } from "react-bootstrap";
+import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { FaShoppingCart, FaSignInAlt, FaUserAlt } from "react-icons/fa";
 
-function Headers() {
+function Headers({ history }) {
     const dispatch = useDispatch();
-    const { loading, authenticated } = useSelector(state => state.auth);
-
+    const { loading, authenticated, user } = useSelector(state => state.auth);
+    const { name = "" } = user;
     return (
         <header>
             <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
@@ -23,17 +23,19 @@ function Headers() {
                                 <Nav.Link><FaShoppingCart /> Cart</Nav.Link>
                             </LinkContainer>
                             {!loading && authenticated ? (
-                                <>
-                                    <LinkContainer to="/dashboard">
-                                        <Nav.Link><FaUserAlt /> Dashboard</Nav.Link>
-                                    </LinkContainer>
-                                    <LinkContainer to="" onClick={() => dispatch(logoutUser())}>
-                                        <Nav.Link><FaSignInAlt /> Logout</Nav.Link>
-                                    </LinkContainer>
-                                </>
+                                <NavDropdown title={name} id="username">
+                                    <NavDropdown.Item onClick={() => history.push("/dashboard")}>
+                                        <FaUserAlt /> Profile
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item onClick={() => dispatch(logoutUser())}>
+                                        <FaSignInAlt /> Logout
+                                    </NavDropdown.Item>
+                                </NavDropdown>
                             ) : (
                                 <LinkContainer to="/login">
-                                    <Nav.Link><FaSignInAlt /> Sign In</Nav.Link>
+                                        <Nav.Link>
+                                            <FaSignInAlt /> Sign In
+                                    </Nav.Link>
                                 </LinkContainer>
                             )}
                         </Nav>

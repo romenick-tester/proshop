@@ -18,17 +18,17 @@ import {
 
 function App() {
     const dispatch = useDispatch();
-    const { loading, authenticated } = useSelector(state => state.auth);
+    const { authenticated } = useSelector(state => state.auth);
 
     useEffect(() => {
-        if (!loading && authenticated) {
+        if (authenticated) {
             dispatch(getDetails());
         }
-    }, [dispatch, loading, authenticated]);
+    }, [dispatch, authenticated]);
 
     return (
         <>
-            <Header />
+            <Route render={({ history }) => <Header history={history} />} />
                 <Main>
                     <Container>
                         <Switch>
