@@ -5,7 +5,7 @@ import { loginUser } from "../manager";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { Message, Loader, FormContainer } from "../components";
 
-function LoginDisplay({ location, history }) {
+function LoginDisplay({ history, location }) {
     const [form, setForm] = useState({
         email: "",
         password: ""
@@ -13,7 +13,7 @@ function LoginDisplay({ location, history }) {
 
     const { email, password } = form;
 
-    //const redirect = location.search ? location.search.split("=")[1] : "/dashboard";
+    const redirect = location.search ? location.search.split("=")[1] : "/";
 
     const emailInputRef = useRef(null);
 
@@ -68,7 +68,7 @@ function LoginDisplay({ location, history }) {
             <Row>
                 <Col>
                     New Customer ? {" "}
-                    <Link to="/register" >
+                    <Link to={redirect ? `/register?redirect=${redirect}` : "/register"} >
                         Register
                     </Link>
                 </Col>

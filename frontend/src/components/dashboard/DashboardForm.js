@@ -1,32 +1,31 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { updateDetails } from "../manager";
-import Message from "./Message";
+import { updateDetails } from "../../manager";
+import { Message } from "../reuseable";
 
 function DashboardForm({ user }) {
     const [name, setName] = useState(user.name);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
-    const [notify, setNotify] = useState({ type: "", msg: "" })
+    const [notify, setNotify] = useState({ msg: "", type: "" })
 
     const dispatch = useDispatch();
-
-    const notification = (type, msg) => {
-        setNotify({ ...notify, type, msg });
-        setTimeout(() => setNotify(null, null), 3000);
-    }
 
     const submitHandler = (e) => {
         e.preventDefault();
 
         if (password !== password2) {
-            notification("warning", "Password do not match!");
+            notification("Password do not match!", "warning");
         } else {
             dispatch(updateDetails({ name, email, password }));
-            notification("success", "Updated!");
+            notification("Updated!", "success");
         }
+    }
+
+    const notification = (msg, type = "info") => {
+        setNotify({ msg, type })
     }
 
     return (

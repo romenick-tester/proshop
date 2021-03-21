@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutUser } from "../manager";
+import { logoutUser } from "../../manager";
 import { LinkContainer } from "react-router-bootstrap";
 import { Container, Navbar, Nav } from "react-bootstrap";
 import { FaShoppingCart, FaSignInAlt, FaUserAlt } from "react-icons/fa";
@@ -20,7 +20,7 @@ function Headers() {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ml-auto">
                             <LinkContainer to="/cart">
-                                <Nav.Link><FaShoppingCart/> Cart</Nav.Link>
+                                <Nav.Link><FaShoppingCart /> Cart</Nav.Link>
                             </LinkContainer>
                             {!loading && authenticated ? (
                                 <>
@@ -33,7 +33,7 @@ function Headers() {
                                 </>
                             ) : (
                                 <LinkContainer to="/login">
-                                    <Nav.Link><FaSignInAlt/> Sign In</Nav.Link>
+                                    <Nav.Link><FaSignInAlt /> Sign In</Nav.Link>
                                 </LinkContainer>
                             )}
                         </Nav>

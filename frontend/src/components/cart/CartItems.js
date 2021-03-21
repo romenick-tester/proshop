@@ -1,12 +1,10 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { ListGroup } from "react-bootstrap";
-import CartItem from "./CartItem";
-import Message from "./Message";
+import SingleItem from "./CartItem";
+import { Message } from "../reuseable";
 
-function Cart() {
-    const { cartItems: items } = useSelector(state => state.cart);
+function CartItems({ items }) {
 
     return (
         <>
@@ -14,7 +12,7 @@ function Cart() {
             {items.length === 0 ? <Message>Your cart is empty <Link to="/">go back</Link></Message> : (
                 <ListGroup variant="flush">
                     {items && items.map((item) => (
-                        <CartItem key={item.product} item={item} />
+                        <SingleItem key={item.product} item={item} />
                     ))}
                 </ListGroup>
             )}
@@ -22,4 +20,4 @@ function Cart() {
     )
 }
 
-export default Cart;
+export default CartItems;

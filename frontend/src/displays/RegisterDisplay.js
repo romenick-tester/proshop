@@ -5,7 +5,7 @@ import { registerUser } from "../manager";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { FormContainer, Loader, Message } from "../components";
 
-function RegisterDisplay({ history }) {
+function RegisterDisplay({ history, location }) {
     const [form, setForm] = useState({
         name: "",
         email: "",
@@ -15,7 +15,7 @@ function RegisterDisplay({ history }) {
 
     const { name, email, password, password2 } = form;
 
-    //const redirect = location.search ? location.search.split("=")[1] : "/";
+    const redirect = location.search ? location.search.split("=")[1] : "/";
 
     const nameRef = useRef(null);
     const passwordRef = useRef(null);
@@ -97,7 +97,7 @@ function RegisterDisplay({ history }) {
             <Row>
                 <Col>
                     Already registered ? {" "}
-                    <Link to="/login">
+                    <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
                         Login
                     </Link>
                 </Col>

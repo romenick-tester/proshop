@@ -37,8 +37,8 @@ const updateUserDetails = asyncHandler(async (req, res) => {
         throw new Error("User not found!");
     }
 
-    user.name = req.body.name || user.name;
-    user.email = req.body.email || user.email;
+    user.name = name || user.name;
+    user.email = email || user.email;
 
     if (password) {
         const salt = await bcrypt.genSalt(10);

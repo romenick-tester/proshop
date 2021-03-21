@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch } from "react-redux";
 import { FaTrash } from "react-icons/fa";
-import { addToCart, removeFromCart } from "../manager";
+import { addToCart, removeFromCart } from "../../manager";
 import { Link } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Form, Button } from "react-bootstrap";
 
-function CartItem({item}) {
+function CartItem({ item }) {
     const dispatch = useDispatch();
 
     function removeFromCartHandler(id) {
@@ -35,7 +35,7 @@ function CartItem({item}) {
                 </Col>
                 <Col md={2}>
                     <Button type="button" variant="danger" onClick={() => removeFromCartHandler(product)}>
-                        <FaTrash/>
+                        <FaTrash />
                     </Button>
                 </Col>
             </Row>

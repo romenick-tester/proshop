@@ -1,16 +1,19 @@
-import Header from "./Headers";
-import Footer from "./Footer";
-import Product from "./Product";
-import RatingStar from "./RatingStar";
-import Message from "./Message";
-import Loader from "./Loader";
-import Alert from "./Alert";
-import Cart from "./Cart";
-import CartItem from "./CartItem";
-import FormContainer from "./FormContainer";
-import DashboardForm from "./DashboardForm";
-import DashboardOrders from "./DashboardOrders";
+import { Alert, FormContainer, Loader, Message, RatingStar } from "./reuseable";
+import { Footer, Header, Product } from "./partials";
+import { DashboardForm, DashboardOrders } from "./dashboard";
+import { CartInfo, CartItems } from "./cart";
 
 export {
-    Header, Footer, Product, RatingStar, Message, Loader, Alert, Cart, CartItem, FormContainer, DashboardForm, DashboardOrders,
+    Header,
+    Footer,
+    Product,
+    RatingStar,
+    Message,
+    Loader,
+    Alert,
+    FormContainer,
+    DashboardForm,
+    DashboardOrders,
+    CartInfo,
+    CartItems,
 };
