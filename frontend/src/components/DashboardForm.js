@@ -2,22 +2,30 @@ import React, { useState } from 'react';
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { updateDetails } from "../manager";
+import Message from "./Message";
 
 function DashboardForm({ user }) {
     const [name, setName] = useState(user.name);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
+    const [notify, setNotify] = useState({ type: "", msg: "" })
 
     const dispatch = useDispatch();
+
+    const notification = (type, msg) => {
+        setNotify({ ...notify, type, msg });
+        setTimeout(() => setNotify(null, null), 3000);
+    }
 
     const submitHandler = (e) => {
         e.preventDefault();
 
         if (password !== password2) {
-            window.alert("Password do not match")
+            notification("warning", "Password do not match!");
         } else {
             dispatch(updateDetails({ name, email, password }));
+            notification("success", "Updated!");
         }
     }
 
@@ -60,6 +68,9 @@ function DashboardForm({ user }) {
                 </div>
                 <div className="form-group">
                     <button type="submit" className="btn btn-primary">Update</button>
+                    {notify && (
+                        <Message variant={notify.type} >{notify.msg}</Message>
+                    )}
                 </div>
             </Form>
         </Wrapper>
