@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from "react-router-dom";
-import { ListGroup, Row, Col, Image } from "react-bootstrap";
+import { ListGroup } from "react-bootstrap";
 import { Message } from "../reuseable";
+import OrderItems from "./OrderItems";
 
 function OrderDetails({ items, payment, address, city, postcode, country }) {
 
@@ -28,23 +28,7 @@ function OrderDetails({ items, payment, address, city, postcode, country }) {
                 {items.length === 0 ? (
                     <Message> Your cart is empty! </Message>
                 ) : (
-                    <ListGroup variant="flush">
-                        {items.map((item, index) => (
-                            <ListGroup.Item key={index}>
-                                <Row>
-                                    <Col md={1}>
-                                        <Image src={item.image} alt={item.name} fluid rounded />
-                                    </Col>
-                                    <Col>
-                                        <Link to={`/product/${item.product}`}>{item.name}</Link>
-                                    </Col>
-                                    <Col md={4}>
-                                        {item.qty} x £{item.price} = £{item.qty * item.price}
-                                    </Col>
-                                </Row>
-                            </ListGroup.Item>
-                        ))}
-                    </ListGroup>
+                    <OrderItems items={items} />
                 )}
             </ListGroup.Item>
         </ListGroup>

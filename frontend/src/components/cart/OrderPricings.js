@@ -8,9 +8,17 @@ function OrderPricing({ items }) {
     const itemsPrice = items.reduce((acc, { price, qty }) => acc + price * qty, 0);
     const shippingPrice = (itemsPrice > 100 ? 0 : 100);
     const taxPrice = Number((0.15 * itemsPrice));
+    const totalPrice = itemsPrice + shippingPrice + taxPrice;
 
     function placeOrderHandler() {
-        console.log("order placed!");
+        const newFormats = {
+            newItemPrice: formatPrice(itemsPrice),
+            newShippingPrice: formatPrice(shippingPrice),
+            newTaxPrice: formatPrice(taxPrice),
+            newTtotalPrice: formatPrice(totalPrice)
+        }
+
+        console.log(newFormats);
     }
 
     return (
@@ -22,25 +30,25 @@ function OrderPricing({ items }) {
                 <ListGroup.Item>
                     <Row>
                         <Col>items</Col>
-                        <Col>{formatPrice(itemsPrice * 100)}</Col>
+                        <Col>{formatPrice(itemsPrice)}</Col>
                     </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                     <Row>
                         <Col>shipping</Col>
-                        <Col>{formatPrice(shippingPrice * 100)}</Col>
+                        <Col>{formatPrice(shippingPrice)}</Col>
                     </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                     <Row>
                         <Col>tax</Col>
-                        <Col>{formatPrice(taxPrice * 100)}</Col>
+                        <Col>{formatPrice(taxPrice)}</Col>
                     </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                     <Row>
                         <Col>total</Col>
-                        <Col>total price</Col>
+                        <Col>{formatPrice(totalPrice)}</Col>
                     </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
