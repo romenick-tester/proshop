@@ -11,7 +11,7 @@ import {
     logoutUser,
     getDetails,
     updateDetails,
-    createOrder,
+    createOrder, getOrder, getOrders
 } from "./actions";
 
 export {
@@ -27,5 +27,5 @@ export {
     logoutUser,
     getDetails,
     updateDetails,
-    createOrder,
+    createOrder, getOrder, getOrders
 };

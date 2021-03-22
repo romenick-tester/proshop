@@ -8,8 +8,8 @@ function OrderPricing({ history }) {
     const dispatch = useDispatch();
     const cart = useSelector(state => state.cart);
 
-    const placedOrder = useSelector(state => state.placedOrder);
-    const { loading, error, order } = placedOrder;
+    const order = useSelector(state => state.order);
+    const { loading, error, createdOrder } = order;
 
     //calculations
     cart.itemsPrice = cart.cartItems.reduce((acc, { price, qty }) => acc + price * qty, 0);
@@ -18,10 +18,10 @@ function OrderPricing({ history }) {
     cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
 
     useEffect(() => {
-        if (order && order._id) {
-            history.push(`/order/${order._id}`);
+        if (createdOrder && createdOrder._id) {
+            history.push(`/order/${createdOrder._id}`);
         }
-    }, [order, history])
+    }, [createdOrder, history])
 
     function placeOrderHandler() {
         const newOrder = {

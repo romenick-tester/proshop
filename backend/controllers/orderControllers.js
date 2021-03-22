@@ -36,4 +36,33 @@ const createOrder = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = { createOrder };
+//route:        GET /api/orders/order/:id
+//desc:         return current user's order
+//access:       private
+const getOrder = asyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id);
+
+    if (!order) {
+        res.status(404)
+        throw new Error("Order not found!");
+    } else {
+        res.status(200).json({ order });
+    }
+});
+
+//route:        GET /api/orders
+//desc:         return current user's orders
+//access:       private
+const getOrders = asyncHandler(async (req, res) => {
+    const orders = await Order.find({ user: req.user.id });
+
+    if (!orders) {
+        res.status(404)
+        throw new Error("Orders not found!");
+    } else {
+        res.status(200).json({ orders });
+    }
+});
+
+
+module.exports = { createOrder, getOrder, getOrders };

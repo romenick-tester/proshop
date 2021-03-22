@@ -1,6 +1,6 @@
 const { getAllProducts, getProductByID } = require("./productsControllers");
 const { userDetails, loginUser, registerUser, updateUserDetails } = require("./userControllers");
-const { createOrder } = require("./orderControllers");
+const { createOrder, getOrders, getOrder } = require("./orderControllers");
 
 module.exports = {
     getAllProducts,
@@ -10,4 +10,6 @@ module.exports = {
     registerUser,
     updateUserDetails,
     createOrder,
+    getOrder,
+    getOrders,
 }

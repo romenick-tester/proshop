@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Row, Col } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getOrders } from "../manager";
 import { DashboardForm as DetailsForm, DashboardOrders as OrdersList } from "../components";
 
 function DashboardDisplay() {
+    const dispatch = useDispatch();
+
     const auth = useSelector(state => state.auth);
-    const { user } = auth;
+    const { authenticated, user } = auth;
+
+    useEffect(() => {
+        if (authenticated) {
+            dispatch(getOrders());
+        }
+    }, [dispatch, authenticated])
 
     return (
         <Row>

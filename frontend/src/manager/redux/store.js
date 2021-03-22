@@ -13,7 +13,7 @@ const reducers = combineReducers({
     product: productReducer,
     auth: authReducer,
     cart: cartReducer,
-    placedOrder: orderReducer,
+    order: orderReducer,
 });
 
 const initialState = {};

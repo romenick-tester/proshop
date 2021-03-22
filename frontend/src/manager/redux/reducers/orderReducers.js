@@ -1,12 +1,16 @@
 import {
-    CREATE_ORDER_REQUEST,
-    CREATE_ORDER_SUCCESS,
-    CREATE_ORDER_ERROR,
+    ORDER_REQUEST,
+    CREATE_ORDER,
+    GET_ORDER,
+    GET_ORDERS,
+    ORDER_ERROR,
 } from "../constants/orderConstants";
 
 const initialState = {
     loading: false,
-    order: null,
+    createdOrder: {},
+    single: {},
+    list: [],
     error: null,
 }
 
@@ -15,25 +19,26 @@ const orderReducer = (state = initialState, action) => {
 
     switch (type) {
 
-        case CREATE_ORDER_REQUEST:
+        case ORDER_REQUEST:
             return {
                 ...state,
-                loading: true
+                loading: true,
             }
 
-        case CREATE_ORDER_SUCCESS:
+        case GET_ORDER:
+        case GET_ORDERS:
+        case CREATE_ORDER:
             return {
                 ...state,
+                ...payload,
                 loading: false,
-                order: payload,
                 error: null,
             }
 
-        case CREATE_ORDER_ERROR:
+        case ORDER_ERROR:
             return {
                 ...state,
                 loading: false,
-                order: null,
                 error: payload
             }
 
