@@ -26,4 +26,5 @@
 
 
 ### TASKS TO COMPLETE:
-1. refactor product redux
+* Shipping display component
+    1.  

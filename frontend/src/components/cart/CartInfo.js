@@ -19,7 +19,7 @@ function CartInfo({ items, checkout }) {
                             type="button"
                             className="btn-block btn-dark"
                             disabled={items.length === 0}
-                            onClick={checkout}>
+                            onClick={() => checkout()}>
                             proceed to checkout
                         </Button>
                     </Wrapper>

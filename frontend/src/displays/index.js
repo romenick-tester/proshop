@@ -6,6 +6,7 @@ import LoginDisplay from "./LoginDisplay";
 import RegisterDisplay from "./RegisterDisplay";
 import PrivateRoute from "./PrivateRoute";
 import DashboardDisplay from "./DashboardDisplay";
+import ShippingDisplay from "./ShippingDisplay";
 
 export {
     HomeDisplay,
@@ -16,4 +17,5 @@ export {
     LoginDisplay,
     PrivateRoute,
     DashboardDisplay,
+    ShippingDisplay,
 };

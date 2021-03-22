@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../manager";
 import { LinkContainer } from "react-router-bootstrap";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
-import { FaShoppingCart, FaSignInAlt, FaUserAlt } from "react-icons/fa";
+import { FaShoppingCart, FaSignInAlt, FaUserAlt, FaCreditCard } from "react-icons/fa";
 
 function Headers({ history }) {
     const dispatch = useDispatch();
@@ -27,14 +27,17 @@ function Headers({ history }) {
                                     <NavDropdown.Item onClick={() => history.push("/dashboard")}>
                                         <FaUserAlt /> Profile
                                     </NavDropdown.Item>
+                                    <NavDropdown.Item onClick={() => history.push("/shipping")}>
+                                        <FaCreditCard /> Checkout
+                                    </NavDropdown.Item>
                                     <NavDropdown.Item onClick={() => dispatch(logoutUser())}>
                                         <FaSignInAlt /> Logout
                                     </NavDropdown.Item>
                                 </NavDropdown>
                             ) : (
                                 <LinkContainer to="/login">
-                                        <Nav.Link>
-                                            <FaSignInAlt /> Sign In
+                                    <Nav.Link>
+                                        <FaSignInAlt /> Sign In
                                     </Nav.Link>
                                 </LinkContainer>
                             )}

@@ -6,7 +6,7 @@ import { getDetails } from "./manager";
 import { Route, Switch } from "react-router-dom";
 import { Header, Footer } from "./components";
 import {
-    HomeDisplay, 
+    HomeDisplay,
     SingleProductDisplay,
     ErrorDisplay as NotFoundDisplay,
     CartDisplay,
@@ -14,6 +14,7 @@ import {
     RegisterDisplay,
     PrivateRoute,
     DashboardDisplay,
+    ShippingDisplay,
 } from "./displays";
 
 function App() {
@@ -29,26 +30,28 @@ function App() {
     return (
         <>
             <Route render={({ history }) => <Header history={history} />} />
-                <Main>
-                    <Container>
-                        <Switch>
-                            <PrivateRoute path="/dashboard" component={DashboardDisplay} />
-                            <Route path="/register" component={RegisterDisplay} />
-                            <Route path="/login" component={LoginDisplay} />
-                            <Route path="/cart/:id?" component={CartDisplay} />
-                            <Route path="/product/:id" component={SingleProductDisplay} />
-                            <Route path="/" exact component={HomeDisplay} />
+            <Main>
+                <Container>
+                    <Switch>
+                        <PrivateRoute path="/shipping" component={ShippingDisplay} />
+                        <PrivateRoute path="/dashboard" component={DashboardDisplay} />
+                        <Route path="/register" component={RegisterDisplay} />
+                        <Route path="/login" component={LoginDisplay} />
+                        <Route path="/cart/:id?" component={CartDisplay} />
+                        <Route path="/product/:id" component={SingleProductDisplay} />
+                        <Route path="/" exact component={HomeDisplay} />
                         <Route path="*" component={NotFoundDisplay} />
-                        </Switch>
-                    </Container>
+                    </Switch>
+                </Container>
             </Main>
-            <Footer/>
+            <Footer />
         </>
     )
 }
 
 const Main = styled.main`
     height: 95vh;
+    padding-top: 2rem;
 `
 
 export default App;
