@@ -1,6 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const { productsRoutes, userRoutes } = require("./routes");
+const { productsRoutes, userRoutes, orderRoutes } = require("./routes");
 const { connectDB, notFound, errorHandler } = require("./settings");
 
 const app = express();
@@ -12,6 +12,7 @@ app.use(express.json({ extended: false }));
 
 app.use("/api/users", userRoutes);
 app.use("/api/products", productsRoutes);
+app.use("/api/orders", orderRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
