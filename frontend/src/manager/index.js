@@ -9,17 +9,19 @@ import {
     logoutUser,
     getDetails,
     updateDetails,
+    shippingAddress,
 } from "./redux";
 
-export { 
+export {
     store,
     getProducts,
     getProduct,
-    addToCart, 
+    addToCart,
     removeFromCart,
     registerUser,
     loginUser,
     logoutUser,
     getDetails,
     updateDetails,
+    shippingAddress,
 };

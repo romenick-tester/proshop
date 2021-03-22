@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-//import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { shippingAddress } from "../manager";
 import { FormContainer } from "../components";
 
 function ShippingDisplay({ history }) {
-    const [address, setAddress] = useState("");
-    const [city, setCity] = useState("");
-    const [postcode, setPostcode] = useState("");
-    const [country, setCountry] = useState("");
+    const cart = useSelector(state => state.cart);
+    const { shippingAddress: shipping } = cart;
+
+    const [address, setAddress] = useState(shipping.address);
+    const [city, setCity] = useState(shipping.city);
+    const [postcode, setPostcode] = useState(shipping.postcode);
+    const [country, setCountry] = useState(shipping.country);
+
+    const dispatch = useDispatch();
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log({ address, city, postcode, country });
+        dispatch(shippingAddress({ address, city, postcode, country }));
+        history.push("/payment");
     }
 
     return (
@@ -26,6 +32,7 @@ function ShippingDisplay({ history }) {
                         className="form input"
                         name="address"
                         placeholder="Enter Address"
+                        value={address}
                         onChange={(e) => setAddress(e.target.value)}
                         required />
                 </div>
@@ -36,6 +43,7 @@ function ShippingDisplay({ history }) {
                         className="form input"
                         name="city"
                         placeholder="Enter City"
+                        value={city}
                         onChange={(e) => setCity(e.target.value)}
                         required />
                 </div>
@@ -46,6 +54,7 @@ function ShippingDisplay({ history }) {
                         className="form input"
                         name="postcode"
                         placeholder="Enter Postcode"
+                        value={postcode}
                         onChange={(e) => setPostcode(e.target.value)}
                         required />
                 </div>
@@ -56,6 +65,7 @@ function ShippingDisplay({ history }) {
                         className="form input"
                         name="country"
                         placeholder="Enter Country"
+                        value={country}
                         onChange={(e) => setCountry(e.target.value)}
                         required />
                 </div>

@@ -28,7 +28,7 @@ function Headers({ history }) {
                                         <FaUserAlt /> Profile
                                     </NavDropdown.Item>
                                     <NavDropdown.Item onClick={() => history.push("/shipping")}>
-                                        <FaCreditCard /> Checkout
+                                        <FaUserAlt /> Checkout
                                     </NavDropdown.Item>
                                     <NavDropdown.Item onClick={() => dispatch(logoutUser())}>
                                         <FaSignInAlt /> Logout

@@ -21,10 +21,10 @@ function LoginDisplay({ history, location }) {
     const { loading, error, authenticated } = useSelector(state => state.auth);
 
     useEffect(() => {
-        if (!loading && authenticated) {
-            history.push("/dashboard");
+        if (authenticated) {
+            history.push(redirect);
         }
-    }, [loading, authenticated, history])
+    }, [authenticated, history, redirect]);
 
     useEffect(() => {
         emailInputRef.current.focus();
@@ -38,7 +38,8 @@ function LoginDisplay({ history, location }) {
     return (
         <FormContainer>
             <h1>Sign In</h1>
-            {loading ? <Loader /> : error && <Message variant="danger">{error}</Message>}
+            {error && <Message variant="danger">{error}</Message>}
+            {loading && <Loader />}
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId="email">
                     <Form.Label>Email Address</Form.Label>

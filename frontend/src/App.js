@@ -15,6 +15,7 @@ import {
     PrivateRoute,
     DashboardDisplay,
     ShippingDisplay,
+    PaymentDisplay,
 } from "./displays";
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
             <Main>
                 <Container>
                     <Switch>
+                        <PrivateRoute path="/payment" component={PaymentDisplay} />
                         <PrivateRoute path="/shipping" component={ShippingDisplay} />
                         <PrivateRoute path="/dashboard" component={DashboardDisplay} />
                         <Route path="/register" component={RegisterDisplay} />

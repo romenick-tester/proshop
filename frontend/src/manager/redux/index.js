@@ -3,9 +3,10 @@ import {
     getProducts,
     getProduct,
 } from "./actions/productActions";
-import { 
-    addToCart, 
+import {
+    addToCart,
     removeFromCart,
+    shippingAddress,
 } from "./actions/cartActions";
 import {
     registerUser, loginUser, logoutUser, getDetails, updateDetails,
@@ -16,8 +17,9 @@ export {
     store,
     getProducts,
     getProduct,
-    addToCart, 
+    addToCart,
     removeFromCart,
+    shippingAddress,
     registerUser,
     loginUser,
     logoutUser,
