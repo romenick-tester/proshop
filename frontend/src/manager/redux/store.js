@@ -6,12 +6,14 @@ import {
     productReducer,
     cartReducer,
     authReducer,
+    orderReducer,
 } from "./reducers";
 
 const reducers = combineReducers({
     product: productReducer,
     auth: authReducer,
     cart: cartReducer,
+    placedOrder: orderReducer,
 });
 
 const initialState = {};
@@ -19,8 +21,8 @@ const initialState = {};
 const middlewares = [thunk];
 
 const store = createStore(
-    reducers, 
-    initialState, 
+    reducers,
+    initialState,
     composeWithDevTools(applyMiddleware(...middlewares))
 );
 
