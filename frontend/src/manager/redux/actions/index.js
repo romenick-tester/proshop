@@ -1,6 +1,6 @@
 import { getProducts, getProduct } from "./productActions";
 import { loginUser, registerUser, getDetails, updateDetails } from "./userActions";
-import { addToCart, removeFromCart, shippingAddress } from "./cartActions";
+import { addToCart, removeFromCart, getShippingAddress, getPaymentMethod } from "./cartActions";
 
 
 export {
@@ -12,5 +12,6 @@ export {
     updateDetails,
     addToCart,
     removeFromCart,
-    shippingAddress,
+    getShippingAddress,
+    getPaymentMethod
 }

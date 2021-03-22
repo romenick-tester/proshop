@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { shippingAddress } from "../manager";
-import { FormContainer } from "../components";
+import { getShippingAddress } from "../manager";
+import { FormContainer, CheckoutSteps } from "../components";
 
 function ShippingDisplay({ history }) {
     const cart = useSelector(state => state.cart);
@@ -17,12 +17,13 @@ function ShippingDisplay({ history }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        dispatch(shippingAddress({ address, city, postcode, country }));
+        dispatch(getShippingAddress({ address, city, postcode, country }));
         history.push("/payment");
     }
 
     return (
         <FormContainer>
+            <CheckoutSteps step1 step2 />
             <h1>shipping</h1>
             <Form onSubmit={handleSubmit}>
                 <div className="form group">

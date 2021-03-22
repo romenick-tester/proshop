@@ -8,6 +8,7 @@ import PrivateRoute from "./PrivateRoute";
 import DashboardDisplay from "./DashboardDisplay";
 import ShippingDisplay from "./ShippingDisplay";
 import PaymentDisplay from "./PaymentDisplay";
+import PlaceOrderDisplay from "./PlaceOrderDisplay";
 
 export {
     HomeDisplay,
@@ -20,4 +21,5 @@ export {
     DashboardDisplay,
     ShippingDisplay,
     PaymentDisplay,
+    PlaceOrderDisplay,
 };

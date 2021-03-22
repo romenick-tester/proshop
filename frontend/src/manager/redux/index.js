@@ -6,7 +6,8 @@ import {
 import {
     addToCart,
     removeFromCart,
-    shippingAddress,
+    getShippingAddress,
+    getPaymentMethod,
 } from "./actions/cartActions";
 import {
     registerUser, loginUser, logoutUser, getDetails, updateDetails,
@@ -19,7 +20,8 @@ export {
     getProduct,
     addToCart,
     removeFromCart,
-    shippingAddress,
+    getShippingAddress,
+    getPaymentMethod,
     registerUser,
     loginUser,
     logoutUser,

@@ -9,7 +9,8 @@ import {
     logoutUser,
     getDetails,
     updateDetails,
-    shippingAddress,
+    getShippingAddress,
+    getPaymentMethod,
 } from "./redux";
 
 export {
@@ -23,5 +24,6 @@ export {
     logoutUser,
     getDetails,
     updateDetails,
-    shippingAddress,
+    getShippingAddress,
+    getPaymentMethod,
 };
