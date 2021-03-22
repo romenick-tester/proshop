@@ -1,7 +1,8 @@
 import { Alert, FormContainer, Loader, Message, RatingStar } from "./reuseable";
 import { Footer, Header, Product, CheckoutSteps } from "./partials";
 import { DashboardForm, DashboardOrders } from "./dashboard";
-import { CartInfo, CartItems } from "./cart";
+import { CartInfo, CartItems, OrderDetails, OrderPricings } from "./cart";
+import { ProductDetails, ProductAddToCart } from "./product";
 
 export {
     Header,
@@ -12,9 +13,13 @@ export {
     Loader,
     Alert,
     FormContainer,
+    ProductDetails,
     DashboardForm,
     DashboardOrders,
     CartInfo,
     CartItems,
-    CheckoutSteps
+    CheckoutSteps,
+    OrderDetails,
+    OrderPricings,
+    ProductAddToCart,
 };

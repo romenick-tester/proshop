@@ -12,7 +12,7 @@ function PaymentDisplay({ history }) {
         history.push("/shipping")
     }
 
-    const [paymentMethod, setPaymentMethod] = useState("paypal");
+    const [paymentMethod, setPaymentMethod] = useState("");
 
     const dispatch = useDispatch();
 
@@ -36,9 +36,8 @@ function PaymentDisplay({ history }) {
                             label="PayPal Or Credit Card"
                             id="paypal"
                             name="paymentMethod"
-                            value="paypal"
+                            value="PayPal"
                             onChange={(e) => setPaymentMethod(e.target.value)}
-                            checked
                         />
 
                         <Form.Check
@@ -46,15 +45,17 @@ function PaymentDisplay({ history }) {
                             label="Debit Card"
                             id="debit"
                             name="paymentMethod"
-                            value="debit"
+                            value="Debit Card"
                             disabled
                             onChange={(e) => setPaymentMethod(e.target.value)}
                         />
                     </Col>
                 </Form.Group>
-                <Button type="submit" variant="primary">
-                    Continue
-                </Button>
+                {paymentMethod && (
+                    <Button type="submit" variant="primary">
+                        Continue
+                    </Button>
+                )}
             </Form>
         </FormContainer>
     )

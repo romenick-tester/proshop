@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from "react-redux";
 import { FaTrash } from "react-icons/fa";
-import { addToCart, removeFromCart } from "../../manager";
+import { addToCart, removeFromCart, formatPrice } from "../../manager";
 import { Link } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Form, Button } from "react-bootstrap";
 
@@ -24,7 +24,7 @@ function CartItem({ item }) {
                     <Link to={`/product/${product}`}> {name} </Link>
                 </Col>
                 <Col md={2}>
-                    £ {price}
+                    {formatPrice(price)} (1)
                 </Col>
                 <Col md={2}>
                     <Form.Control as="select" value={qty} onChange={(e) => dispatch(addToCart(product, Number(e.target.value)))} >

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../manager";
 import { LinkContainer } from "react-router-bootstrap";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
-import { FaShoppingCart, FaSignInAlt, FaUserAlt, FaCreditCard } from "react-icons/fa";
+import { FaShoppingCart, FaSignInAlt, FaUserAlt } from "react-icons/fa";
 
 function Headers({ history }) {
     const dispatch = useDispatch();

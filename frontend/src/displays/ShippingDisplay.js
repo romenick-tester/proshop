@@ -70,10 +70,12 @@ function ShippingDisplay({ history }) {
                         onChange={(e) => setCountry(e.target.value)}
                         required />
                 </div>
-                <div className="form group">
-                    <label className="form label"></label>
-                    <button type="submit" className="form button">Submit</button>
-                </div>
+                {postcode && country && (
+                    <div className="form group">
+                        <label className="form label"></label>
+                        <button type="submit" className="form button">Continue</button>
+                    </div>
+                )}
             </Form>
         </FormContainer>
     )
