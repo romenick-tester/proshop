@@ -11,7 +11,10 @@ import {
     updateDetails,
     getShippingAddress,
     getPaymentMethod,
-    createOrder, getOrder, getOrders
+    createOrder,
+    getOrder,
+    getOrders,
+    updateOrderPaid,
 } from "./redux";
 
 import formatPrice from "./utils/helper"
@@ -30,5 +33,8 @@ export {
     updateDetails,
     getShippingAddress,
     getPaymentMethod,
-    createOrder, getOrder, getOrders
+    createOrder,
+    getOrder,
+    getOrders,
+    updateOrderPaid,
 };

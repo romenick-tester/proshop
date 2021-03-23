@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ORDER_RESET } from "../constants/orderConstants";
 import {
     USER_REQUEST,
     USER_LOGIN,
@@ -66,7 +67,7 @@ export const registerUser = (form) => async (dispatch) => {
 }
 
 export const getDetails = () => async (dispatch, getState) => {
-     try {
+    try {
 
         const { auth: { token } } = getState();
 
@@ -86,7 +87,7 @@ export const getDetails = () => async (dispatch, getState) => {
             ? error.response.data.message
             : error.message;
 
-         dispatch({ type: USER_ERROR, payload: { error: msg } });
+        dispatch({ type: USER_ERROR, payload: { error: msg } });
     }
 }
 
@@ -115,7 +116,7 @@ export const updateDetails = (form) => async (dispatch, getState) => {
             && error.response.data.message
             ? error.response.data.message
             : error.message;
-        
+
         console.log(msg);
         dispatch({ type: UPDATE_ERROR, payload: { error: msg } })
     }
@@ -123,5 +124,6 @@ export const updateDetails = (form) => async (dispatch, getState) => {
 
 export const logoutUser = () => (dispatch) => {
     localStorage.removeItem("token");
+    dispatch({ type: ORDER_RESET });
     dispatch({ type: USER_LOGOUT });
 };

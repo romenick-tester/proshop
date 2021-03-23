@@ -38,7 +38,7 @@ function OrderDetails({ user = {}, shippingAddress = {}, paymentMethod, orderIte
                         </tbody>
                     </Table>
                     {isDelivered ? (
-                        <Message variant="success">Delivered on {paidAt}</Message>
+                        <Message variant="success">Delivered on {deliveredAt}</Message>
                     ) : (
                         <Message variant="danger">Not Delivered</Message>
                     )}
