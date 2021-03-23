@@ -12,14 +12,12 @@ const OrderSchema = new Schema({
             product: { type: Schema.Types.ObjectId, required: true, ref: "Product" },
         }
     ],
-    shippingAddress: [
-        {
-            address: { type: String, required: true },
-            city: { type: String, required: true },
-            postcode: { type: String, required: true },
-            country: { type: String, required: true },
-        }
-    ],
+    shippingAddress: {
+        address: { type: String, required: true },
+        city: { type: String, required: true },
+        postcode: { type: String, required: true },
+        country: { type: String, required: true },
+    },
     paymentMethod: { type: String, required: true },
     paymentResult: {
         id: { type: String },
