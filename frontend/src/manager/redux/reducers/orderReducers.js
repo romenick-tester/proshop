@@ -9,7 +9,7 @@ import {
 const initialState = {
     loading: false,
     createdOrder: {},
-    single: {},
+    details: {},
     list: [],
     error: null,
 }

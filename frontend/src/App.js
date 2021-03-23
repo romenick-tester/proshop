@@ -17,6 +17,7 @@ import {
     ShippingDisplay,
     PaymentDisplay,
     PlaceOrderDisplay,
+    OrderDisplay,
 } from "./displays";
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
             <Main>
                 <Container>
                     <Switch>
+                        <PrivateRoute path="/order/:id" component={OrderDisplay} />
                         <PrivateRoute path="/placeorder" component={PlaceOrderDisplay} />
                         <PrivateRoute path="/payment" component={PaymentDisplay} />
                         <PrivateRoute path="/shipping" component={ShippingDisplay} />

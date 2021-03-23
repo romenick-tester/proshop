@@ -74,7 +74,7 @@ export const getOrder = (id) => async (dispatch, getState) => {
 
         const { data } = await axios.get(`/api/orders/order/${id}`, config);
 
-        dispatch({ type: GET_ORDER, payload: { single: data.order } });
+        dispatch({ type: GET_ORDER, payload: { details: data.order } });
 
     } catch (error) {
         dispatch({

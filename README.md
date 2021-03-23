@@ -24,6 +24,7 @@
 | "morgan": "^1.10.0" |
 | "multer": "^1.4.2" |
 
+![Cert](https://i.ibb.co/Z832YpZ/completion-certificate.jpg)
 
 ### TASKS TO COMPLETE:
 * Shipping display component
