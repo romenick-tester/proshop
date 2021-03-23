@@ -26,6 +26,10 @@
 
 ![Cert](https://i.ibb.co/Z832YpZ/completion-certificate.jpg)
 
-### TASKS TO COMPLETE:
-* Shipping display component
-    1.  
+images:
+https://i.ibb.co/1QLWHCW/airpods.jpg
+https://i.ibb.co/D1r8Css/alexa.jpg
+https://i.ibb.co/zn05Cvq/camera.jpg
+https://i.ibb.co/X3Mdjyp/mouse.jpg
+https://i.ibb.co/pXNBbqJ/phone.jpg
+https://i.ibb.co/9Z20Bdd/playstation.jpg

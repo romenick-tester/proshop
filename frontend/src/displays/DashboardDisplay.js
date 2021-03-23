@@ -10,11 +10,19 @@ function DashboardDisplay() {
     const auth = useSelector(state => state.auth);
     const { authenticated, user } = auth;
 
+    const { list } = useSelector(state => state.order);
+
     useEffect(() => {
         if (authenticated) {
             dispatch(getOrders());
         }
-    }, [dispatch, authenticated])
+    }, [dispatch, authenticated]);
+
+    useEffect(() => {
+        if (list) {
+            dispatch(getOrders);
+        }
+    }, [dispatch, list])
 
     return (
         <Row>

@@ -14,7 +14,7 @@ import {
     createOrder, getOrder, getOrders
 } from "./redux";
 
-import formatPrice from "./miscs/utils/helper"
+import formatPrice from "./utils/helper"
 
 export {
     store,

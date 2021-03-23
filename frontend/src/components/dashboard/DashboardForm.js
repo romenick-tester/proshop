@@ -30,8 +30,10 @@ function DashboardForm({ user }) {
 
     return (
         <Wrapper>
-            <h1>Update Details</h1>
-
+            <div>
+                <h4>Update Details</h4>
+                <hr />
+            </div>
             <Form onSubmit={submitHandler}>
                 <div className="form-group">
                     <label> Full Name </label>
@@ -66,7 +68,7 @@ function DashboardForm({ user }) {
                         onChange={(e) => setPassword2(e.target.value)} />
                 </div>
                 <div className="form-group">
-                    <button type="submit" className="btn btn-primary">Update</button>
+                    <button type="submit" className="btn btn-dark">Update</button>
                     {notify && (
                         <Message variant={notify.type} >{notify.msg}</Message>
                     )}
@@ -78,8 +80,19 @@ function DashboardForm({ user }) {
 
 const Wrapper = styled.div`
     margin-top: 1rem;
-    border-right: 1px solid #999;
-    padding: 0 1rem;
+    background: #888;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    color: whitesmoke;
+
+    > div {
+        width: 100%;
+        text-align: center;
+
+        h4 {
+            font-weight: 700;
+        }
+    }
 `
 
 const Form = styled.form`
@@ -94,6 +107,8 @@ const Form = styled.form`
         > * {
             flex: 1;
             padding: 5px;
+            border-radius: 0.3rem;
+            outline: none;
         }
     }
 `

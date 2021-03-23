@@ -5,6 +5,8 @@ import { registerUser } from "../manager";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { FormContainer, Loader, Message } from "../components";
 
+import "../manager/styling/inline.css"
+
 function RegisterDisplay({ history, location }) {
     const [form, setForm] = useState({
         name: "",
@@ -18,7 +20,8 @@ function RegisterDisplay({ history, location }) {
     const redirect = location.search ? location.search.split("=")[1] : "/";
 
     const nameRef = useRef(null);
-    const passwordRef = useRef(null);
+    const passwordRef1 = useRef(null);
+    const passwordRef2 = useRef(null);
 
     const dispatch = useDispatch();
     const { loading, error, authenticated } = useSelector(state => state.auth);
@@ -37,7 +40,8 @@ function RegisterDisplay({ history, location }) {
         e.preventDefault();
 
         if (password !== password2) {
-            passwordRef.current.classList.add("form-alert");
+            passwordRef1.current.classList.add("form-alert");
+            passwordRef2.current.classList.add("form-alert");
 
         } else {
             dispatch(registerUser(form));
@@ -73,7 +77,7 @@ function RegisterDisplay({ history, location }) {
                     <Form.Control
                         type="password"
                         minLength={6}
-                        ref={passwordRef}
+                        ref={passwordRef1}
                         placeholder="Enter Password"
                         value={password}
                         onChange={(e) => setForm({ ...form, password: e.target.value })}
@@ -84,7 +88,7 @@ function RegisterDisplay({ history, location }) {
                     <Form.Control
                         type="password"
                         minLength={6}
-                        ref={passwordRef}
+                        ref={passwordRef2}
                         placeholder="Confirm Password"
                         value={password2}
                         onChange={(e) => setForm({ ...form, password2: e.target.value })} />
