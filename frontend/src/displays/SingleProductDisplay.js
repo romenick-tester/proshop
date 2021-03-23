@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { formatPrice, getProduct } from "../manager"
 import { Row, Col, Image } from "react-bootstrap";
-import { Alert, Loader, ProductDetails, ProductAddToCart } from "../components";
+import { Message, Loader, ProductDetails, ProductAddToCart } from "../components";
 
 function SingleProductDisplay({ match, history }) {
     const productId = match.params.id;
@@ -24,7 +24,7 @@ function SingleProductDisplay({ match, history }) {
     }
 
     if (error) {
-        return <Alert variant="warning">{error}</Alert>;
+        return <Message variant="warning" center>{error}</Message>;
     }
 
     const { name, image, price, countInStock } = product;

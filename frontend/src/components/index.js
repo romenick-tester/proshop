@@ -1,4 +1,4 @@
-import { Alert, FormContainer, Loader, Message, RatingStar } from "./reuseable";
+import { FormContainer, Loader, Message, RatingStar } from "./reuseable";
 import { Footer, Header, Product, CheckoutSteps } from "./partials";
 import { DashboardForm, DashboardOrders } from "./dashboard";
 import { CartInfo, CartItems, OrderDetails, OrderPricings } from "./cart";
@@ -12,7 +12,6 @@ export {
     RatingStar,
     Message,
     Loader,
-    Alert,
     FormContainer,
     ProductDetails,
     DashboardForm,

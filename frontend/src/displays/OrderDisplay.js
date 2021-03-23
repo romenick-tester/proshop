@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Row, Col } from "react-bootstrap";
-import { getOrder, formatPrice } from "../manager";
+import { getOrder } from "../manager";
 import { Loader, Message, OrderedDetails, OrderedPrices } from "../components";
 
 function OrderDisplay({ match }) {
@@ -33,7 +32,7 @@ function OrderDisplay({ match }) {
                 <>
                     <Row>
                         <Col md={6}>
-                            <h2 style={{ background: "#999" }}>order no: {details._id} </h2>
+                            <h2>order no: {details._id} </h2>
                         </Col>
                     </Row>
                     <Row>

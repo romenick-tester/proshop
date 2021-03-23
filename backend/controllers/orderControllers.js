@@ -40,7 +40,7 @@ const createOrder = asyncHandler(async (req, res) => {
 //desc:         return current user's order
 //access:       private
 const getOrder = asyncHandler(async (req, res) => {
-    const order = await Order.findById(req.params.id);
+    const order = await Order.findById(req.params.id).populate("user", "name email");
 
     if (!order) {
         res.status(404)

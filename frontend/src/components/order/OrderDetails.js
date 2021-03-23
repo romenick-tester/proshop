@@ -1,33 +1,64 @@
 import React from 'react';
+import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { Row, Col, Image, ListGroup, } from "react-bootstrap";
+import { Row, Col, Image, ListGroup } from "react-bootstrap";
 import { formatPrice } from "../../manager";
+import { Message } from "../reuseable";
 
-function OrderDetails({ shippingAddress = {}, paymentMethod, orderItems = [] }) {
+function OrderDetails({ user = {}, shippingAddress = {}, paymentMethod, orderItems = [], ...rest }) {
+    const { address = "", city = "", postcode = "", country = "" } = shippingAddress;
+
+    const { isPaid, paidAt, isDelivered, deliveredAt } = rest;
+
     return (
         <Col md={8}>
             <ListGroup variant="flush">
                 <ListGroup.Item>
-                    <h2>shipping address</h2>
-                    <p>
-                        <strong>Address: </strong> <br />
-                        {shippingAddress.address},
-                        {shippingAddress.city},
-                        {shippingAddress.postcode},
-                        {shippingAddress.country}
-                    </p>
+                    <Table>
+                        <thead>
+                            <tr>
+                                <th>Recipient:</th>
+                                <th>Shipping Address:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <strong>{user.name}</strong> <br />
+                                    <a href={`mailto:${user.email}`}>{user.email}</a>
+                                </td>
+                                <td>
+                                    {address.split(",")[0]}, <br />
+                                    {address.split(",")[1]}, <br />
+                                    {city}, <br />
+                                    {postcode}, <br />
+                                    {country}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </Table>
+                    {isDelivered ? (
+                        <Message variant="success">Delivered on {paidAt}</Message>
+                    ) : (
+                        <Message variant="danger">Not Delivered</Message>
+                    )}
                 </ListGroup.Item>
 
                 <ListGroup.Item>
-                    <h2>payment method</h2>
+                    <h3>payment method</h3>
                     <p>
                         <strong>Method: </strong>
                         {paymentMethod}
                     </p>
+                    {isPaid ? (
+                        <Message variant="success">Paid on {paidAt}</Message>
+                    ) : (
+                        <Message variant="danger">Not Paid</Message>
+                    )}
                 </ListGroup.Item>
 
                 <ListGroup.Item>
-                    <h2>order items</h2>
+                    <h3>order items</h3>
                     <ListGroup variant="flush">
                         {orderItems.map((item, index) => (
                             <ListGroup.Item key={index}>
@@ -50,5 +81,10 @@ function OrderDetails({ shippingAddress = {}, paymentMethod, orderItems = [] }) 
         </Col>
     )
 }
+
+const Table = styled.table`
+    width: 60%;
+    margin-bottom: 1rem;
+`
 
 export default OrderDetails;

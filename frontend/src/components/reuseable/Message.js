@@ -1,10 +1,10 @@
 import React from "react";
 import { Alert } from "react-bootstrap";
 
-function Message({ variant, children }) {
+function Message({ variant, children, center = false }) {
 
     return (
-        <Alert variant={variant} style={{ textAlign: "center" }}>
+        <Alert variant={variant} className={center ? "text-center" : null}>
             {children}
         </Alert>
     )
