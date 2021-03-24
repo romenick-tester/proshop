@@ -37,7 +37,7 @@ const userReducer = (state = initialState, action) => {
                 authenticated: true,
                 error: null,
             };
-        
+
         case USER_DETAILS:
             return {
                 ...state,
@@ -55,7 +55,7 @@ const userReducer = (state = initialState, action) => {
                 authenticated: false,
                 user: {}
             };
-        
+
         case UPDATE_ERROR:
             return {
                 ...state,

@@ -1,5 +1,4 @@
 import axios from "axios";
-import { ORDER_RESET } from "../constants/orderConstants";
 import { CART_RESET } from "../constants/cartConstants";
 import {
     USER_REQUEST,
@@ -125,7 +124,7 @@ export const updateDetails = (form) => async (dispatch, getState) => {
 
 export const logoutUser = () => (dispatch) => {
     localStorage.removeItem("token");
+    localStorage.removeItem("cartItems");
     dispatch({ type: CART_RESET });
-    dispatch({ type: ORDER_RESET });
     dispatch({ type: USER_LOGOUT });
 };

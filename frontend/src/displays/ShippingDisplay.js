@@ -8,16 +8,24 @@ function ShippingDisplay({ history }) {
     const cart = useSelector(state => state.cart);
     const { shippingAddress: shipping } = cart;
 
-    const [address, setAddress] = useState(shipping.address);
-    const [city, setCity] = useState(shipping.city);
-    const [postcode, setPostcode] = useState(shipping.postcode);
-    const [country, setCountry] = useState(shipping.country);
+    const [address, setAddress] = useState("");
+    const [city, setCity] = useState("");
+    const [postcode, setPostcode] = useState("");
+    const [country, setCountry] = useState("");
 
     const dispatch = useDispatch();
 
     function handleSubmit(e) {
         e.preventDefault();
-        dispatch(getShippingAddress({ address, city, postcode, country }));
+
+        const form = {
+            address: address ? address : shipping.address ? shipping.address : "",
+            city: city ? city : shipping.city ? shipping.city : "",
+            postcode: postcode ? postcode : shipping.postcode ? shipping.postcode : "",
+            country: country ? country : shipping.country ? shipping.country : ""
+        }
+
+        dispatch(getShippingAddress(form));
         history.push("/payment");
     }
 
@@ -32,10 +40,10 @@ function ShippingDisplay({ history }) {
                         type="text"
                         className="form input"
                         name="address"
-                        placeholder="Enter Address"
+                        placeholder={shipping.address || "Enter Address"}
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
-                        required />
+                    />
                 </div>
                 <div className="form group">
                     <label className="form label">City</label>
@@ -43,10 +51,10 @@ function ShippingDisplay({ history }) {
                         type="text"
                         className="form input"
                         name="city"
-                        placeholder="Enter City"
+                        placeholder={shipping.city || "Enter City"}
                         value={city}
                         onChange={(e) => setCity(e.target.value)}
-                        required />
+                    />
                 </div>
                 <div className="form group">
                     <label className="form label">Postcode</label>
@@ -54,10 +62,10 @@ function ShippingDisplay({ history }) {
                         type="text"
                         className="form input"
                         name="postcode"
-                        placeholder="Enter Postcode"
+                        placeholder={shipping.postcode || "Enter Postcode"}
                         value={postcode}
                         onChange={(e) => setPostcode(e.target.value)}
-                        required />
+                    />
                 </div>
                 <div className="form group">
                     <label className="form label">Country</label>
@@ -65,17 +73,16 @@ function ShippingDisplay({ history }) {
                         type="text"
                         className="form input"
                         name="country"
-                        placeholder="Enter Country"
+                        placeholder={shipping.country || "Enter Country"}
                         value={country}
                         onChange={(e) => setCountry(e.target.value)}
-                        required />
+                    />
                 </div>
-                {postcode && country && (
-                    <div className="form group">
-                        <label className="form label"></label>
-                        <button type="submit" className="form button">Continue</button>
-                    </div>
-                )}
+
+                <div className="form group">
+                    <label className="form label"></label>
+                    <button type="submit" className="form button">Continue</button>
+                </div>
             </Form>
         </FormContainer>
     )
@@ -105,7 +112,7 @@ const Form = styled.form`
             outline: none;
             background: #111;
             color: white;
-            padding: 0.3rem 1rem;
+            padding: 0.5rem 1rem;
 
             &:hover {
                 cursor: pointer;

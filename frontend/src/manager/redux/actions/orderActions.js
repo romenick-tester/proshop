@@ -5,9 +5,9 @@ import {
     ORDER_ERROR,
     GET_ORDER,
     GET_ORDERS,
-    UPDATE_REQUEST,
-    ORDER_PAID,
-    UPDATE_ERROR,
+    ORDER_PAY_REQUEST,
+    ORDER_PAY_SUCCESS,
+    ORDER_PAY_ERROR,
 } from "../constants/orderConstants";
 
 export const createOrder = (order) => async (dispatch, getState) => {
@@ -94,7 +94,7 @@ export const getOrder = (id) => async (dispatch, getState) => {
 }
 
 export const payOrder = (orderId, paymentResult) => async (dispatch, getState) => {
-    dispatch({ type: UPDATE_REQUEST });
+    dispatch({ type: ORDER_PAY_REQUEST });
 
     try {
         const { auth: { token } } = getState();
@@ -106,18 +106,18 @@ export const payOrder = (orderId, paymentResult) => async (dispatch, getState) =
             }
         }
 
-        const { data } = await axios.put(`/api/orders/order/${orderId}/pay`, paymentResult, config);
+        const body = JSON.stringify(paymentResult);
 
-        console.log(data.msg);
+        const { data } = await axios.put(`/api/orders/order/${orderId}/pay`, body, config);
 
-        dispatch({ type: ORDER_PAID });
+        dispatch({ type: ORDER_PAY_SUCCESS, payload: data.paymentResult });
 
     } catch (error) {
         const msg = error.response && error.response.data.message ? error.response.data.message : error.message;
 
         dispatch({
-            type: UPDATE_ERROR,
-            payload: { paid: false, error: msg }
+            type: ORDER_PAY_ERROR,
+            payload: msg
         });
     }
 }

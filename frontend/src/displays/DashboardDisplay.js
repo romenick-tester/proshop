@@ -10,13 +10,13 @@ function DashboardDisplay() {
     const auth = useSelector(state => state.auth);
     const { authenticated, user } = auth;
 
-    const { list } = useSelector(state => state.order);
+    const { list, paid } = useSelector(state => state.order);
 
     useEffect(() => {
-        if (authenticated) {
+        if (authenticated || paid) {
             dispatch(getOrders());
         }
-    }, [dispatch, authenticated]);
+    }, [dispatch, authenticated, paid]);
 
     useEffect(() => {
         if (list) {

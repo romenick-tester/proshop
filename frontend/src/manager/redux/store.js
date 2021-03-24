@@ -7,6 +7,7 @@ import {
     cartReducer,
     authReducer,
     orderReducer,
+    payReducer,
 } from "./reducers";
 
 const reducers = combineReducers({
@@ -14,6 +15,7 @@ const reducers = combineReducers({
     auth: authReducer,
     cart: cartReducer,
     order: orderReducer,
+    payment: payReducer,
 });
 
 const initialState = {};

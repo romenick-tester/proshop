@@ -83,9 +83,9 @@ const updateOrderPaid = asyncHandler(async (req, res) => {
             email_address: req.body.payer.email_address
         }
 
-        await order.save();
+        const updatedOrder = await order.save();
 
-        res.status(200).json({ msg: "payment success!" });
+        res.status(200).json({ paymentResult: updatedOrder.paymentResult });
     }
 });
 

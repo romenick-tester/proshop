@@ -16,13 +16,15 @@ import {
     getOrders,
     payOrder,
 } from "./redux";
-import { ORDER_RESET } from "./redux/constants/orderConstants";
+import { ORDER_PAY_RESET } from "./redux/constants/orderConstants";
 
-import formatPrice from "./utils/helper"
+import formatPrice from "./utils/helper";
+import addPaypalScript from "./utils/addScript";
 
 export {
     store,
     formatPrice,
+    addPaypalScript,
     getProducts,
     getProduct,
     addToCart,
@@ -38,5 +40,5 @@ export {
     getOrder,
     getOrders,
     payOrder,
-    ORDER_RESET,
+    ORDER_PAY_RESET,
 };

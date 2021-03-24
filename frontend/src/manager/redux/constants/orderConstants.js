@@ -8,10 +8,7 @@ export const GET_ORDERS = "GET_ORDERS";
 
 export const ORDER_ERROR = "ORDER_ERROR";
 
-export const UPDATE_REQUEST = "UPDATE_REQUEST";
-
-export const ORDER_PAID = "ORDER_PAID";
-
-export const UPDATE_ERROR = "UPDATE_ERROR";
-
-export const ORDER_RESET = "ORDER_RESET";
+export const ORDER_PAY_REQUEST = "ORDER_PAY_REQUEST";
+export const ORDER_PAY_SUCCESS = "ORDER_PAY_SUCCESS";
+export const ORDER_PAY_ERROR = "ORDER_PAY_ERROR";
+export const ORDER_PAY_RESET = "ORDER_PAY_RESET";
