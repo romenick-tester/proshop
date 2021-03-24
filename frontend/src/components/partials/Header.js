@@ -25,10 +25,7 @@ function Headers({ history }) {
                             {!loading && authenticated ? (
                                 <NavDropdown title={name} id="username">
                                     <NavDropdown.Item onClick={() => history.push("/dashboard")}>
-                                        <FaUserAlt /> Profile
-                                    </NavDropdown.Item>
-                                    <NavDropdown.Item onClick={() => history.push("/shipping")}>
-                                        <FaUserAlt /> Checkout
+                                        <FaUserAlt /> Dashboard
                                     </NavDropdown.Item>
                                     <NavDropdown.Item onClick={() => dispatch(logoutUser())}>
                                         <FaSignInAlt /> Logout
