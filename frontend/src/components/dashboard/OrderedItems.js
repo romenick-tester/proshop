@@ -8,7 +8,7 @@ import { formatPrice } from "../../manager";
 function OrderItem({ list }) {
 
     return (
-        <Table striped bordered hover reponsive className="table-sm">
+        <Table striped bordered hover responsive className="table-sm">
             <THEAD>
                 <tr>
                     <th>ID</th>

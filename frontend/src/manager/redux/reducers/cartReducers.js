@@ -3,11 +3,12 @@ import {
     CART_REMOVE_ITEM,
     CART_SHIPPING_ADDRESS,
     CART_PAYMENT_METHOD,
+    CART_RESET,
 } from "../constants/cartConstants";
 
 const cartItemsLocalStorage = localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : [];
 const shippingAddressLocalStorage = localStorage.getItem("shippingAddress") ? JSON.parse(localStorage.getItem("shippingAddress")) : {};
-const paymentMethodLocalStorage = localStorage.getItem("paymentMethod") ? JSON.parse(localStorage.getItem("paymentMethod")) : "";
+const paymentMethodLocalStorage = localStorage.getItem("paymentMethod") ? JSON.parse(localStorage.getItem("paymentMethod")) : null;
 
 const initialState = {
     cartItems: cartItemsLocalStorage,
@@ -49,6 +50,14 @@ export const cartReducer = (state = initialState, action) => {
             return {
                 ...state,
                 paymentMethod: payload,
+            }
+
+        case CART_RESET:
+            return {
+                ...state,
+                cartItems: [],
+                shippingAddress: {},
+                paymentMethod: null
             }
 
         default:

@@ -8,6 +8,8 @@ export const GET_ORDERS = "GET_ORDERS";
 
 export const ORDER_ERROR = "ORDER_ERROR";
 
+export const UPDATE_REQUEST = "UPDATE_REQUEST";
+
 export const ORDER_PAID = "ORDER_PAID";
 
 export const UPDATE_ERROR = "UPDATE_ERROR";

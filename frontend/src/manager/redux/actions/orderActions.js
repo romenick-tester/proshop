@@ -5,6 +5,7 @@ import {
     ORDER_ERROR,
     GET_ORDER,
     GET_ORDERS,
+    UPDATE_REQUEST,
     ORDER_PAID,
     UPDATE_ERROR,
 } from "../constants/orderConstants";
@@ -93,6 +94,8 @@ export const getOrder = (id) => async (dispatch, getState) => {
 }
 
 export const payOrder = (orderId, paymentResult) => async (dispatch, getState) => {
+    dispatch({ type: UPDATE_REQUEST });
+
     try {
         const { auth: { token } } = getState();
 

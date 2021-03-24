@@ -5,6 +5,7 @@ import {
     GET_ORDERS,
     ORDER_ERROR,
     ORDER_PAID,
+    UPDATE_REQUEST,
     ORDER_RESET,
     UPDATE_ERROR,
 } from "../constants/orderConstants";
@@ -14,8 +15,6 @@ const initialState = {
     createdOrder: {},
     details: {},
     list: [],
-    paid: false,
-    delivered: false,
     error: null,
 }
 
@@ -28,6 +27,14 @@ const orderReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: true,
+            }
+
+        case UPDATE_REQUEST:
+            return {
+                ...state,
+                loading: true,
+                paid: false,
+                delivered: false,
             }
 
         case GET_ORDER:
