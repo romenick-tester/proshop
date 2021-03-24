@@ -6,6 +6,7 @@ import {
     GET_ORDER,
     GET_ORDERS,
     ORDER_PAID,
+    UPDATE_ERROR,
 } from "../constants/orderConstants";
 
 export const createOrder = (order) => async (dispatch, getState) => {
@@ -28,9 +29,11 @@ export const createOrder = (order) => async (dispatch, getState) => {
         dispatch({ type: CREATE_ORDER, payload: { createdOrder: data } });
 
     } catch (error) {
+        const msg = error.response && error.response.data.message ? error.response.data.message : error.message;
+
         dispatch({
             type: ORDER_ERROR,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+            payload: { error: msg }
         });
     }
 }
@@ -53,9 +56,11 @@ export const getOrders = () => async (dispatch, getState) => {
         dispatch({ type: GET_ORDERS, payload: { list: data.orders } });
 
     } catch (error) {
+        const msg = error.response && error.response.data.message ? error.response.data.message : error.message;
+
         dispatch({
             type: ORDER_ERROR,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+            payload: { error: msg }
         });
     }
 }
@@ -78,16 +83,16 @@ export const getOrder = (id) => async (dispatch, getState) => {
         dispatch({ type: GET_ORDER, payload: { details: data.order } });
 
     } catch (error) {
+        const msg = error.response && error.response.data.message ? error.response.data.message : error.message;
+
         dispatch({
             type: ORDER_ERROR,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+            payload: { error: msg }
         });
     }
 }
 
 export const payOrder = (orderId, paymentResult) => async (dispatch, getState) => {
-    dispatch({ type: ORDER_REQUEST });
-
     try {
         const { auth: { token } } = getState();
 
@@ -98,16 +103,18 @@ export const payOrder = (orderId, paymentResult) => async (dispatch, getState) =
             }
         }
 
-        const body = JSON.stringify(paymentResult);
+        const { data } = await axios.put(`/api/orders/order/${orderId}/pay`, paymentResult, config);
 
-        const { data } = await axios.put(`/api/orders/order/${orderId}/pay`, body, config);
+        console.log(data.msg);
 
-        dispatch({ type: ORDER_PAID, payload: data });
+        dispatch({ type: ORDER_PAID });
 
     } catch (error) {
+        const msg = error.response && error.response.data.message ? error.response.data.message : error.message;
+
         dispatch({
-            type: ORDER_ERROR,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+            type: UPDATE_ERROR,
+            payload: { paid: false, error: msg }
         });
     }
 }

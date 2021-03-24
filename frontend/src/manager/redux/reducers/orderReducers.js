@@ -6,6 +6,7 @@ import {
     ORDER_ERROR,
     ORDER_PAID,
     ORDER_RESET,
+    UPDATE_ERROR,
 } from "../constants/orderConstants";
 
 const initialState = {
@@ -13,7 +14,8 @@ const initialState = {
     createdOrder: {},
     details: {},
     list: [],
-    orderPay: {},
+    paid: false,
+    delivered: false,
     error: null,
 }
 
@@ -28,7 +30,6 @@ const orderReducer = (state = initialState, action) => {
                 loading: true,
             }
 
-        case ORDER_PAID:
         case GET_ORDER:
         case GET_ORDERS:
         case CREATE_ORDER:
@@ -39,11 +40,25 @@ const orderReducer = (state = initialState, action) => {
                 error: null,
             }
 
+        case ORDER_PAID:
+            return {
+                ...state,
+                paid: true,
+                loading: false,
+            }
+
+        case UPDATE_ERROR:
+            return {
+                ...state,
+                ...payload,
+                loading: false,
+            }
+
         case ORDER_ERROR:
             return {
                 ...state,
+                ...payload,
                 loading: false,
-                error: payload
             }
 
         case ORDER_RESET:
@@ -52,7 +67,6 @@ const orderReducer = (state = initialState, action) => {
                 loading: false,
                 list: [],
                 details: {},
-                orderPay: {}
             }
 
         default:

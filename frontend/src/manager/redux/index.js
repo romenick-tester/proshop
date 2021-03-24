@@ -14,7 +14,7 @@ import {
     createOrder,
     getOrder,
     getOrders,
-    updateOrderPaid
+    payOrder,
 } from "./actions";
 
 export {
@@ -33,5 +33,5 @@ export {
     createOrder,
     getOrder,
     getOrders,
-    updateOrderPaid
+    payOrder,
 };

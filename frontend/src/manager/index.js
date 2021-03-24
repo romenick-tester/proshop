@@ -14,8 +14,9 @@ import {
     createOrder,
     getOrder,
     getOrders,
-    updateOrderPaid,
+    payOrder,
 } from "./redux";
+import { ORDER_RESET } from "./redux/constants/orderConstants";
 
 import formatPrice from "./utils/helper"
 
@@ -36,5 +37,6 @@ export {
     createOrder,
     getOrder,
     getOrders,
-    updateOrderPaid,
+    payOrder,
+    ORDER_RESET,
 };

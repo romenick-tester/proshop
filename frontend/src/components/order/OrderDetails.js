@@ -5,7 +5,10 @@ import { Row, Col, Image, ListGroup } from "react-bootstrap";
 import { formatPrice } from "../../manager";
 import { Message } from "../reuseable";
 
-function OrderDetails({ user = {}, shippingAddress = {}, paymentMethod, orderItems = [], ...rest }) {
+function OrderDetails({ details }) {
+
+    const { user = {}, shippingAddress = {}, paymentMethod, orderItems = [], ...rest } = details ? details : {};
+
     const { address = "", city = "", postcode = "", country = "" } = shippingAddress;
 
     const { isPaid, paidAt, isDelivered, deliveredAt } = rest;
@@ -29,7 +32,6 @@ function OrderDetails({ user = {}, shippingAddress = {}, paymentMethod, orderIte
                                 </td>
                                 <td>
                                     {address.split(",")[0]}, <br />
-                                    {address.split(",")[1]}, <br />
                                     {city}, <br />
                                     {postcode}, <br />
                                     {country}

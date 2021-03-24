@@ -10,4 +10,6 @@ export const ORDER_ERROR = "ORDER_ERROR";
 
 export const ORDER_PAID = "ORDER_PAID";
 
+export const UPDATE_ERROR = "UPDATE_ERROR";
+
 export const ORDER_RESET = "ORDER_RESET";
