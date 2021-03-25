@@ -37,12 +37,17 @@ function Headers({ history }) {
                                             <LinkContainer to="/admin/users">
                                                 <NavDropdown.Item>
                                                     <FaUserFriends /> Users
-                                            </NavDropdown.Item>
+                                                </NavDropdown.Item>
+                                            </LinkContainer>
+                                            <LinkContainer to="/admin/orders">
+                                                <NavDropdown.Item>
+                                                    <FaGamepad /> Orders
+                                                </NavDropdown.Item>
                                             </LinkContainer>
                                             <LinkContainer to="/admin/products">
                                                 <NavDropdown.Item>
                                                     <FaGamepad /> Products
-                                            </NavDropdown.Item>
+                                                </NavDropdown.Item>
                                             </LinkContainer>
                                         </NavDropdown>
                                     )}

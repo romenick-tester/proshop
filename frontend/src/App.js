@@ -19,6 +19,8 @@ import {
     PlaceOrderDisplay,
     OrderDisplay,
     UserListDisplay,
+    ProductListDisplay,
+    OrderListDisplay,
 } from "./displays";
 
 function App() {
@@ -37,6 +39,8 @@ function App() {
             <Main>
                 <Container>
                     <Switch>
+                        <PrivateRoute path="/admin/orders" component={OrderListDisplay} />
+                        <PrivateRoute path="/admin/products" component={ProductListDisplay} />
                         <PrivateRoute path="/admin/users" component={UserListDisplay} />
                         <PrivateRoute path="/order/:id" component={OrderDisplay} />
                         <PrivateRoute path="/placeorder" component={PlaceOrderDisplay} />
