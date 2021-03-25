@@ -5,17 +5,19 @@ import thunk from "redux-thunk";
 import {
     productReducer,
     cartReducer,
-    authReducer,
+    userReducer,
     orderReducer,
     payReducer,
+    usersReducer,
 } from "./reducers";
 
 const reducers = combineReducers({
     product: productReducer,
-    auth: authReducer,
+    auth: userReducer,
     cart: cartReducer,
     order: orderReducer,
     orderPay: payReducer,
+    usersList: usersReducer,
 });
 
 const initialState = {};

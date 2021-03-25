@@ -6,6 +6,9 @@ import {
     USER_ERROR,
     UPDATE_ERROR,
     USER_LOGOUT,
+    GET_USER_LIST_REQUEST,
+    GET_USER_LIST_SUCCESS,
+    GET_USER_LIST_ERROR,
 } from "../constants/userConstants";
 
 const tokenFromStorage = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null;
@@ -18,7 +21,7 @@ const initialState = {
     error: null,
 }
 
-const userReducer = (state = initialState, action) => {
+export const userReducer = (state = initialState, action) => {
     const { type, payload } = action;
 
     switch (type) {
@@ -78,4 +81,40 @@ const userReducer = (state = initialState, action) => {
     }
 }
 
-export default userReducer;
+const usersInitialState = {
+    loading: false,
+    list: [],
+    error: null,
+}
+
+export const usersReducer = (state = usersInitialState, action) => {
+    const { type, payload } = action;
+
+    switch (type) {
+
+        case GET_USER_LIST_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+
+        case GET_USER_LIST_SUCCESS:
+            return {
+                ...state,
+                loading: true,
+                list: payload.users,
+                error: null,
+            }
+
+        case GET_USER_LIST_ERROR:
+            return {
+                ...state,
+                loading: false,
+                list: [],
+                error: payload
+            }
+
+        default:
+            return state;
+    }
+}

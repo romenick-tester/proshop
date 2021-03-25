@@ -9,6 +9,9 @@ import {
     USER_LOGOUT,
     USER_DETAILS,
     UPDATE_ERROR,
+    GET_USER_LIST_REQUEST,
+    GET_USER_LIST_SUCCESS,
+    GET_USER_LIST_ERROR,
 } from "../constants/userConstants";
 
 export const loginUser = (form) => async (dispatch) => {
@@ -120,6 +123,30 @@ export const updateDetails = (form) => async (dispatch, getState) => {
 
         console.log(msg);
         dispatch({ type: UPDATE_ERROR, payload: { error: msg } })
+    }
+};
+
+export const getUsers = () => async (dispatch, getState) => {
+    dispatch({ type: GET_USER_LIST_REQUEST })
+
+    try {
+        const { auth: { token } } = getState();
+
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "Auth-Token": `${token}`
+            }
+        }
+
+        const { data } = await axios.get("/api/users", config);
+
+        dispatch({ type: GET_USER_LIST_SUCCESS, payload: data });
+
+    } catch (error) {
+        const msg = error.response && error.response.data.message ? error.response.data.message : error.message;
+
+        dispatch({ type: GET_USER_LIST_ERROR, payload: msg })
     }
 };
 

@@ -1,13 +1,14 @@
 import { cartReducer } from "./cartReducers";
 import productReducer from "./productReducers";
-import authReducer from "./userReducers";
+import { userReducer, usersReducer } from "./userReducers";
 import { orderReducer, payReducer } from "./orderReducers";
 
 
 export {
     cartReducer,
     productReducer,
-    authReducer,
+    userReducer,
+    usersReducer,
     orderReducer,
     payReducer,
 };
