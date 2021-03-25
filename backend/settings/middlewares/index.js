@@ -1,7 +1,7 @@
-const auth = require("./authMiddleware");
+const { auth, admin } = require("./authMiddleware");
 const { notFound, errorHandler } = require("./errorHandlingMiddlewares");
 
 module.exports = {
-    auth,
+    auth, admin,
     notFound, errorHandler
 };

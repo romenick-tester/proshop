@@ -6,7 +6,7 @@ const { User } = require("../settings");
 //route:        GET /api/users
 //desc:         return current user's details
 //access:       private
-const userDetails = asyncHandler( async(req,res) => {
+const userDetails = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user.id).select(["isAdmin", "name", "email", "_id"]);
 
     if (user) {
@@ -108,4 +108,15 @@ const loginUser = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = { userDetails, loginUser, registerUser, updateUserDetails };
+//route:        GET /api/users
+//desc:         return current user's details
+//access:       private/admin
+const getUsers = asyncHandler(async (req, res) => {
+    const users = await User.find({}).select("-password");
+
+    const filter = users.filter((user) => !user.isAdmin);
+
+    res.status(200).json({ users: filter });
+});
+
+module.exports = { userDetails, loginUser, registerUser, updateUserDetails, getUsers };

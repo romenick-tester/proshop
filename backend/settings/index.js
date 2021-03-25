@@ -1,13 +1,13 @@
 const connectDB = require("./db");
 const { products } = require("./data");
-const { auth, notFound, errorHandler } = require("./middlewares");
+const { auth, admin, notFound, errorHandler } = require("./middlewares");
 const { users, products: productsData } = require("./seeders");
 const { User, Product, Order } = require("./models");
 
-module.exports = { 
+module.exports = {
     connectDB,
     products,
-    auth, notFound, errorHandler,
+    auth, admin, notFound, errorHandler,
     users, productsData,
     User, Product, Order
 };
