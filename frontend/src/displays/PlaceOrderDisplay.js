@@ -1,8 +1,15 @@
 import React from 'react';
 import { Row, Col } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { createOrder } from "../manager";
 import { CheckoutSteps, OrderDetails, OrderPricings } from "../components";
 
 function PlaceOrderDisplay({ history }) {
+    const dispatch = useDispatch();
+
+    function submitOrderHandler(order) {
+        dispatch(createOrder(order));
+    }
 
     return (
         <>
@@ -12,7 +19,7 @@ function PlaceOrderDisplay({ history }) {
                     <OrderDetails />
                 </Col>
                 <Col md={4}>
-                    <OrderPricings history={history} />
+                    <OrderPricings history={history} submitOrder={submitOrderHandler} />
                 </Col>
             </Row>
         </>

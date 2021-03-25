@@ -6,7 +6,7 @@ import { PayPalButton } from "react-paypal-button-v2";
 import { getOrderDetails, payOrder, formatPrice } from "../manager";
 import { Message, Loader } from "../components";
 import axios from "axios";
-import { PAY_ORDER_RESET } from '../manager/redux/constants/orderConstants';
+import { PAY_ORDER_RESET, NEW_ORDER_RESET } from '../manager/redux/constants/orderConstants';
 
 function OrderDisplay({ match }) {
     const [sdkReady, setSdkReady] = useState(false);
@@ -32,6 +32,7 @@ function OrderDisplay({ match }) {
 
     useEffect(() => {
         if (!details || orderId !== details._id || success) {
+            dispatch({ type: NEW_ORDER_RESET });
             dispatch({ type: PAY_ORDER_RESET });
             dispatch(getOrderDetails(orderId));
         } else if (!details.isPaid) {

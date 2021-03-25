@@ -11,8 +11,9 @@ import {
     PAY_ORDER_REQUEST,
     PAY_ORDER_SUCCESS,
     PAY_ORDER_ERROR,
-    GET_ORDER_RESET,
+    ALL_ORDER_RESET,
     PAY_ORDER_RESET,
+    NEW_ORDER_RESET,
 } from "../constants/orderConstants";
 
 const orderInitialState = {
@@ -59,6 +60,7 @@ const orderReducer = (state = orderInitialState, action) => {
                 ...state,
                 loading: false,
                 list: payload.orders,
+                details: {},
                 error: null,
             }
 
@@ -66,6 +68,7 @@ const orderReducer = (state = orderInitialState, action) => {
             return {
                 ...state,
                 loading: false,
+                list: [],
                 details: payload.order,
                 error: null,
             }
@@ -94,10 +97,19 @@ const orderReducer = (state = orderInitialState, action) => {
                 error: payload,
             }
 
-        case GET_ORDER_RESET:
+        case NEW_ORDER_RESET:
             return {
                 ...state,
                 loading: false,
+                newOrder: {},
+                error: null,
+            }
+
+        case ALL_ORDER_RESET:
+            return {
+                ...state,
+                loading: false,
+                newOrder: {},
                 details: {},
                 list: [],
                 error: null,

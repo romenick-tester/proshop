@@ -52,7 +52,7 @@ function PaymentDisplay({ history }) {
                     </Col>
                 </Form.Group>
                 {paymentMethod && (
-                    <Button type="submit" variant="primary">
+                    <Button type="submit" variant="dark">
                         Continue
                     </Button>
                 )}

@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Card, ListGroup, Row, Col, Button } from "react-bootstrap";
-import { formatPrice, createOrder } from "../../manager";
+import { formatPrice } from "../../manager";
 import { Loader, Message } from "../reuseable";
 
-function OrderPricing({ history }) {
-    const dispatch = useDispatch();
+function OrderPricing({ history, submitOrder }) {
     const cart = useSelector(state => state.cart);
 
     const order = useSelector(state => state.order);
@@ -18,7 +17,7 @@ function OrderPricing({ history }) {
     cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
 
     useEffect(() => {
-        if (newOrder && newOrder._id) {
+        if (newOrder._id) {
             history.push(`/order/${newOrder._id}`);
         }
     }, [newOrder, history])
@@ -34,7 +33,7 @@ function OrderPricing({ history }) {
             totalPrice: Number(cart.totalPrice.toFixed(2)),
         }
 
-        dispatch(createOrder(newOrder));
+        submitOrder(newOrder);
     }
 
     return (
@@ -74,7 +73,7 @@ function OrderPricing({ history }) {
                 <ListGroup.Item>
                     <Button
                         type="button"
-                        className="btn-block"
+                        className="btn-block btn-dark"
                         onClick={placeOrderHandler}
                         disabled={cart.cartItems.length === 0} >
                         place order
