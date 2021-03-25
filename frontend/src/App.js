@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getDetails } from "./manager";
+import { getUserDetails } from "./manager";
 import { Route, Switch } from "react-router-dom";
 import { Header, Footer } from "./components";
 import {
@@ -26,7 +26,7 @@ function App() {
 
     useEffect(() => {
         if (authenticated) {
-            dispatch(getDetails());
+            dispatch(getUserDetails());
         }
     }, [dispatch, authenticated]);
 

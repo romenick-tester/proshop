@@ -66,7 +66,7 @@ export const registerUser = (form) => async (dispatch) => {
     }
 }
 
-export const getDetails = () => async (dispatch, getState) => {
+export const getUserDetails = () => async (dispatch, getState) => {
     try {
 
         const { auth: { token } } = getState();
@@ -93,7 +93,7 @@ export const getDetails = () => async (dispatch, getState) => {
 
 export const updateDetails = (form) => async (dispatch, getState) => {
     try {
-        const { auth: { token } } = getState();
+        const { auth: { token, user } } = getState();
 
         const config = {
             headers: {
@@ -108,7 +108,7 @@ export const updateDetails = (form) => async (dispatch, getState) => {
 
         if (data.msg) {
             console.log(data.msg);
-            dispatch(getDetails());
+            dispatch(getUserDetails(user._id));
         }
 
     } catch (error) {

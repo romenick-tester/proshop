@@ -1,14 +1,16 @@
-import { 
-    PRODUCT_REQUEST,
-    PRODUCT_LIST,
-    PRODUCT_DETAILS,
-    PRODUCT_ERROR,
+import {
+    GET_PRODUCT_LIST_REQUEST,
+    GET_PRODUCT_LIST_SUCCESS,
+    GET_PRODUCT_LIST_ERROR,
+    GET_PRODUCT_DETAILS_REQUEST,
+    GET_PRODUCT_DETAILS_SUCCESS,
+    GET_PRODUCT_DETAILS_ERROR,
 } from "../constants/productConstants";
 
 const initialState = {
     loading: false,
-    product: {},
-    products: [],
+    details: {},
+    list: [],
     error: null,
 }
 
@@ -16,27 +18,52 @@ const productReducer = (state = initialState, action) => {
     const { type, payload } = action;
 
     switch (type) {
-        case PRODUCT_REQUEST:
+        case GET_PRODUCT_LIST_REQUEST:
             return {
                 ...state,
                 loading: true,
             }
-        
-        case PRODUCT_LIST:
-        case PRODUCT_DETAILS:
+
+        case GET_PRODUCT_DETAILS_REQUEST:
             return {
                 ...state,
-                ...payload,
-                loading: false,
+                loading: true,
             }
-        
-        case PRODUCT_ERROR:
+
+        case GET_PRODUCT_LIST_SUCCESS:
             return {
                 ...state,
-                ...payload,
                 loading: false,
+                list: payload.products,
+                details: {},
+                error: null,
             }
-        
+
+        case GET_PRODUCT_DETAILS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                list: [],
+                details: payload.product,
+                error: null,
+            }
+
+        case GET_PRODUCT_LIST_ERROR:
+            return {
+                ...state,
+                loading: false,
+                productList: [],
+                error: payload,
+            }
+
+        case GET_PRODUCT_DETAILS_ERROR:
+            return {
+                ...state,
+                loading: false,
+                details: {},
+                error: payload,
+            }
+
         default:
             return state;
     }

@@ -1,7 +1,7 @@
 import store from "./store";
 import {
     getProducts,
-    getProduct,
+    getProductDetails,
     addToCart,
     removeFromCart,
     getShippingAddress,
@@ -9,10 +9,10 @@ import {
     registerUser,
     loginUser,
     logoutUser,
-    getDetails,
+    getUserDetails,
     updateDetails,
     createOrder,
-    getOrder,
+    getOrderDetails,
     getOrders,
     payOrder,
 } from "./actions";
@@ -20,7 +20,7 @@ import {
 export {
     store,
     getProducts,
-    getProduct,
+    getProductDetails,
     addToCart,
     removeFromCart,
     getShippingAddress,
@@ -28,10 +28,10 @@ export {
     registerUser,
     loginUser,
     logoutUser,
-    getDetails,
+    getUserDetails,
     updateDetails,
     createOrder,
-    getOrder,
+    getOrderDetails,
     getOrders,
     payOrder,
 };

@@ -15,7 +15,7 @@ const reducers = combineReducers({
     auth: authReducer,
     cart: cartReducer,
     order: orderReducer,
-    payment: payReducer,
+    orderPay: payReducer,
 });
 
 const initialState = {};

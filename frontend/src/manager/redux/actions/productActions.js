@@ -1,39 +1,43 @@
 import Axios from "axios";
 import {
-    PRODUCT_REQUEST,
-    PRODUCT_LIST,
-    PRODUCT_DETAILS,
-    PRODUCT_ERROR,
+    GET_PRODUCT_LIST_REQUEST,
+    GET_PRODUCT_LIST_SUCCESS,
+    GET_PRODUCT_LIST_ERROR,
+    GET_PRODUCT_DETAILS_REQUEST,
+    GET_PRODUCT_DETAILS_SUCCESS,
+    GET_PRODUCT_DETAILS_ERROR,
 } from "../constants/productConstants";
 
 export const getProducts = () => async (dispatch) => {
-    dispatch({ type: PRODUCT_REQUEST });
+    dispatch({ type: GET_PRODUCT_LIST_REQUEST });
 
     try {
         const { data } = await Axios.get("/api/products");
 
-        dispatch({ type: PRODUCT_LIST, payload: data });
+        dispatch({ type: GET_PRODUCT_LIST_SUCCESS, payload: data });
 
     } catch (error) {
-        dispatch({ 
-            type: PRODUCT_ERROR,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message  
+        const msg = error.response && error.response.data.message ? error.response.data.message : error.message;
+        dispatch({
+            type: GET_PRODUCT_LIST_ERROR,
+            payload: msg,
         });
     }
 };
 
-export const getProduct = (id) => async (dispatch) => {
-    dispatch({ type: PRODUCT_REQUEST });
+export const getProductDetails = (id) => async (dispatch) => {
+    dispatch({ type: GET_PRODUCT_DETAILS_REQUEST });
 
     try {
         const { data } = await Axios.get(`/api/products/${id}`);
 
-        dispatch({ type: PRODUCT_DETAILS, payload: data });
+        dispatch({ type: GET_PRODUCT_DETAILS_SUCCESS, payload: data });
 
     } catch (error) {
-        dispatch({ 
-            type: PRODUCT_ERROR,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message  
+        const msg = error.response && error.response.data.message ? error.response.data.message : error.message;
+        dispatch({
+            type: GET_PRODUCT_DETAILS_ERROR,
+            payload: msg,
         });
     }
 };

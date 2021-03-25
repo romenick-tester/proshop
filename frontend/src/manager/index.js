@@ -1,22 +1,21 @@
 import {
     store,
     getProducts,
-    getProduct,
+    getProductDetails,
     addToCart,
     removeFromCart,
     registerUser,
     loginUser,
     logoutUser,
-    getDetails,
+    getUserDetails,
     updateDetails,
     getShippingAddress,
     getPaymentMethod,
     createOrder,
-    getOrder,
+    getOrderDetails,
     getOrders,
     payOrder,
 } from "./redux";
-import { ORDER_PAY_RESET } from "./redux/constants/orderConstants";
 
 import formatPrice from "./utils/helper";
 import addPaypalScript from "./utils/addScript";
@@ -26,19 +25,18 @@ export {
     formatPrice,
     addPaypalScript,
     getProducts,
-    getProduct,
+    getProductDetails,
     addToCart,
     removeFromCart,
     registerUser,
     loginUser,
     logoutUser,
-    getDetails,
+    getUserDetails,
     updateDetails,
     getShippingAddress,
     getPaymentMethod,
     createOrder,
-    getOrder,
+    getOrderDetails,
     getOrders,
     payOrder,
-    ORDER_PAY_RESET,
 };

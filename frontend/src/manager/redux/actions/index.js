@@ -1,23 +1,23 @@
-import { getProducts, getProduct } from "./productActions";
-import { loginUser, registerUser, getDetails, updateDetails, logoutUser } from "./userActions";
+import { getProducts, getProductDetails } from "./productActions";
+import { loginUser, registerUser, updateDetails, logoutUser, getUserDetails } from "./userActions";
 import { addToCart, removeFromCart, getShippingAddress, getPaymentMethod } from "./cartActions";
-import { createOrder, getOrder, getOrders, payOrder } from "./orderActions";
+import { createOrder, getOrderDetails, getOrders, payOrder } from "./orderActions";
 
 
 export {
     getProducts,
-    getProduct,
+    getProductDetails,
     loginUser,
     logoutUser,
     registerUser,
-    getDetails,
+    getUserDetails,
     updateDetails,
     addToCart,
     removeFromCart,
     getShippingAddress,
     getPaymentMethod,
     createOrder,
-    getOrder,
+    getOrderDetails,
     getOrders,
     payOrder
 }

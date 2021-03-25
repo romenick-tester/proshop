@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { formatPrice, getProduct } from "../manager"
+import { formatPrice, getProductDetails } from "../manager"
 import { Row, Col, Image } from "react-bootstrap";
 import { Message, Loader, ProductDetails, ProductAddToCart } from "../components";
 
@@ -12,12 +12,12 @@ function SingleProductDisplay({ match, history }) {
 
     useEffect(() => {
         if (productId) {
-            dispatch(getProduct(productId))
+            dispatch(getProductDetails(productId))
         }
     }, [dispatch, productId])
 
     const productDetails = useSelector(state => state.product);
-    const { loading, error, product } = productDetails;
+    const { loading, error, details: product } = productDetails;
 
     if (loading) {
         return <Loader />;

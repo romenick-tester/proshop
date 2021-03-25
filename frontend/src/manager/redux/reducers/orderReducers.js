@@ -1,20 +1,21 @@
 import {
-    ORDER_REQUEST,
-    CREATE_ORDER,
-    GET_ORDER,
-    GET_ORDERS,
-    ORDER_ERROR,
-    ORDER_PAY_REQUEST,
-    ORDER_PAY_SUCCESS,
-    ORDER_PAY_ERROR,
-    ORDER_PAY_RESET,
+    GET_ORDER_LIST_REQUEST,
+    GET_ORDER_LIST_SUCCESS,
+    GET_ORDER_LIST_ERROR,
+    GET_ORDER_DETAILS_REQUEST,
+    GET_ORDER_DETAILS_SUCCESS,
+    GET_ORDER_DETAILS_ERROR,
+    PAY_ORDER_REQUEST,
+    PAY_ORDER_SUCCESS,
+    PAY_ORDER_ERROR,
+    GET_ORDER_RESET,
+    PAY_ORDER_RESET,
 } from "../constants/orderConstants";
 
 const orderInitialState = {
     loading: false,
-    createdOrder: {},
-    details: {},
     list: [],
+    details: {},
     error: null,
 }
 
@@ -23,27 +24,57 @@ const orderReducer = (state = orderInitialState, action) => {
 
     switch (type) {
 
-        case ORDER_REQUEST:
+        case GET_ORDER_LIST_REQUEST:
             return {
                 ...state,
                 loading: true,
             }
 
-        case GET_ORDER:
-        case GET_ORDERS:
-        case CREATE_ORDER:
+        case GET_ORDER_DETAILS_REQUEST:
             return {
                 ...state,
-                ...payload,
+                loading: true,
+            }
+
+        case GET_ORDER_LIST_SUCCESS:
+            return {
+                ...state,
                 loading: false,
+                list: payload.orders,
                 error: null,
             }
 
-        case ORDER_ERROR:
+        case GET_ORDER_DETAILS_SUCCESS:
             return {
                 ...state,
-                ...payload,
                 loading: false,
+                details: payload.order,
+                error: null,
+            }
+
+        case GET_ORDER_LIST_ERROR:
+            return {
+                ...state,
+                loading: false,
+                list: [],
+                error: payload,
+            }
+
+        case GET_ORDER_DETAILS_ERROR:
+            return {
+                ...state,
+                loading: false,
+                details: {},
+                error: payload,
+            }
+
+        case GET_ORDER_RESET:
+            return {
+                ...state,
+                loading: false,
+                details: {},
+                list: [],
+                error: null,
             }
 
         default:
@@ -54,44 +85,40 @@ const orderReducer = (state = orderInitialState, action) => {
 const payInitialState = {
     loading: false,
     error: null,
-    paid: false,
-    delivered: false,
-    result: {},
+    success: false,
 }
 
 const payReducer = (state = payInitialState, action) => {
     const { type, payload } = action;
 
     switch (type) {
-        case ORDER_PAY_REQUEST:
+        case PAY_ORDER_REQUEST:
             return {
                 ...state,
                 loading: true,
             }
 
-        case ORDER_PAY_SUCCESS:
+        case PAY_ORDER_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                paid: true,
-                result: payload,
+                success: true,
+                error: null,
             }
 
-        case ORDER_PAY_ERROR:
+        case PAY_ORDER_ERROR:
             return {
                 ...state,
                 loading: false,
-                paid: false,
-                result: {},
+                success: false,
                 error: payload,
             }
 
-        case ORDER_PAY_RESET:
+        case PAY_ORDER_RESET:
             return {
                 ...state,
                 loading: false,
-                paid: false,
-                result: {},
+                success: false,
                 error: null,
             }
 

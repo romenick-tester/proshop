@@ -11,8 +11,8 @@ function HomeDisplay() {
         dispatch(getProducts());
     }, [dispatch])
 
-    const productList = useSelector(state => state.product);
-    const { loading, error, products } = productList;
+    const product = useSelector(state => state.product);
+    const { loading, error, list: products } = product;
 
     if (loading) {
         return <Loader />

@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, ListGroup, Table, Image, Card } from "react-bootstrap";
 import { PayPalButton } from "react-paypal-button-v2";
-import { getOrder, payOrder, formatPrice } from "../manager";
+import { getOrderDetails, payOrder, formatPrice } from "../manager";
 import { Message, Loader } from "../components";
 import axios from "axios";
+import { PAY_ORDER_RESET } from '../manager/redux/constants/orderConstants';
 
 function OrderDisplay({ match }) {
     const [sdkReady, setSdkReady] = useState(false);
@@ -13,13 +14,8 @@ function OrderDisplay({ match }) {
     const orderId = match.params.id;
     const dispatch = useDispatch();
 
-    const payment = useSelector(state => state.payment);
-    const { loading, paid } = payment;
-
-    useEffect(() => {
-        dispatch(getOrder(orderId));
-    }, [dispatch, orderId, paid]);
-
+    const orderPay = useSelector(state => state.orderPay);
+    const { loading, success } = orderPay;
 
     const { details } = useSelector(state => state.order);
 
@@ -35,14 +31,17 @@ function OrderDisplay({ match }) {
     }
 
     useEffect(() => {
-        if (!details.isPaid) {
+        if (!details || orderId !== details._id || success) {
+            dispatch({ type: PAY_ORDER_RESET });
+            dispatch(getOrderDetails(orderId));
+        } else if (!details.isPaid) {
             if (!window.paypal) {
                 addPaypalScript();
             } else {
                 setSdkReady(true);
             }
         }
-    }, [dispatch, details]);
+    }, [dispatch, orderId, details, success]);
 
     const successPaymentHandler = (paymentResult) => {
         dispatch(payOrder(orderId, paymentResult));
@@ -130,36 +129,55 @@ function OrderDisplay({ match }) {
                             <ListGroup.Item>
                                 <h2>order summary</h2>
                             </ListGroup.Item>
+
                             <ListGroup.Item>
                                 <Row>
                                     <Col>items</Col>
                                     <Col>{formatPrice(details.itemsPrice)}</Col>
                                 </Row>
                             </ListGroup.Item>
+
                             <ListGroup.Item>
                                 <Row>
                                     <Col>shipping</Col>
                                     <Col>{formatPrice(details.shippingPrice)}</Col>
                                 </Row>
                             </ListGroup.Item>
+
                             <ListGroup.Item>
                                 <Row>
                                     <Col>tax</Col>
                                     <Col>{formatPrice(details.taxPrice)}</Col>
                                 </Row>
                             </ListGroup.Item>
+
                             <ListGroup.Item>
                                 <Row>
                                     <Col>total</Col>
                                     <Col>{formatPrice(details.totalPrice)}</Col>
                                 </Row>
                             </ListGroup.Item>
+
                             {!details.isPaid && (
                                 <ListGroup.Item>
                                     {loading && <Loader />}
                                     {!sdkReady ? <Loader /> : (
                                         <PayPalButton amount={details.totalPrice} onSuccess={successPaymentHandler} />
                                     )}
+                                </ListGroup.Item>
+                            )}
+
+                            {details.paymentResult && (
+                                <ListGroup.Item>
+                                    <h4>RECEIPT:</h4>
+                                    <p>
+                                        <strong>ID:</strong> <br />
+                                        {details.paymentResult.id} <br />
+                                        <strong>EMAIL:</strong> <br />
+                                        {details.paymentResult.email_address} <br />
+                                        <strong>PAID AT:</strong> <br />
+                                        {details.paymentResult.update_time}
+                                    </p>
                                 </ListGroup.Item>
                             )}
                         </ListGroup>
