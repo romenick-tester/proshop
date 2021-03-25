@@ -10,6 +10,7 @@ import ShippingDisplay from "./ShippingDisplay";
 import PaymentDisplay from "./PaymentDisplay";
 import PlaceOrderDisplay from "./PlaceOrderDisplay";
 import OrderDisplay from "./OrderDisplay";
+import UserListDisplay from "./UserListDisplay";
 
 export {
     HomeDisplay,
@@ -24,4 +25,5 @@ export {
     PaymentDisplay,
     PlaceOrderDisplay,
     OrderDisplay,
+    UserListDisplay,
 };

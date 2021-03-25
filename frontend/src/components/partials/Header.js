@@ -34,12 +34,12 @@ function Headers({ history }) {
                                     </NavDropdown>
                                     {user && user.isAdmin && (
                                         <NavDropdown title="admin" id="admin-menu">
-                                            <LinkContainer to="/admin/userlist">
+                                            <LinkContainer to="/admin/users">
                                                 <NavDropdown.Item>
                                                     <FaUserFriends /> Users
                                             </NavDropdown.Item>
                                             </LinkContainer>
-                                            <LinkContainer to="/admin/productlist">
+                                            <LinkContainer to="/admin/products">
                                                 <NavDropdown.Item>
                                                     <FaGamepad /> Products
                                             </NavDropdown.Item>

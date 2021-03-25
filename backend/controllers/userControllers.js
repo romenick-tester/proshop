@@ -113,10 +113,7 @@ const loginUser = asyncHandler(async (req, res) => {
 //access:       private/admin
 const getUsers = asyncHandler(async (req, res) => {
     const users = await User.find({}).select("-password");
-
-    const filter = users.filter((user) => !user.isAdmin);
-
-    res.status(200).json({ users: filter });
+    res.status(200).json({ users });
 });
 
 module.exports = { userDetails, loginUser, registerUser, updateUserDetails, getUsers };

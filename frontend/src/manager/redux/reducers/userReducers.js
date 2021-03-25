@@ -101,7 +101,7 @@ export const usersReducer = (state = usersInitialState, action) => {
         case GET_USER_LIST_SUCCESS:
             return {
                 ...state,
-                loading: true,
+                loading: false,
                 list: payload.users,
                 error: null,
             }
