@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../manager";
 import { LinkContainer } from "react-router-bootstrap";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
-import { FaShoppingCart, FaSignInAlt, FaUserAlt } from "react-icons/fa";
+import { FaShoppingCart, FaSignInAlt, FaUserAlt, FaUserFriends, FaGamepad } from "react-icons/fa";
 
 function Headers({ history }) {
     const dispatch = useDispatch();
@@ -23,14 +23,30 @@ function Headers({ history }) {
                                 <Nav.Link><FaShoppingCart /> Cart</Nav.Link>
                             </LinkContainer>
                             {!loading && authenticated ? (
-                                <NavDropdown title={name} id="username">
-                                    <NavDropdown.Item onClick={() => history.push("/dashboard")}>
-                                        <FaUserAlt /> Dashboard
+                                <>
+                                    <NavDropdown title={name} id="username">
+                                        <NavDropdown.Item onClick={() => history.push("/dashboard")}>
+                                            <FaUserAlt /> Dashboard
                                     </NavDropdown.Item>
-                                    <NavDropdown.Item onClick={() => dispatch(logoutUser())}>
-                                        <FaSignInAlt /> Logout
+                                        <NavDropdown.Item onClick={() => dispatch(logoutUser())}>
+                                            <FaSignInAlt /> Logout
                                     </NavDropdown.Item>
-                                </NavDropdown>
+                                    </NavDropdown>
+                                    {user && user.isAdmin && (
+                                        <NavDropdown title="admin" id="admin-menu">
+                                            <LinkContainer to="/admin/userlist">
+                                                <NavDropdown.Item>
+                                                    <FaUserFriends /> Users
+                                            </NavDropdown.Item>
+                                            </LinkContainer>
+                                            <LinkContainer to="/admin/productlist">
+                                                <NavDropdown.Item>
+                                                    <FaGamepad /> Products
+                                            </NavDropdown.Item>
+                                            </LinkContainer>
+                                        </NavDropdown>
+                                    )}
+                                </>
                             ) : (
                                 <LinkContainer to="/login">
                                     <Nav.Link>
