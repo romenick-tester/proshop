@@ -1,4 +1,7 @@
 import {
+    CREATE_ORDER_REQUEST,
+    CREATE_ORDER_SUCCESS,
+    CREATE_ORDER_ERROR,
     GET_ORDER_LIST_REQUEST,
     GET_ORDER_LIST_SUCCESS,
     GET_ORDER_LIST_ERROR,
@@ -14,6 +17,7 @@ import {
 
 const orderInitialState = {
     loading: false,
+    newOrder: {},
     list: [],
     details: {},
     error: null,
@@ -23,6 +27,12 @@ const orderReducer = (state = orderInitialState, action) => {
     const { type, payload } = action;
 
     switch (type) {
+
+        case CREATE_ORDER_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
 
         case GET_ORDER_LIST_REQUEST:
             return {
@@ -34,6 +44,14 @@ const orderReducer = (state = orderInitialState, action) => {
             return {
                 ...state,
                 loading: true,
+            }
+
+        case CREATE_ORDER_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                newOrder: payload.newOrder,
+                error: null,
             }
 
         case GET_ORDER_LIST_SUCCESS:
@@ -50,6 +68,14 @@ const orderReducer = (state = orderInitialState, action) => {
                 loading: false,
                 details: payload.order,
                 error: null,
+            }
+
+        case CREATE_ORDER_ERROR:
+            return {
+                ...state,
+                loading: false,
+                newOrder: {},
+                error: payload,
             }
 
         case GET_ORDER_LIST_ERROR:
