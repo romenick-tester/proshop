@@ -12,6 +12,9 @@ import {
     GET_USER_LIST_REQUEST,
     GET_USER_LIST_SUCCESS,
     GET_USER_LIST_ERROR,
+    DELETE_USER_REQUEST,
+    DELETE_USER_SUCCESS,
+    DELETE_USER_ERROR,
 } from "../constants/userConstants";
 
 export const loginUser = (form) => async (dispatch) => {
@@ -147,6 +150,32 @@ export const getUsers = () => async (dispatch, getState) => {
         const msg = error.response && error.response.data.message ? error.response.data.message : error.message;
 
         dispatch({ type: GET_USER_LIST_ERROR, payload: msg })
+    }
+};
+
+export const deleteUser = (id) => async (dispatch, getState) => {
+    dispatch({ type: DELETE_USER_REQUEST })
+
+    try {
+        const { auth: { token } } = getState();
+
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "Auth-Token": `${token}`
+            }
+        }
+
+        const { data } = await axios.delete(`/api/users/user/${id}`, config);
+
+        console.log(data.msg);
+
+        dispatch({ type: DELETE_USER_SUCCESS });
+
+    } catch (error) {
+        const msg = error.response && error.response.data.message ? error.response.data.message : error.message;
+
+        dispatch({ type: DELETE_USER_ERROR, payload: msg })
     }
 };
 

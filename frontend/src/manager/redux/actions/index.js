@@ -1,7 +1,10 @@
 import { getProducts, getProductDetails } from "./productActions";
-import { loginUser, registerUser, updateDetails, logoutUser, getUserDetails, getUsers } from "./userActions";
 import { addToCart, removeFromCart, getShippingAddress, getPaymentMethod } from "./cartActions";
 import { createOrder, getOrderDetails, getOrders, payOrder } from "./orderActions";
+import {
+    loginUser, registerUser, updateDetails, logoutUser,
+    getUserDetails, getUsers, deleteUser
+} from "./userActions";
 
 
 export {
@@ -13,6 +16,7 @@ export {
     getUserDetails,
     updateDetails,
     getUsers,
+    deleteUser,
     addToCart,
     removeFromCart,
     getShippingAddress,

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../manager";
+import { getUsers, deleteUser } from "../manager";
 import { Table, Button } from "react-bootstrap";
 import { Loader, Message } from "../components";
 import { FaCheck, FaEdit, FaTimes, FaTrash } from 'react-icons/fa';
@@ -12,21 +12,26 @@ function UserListDisplay() {
     const dispatch = useDispatch();
     const usersList = useSelector(state => state.usersList);
     const { loading, error, list: users } = usersList;
+    const userDelete = useSelector(state => state.userDelete);
+    const { loading: deleting, error: delete_error, deleted } = userDelete;
 
     useEffect(() => {
         dispatch(getUsers());
-    }, [dispatch]);
+    }, [dispatch, deleted]);
 
-    if (loading) {
+    if (loading || (!loading && deleting)) {
         return <Loader />
     }
 
-    if (error) {
+    if (error || (!error && delete_error)) {
         return <Message variant="danger">{error}</Message>
     }
 
     const deleteUserHandler = (userId) => {
-        console.log(userId);
+        const confirmed = window.confirm("Are you sure you want to delete this user?");
+        if (confirmed) {
+            dispatch(deleteUser(userId))
+        }
     }
 
     return (
