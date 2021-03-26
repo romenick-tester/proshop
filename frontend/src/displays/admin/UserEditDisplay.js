@@ -35,7 +35,7 @@ function UserEditDisplay({ match }) {
         const data = {
             name: name ? name : user.name,
             email: email ? email : user.email,
-            isAdmin,
+            isAdmin: isAdmin ? isAdmin : user.isAdmin,
         }
 
         dispatch(updateUserById(userId, data));
@@ -69,7 +69,7 @@ function UserEditDisplay({ match }) {
                         <Form.Check
                             type="checkbox"
                             label="Is Admin"
-                            checked={isAdmin}
+                            checked={user.isAdmin}
                             onChange={(e) => setIsAdmin(e.target.checked)}
                         />
                     </Form.Group>

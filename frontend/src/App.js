@@ -4,7 +4,7 @@ import { Container } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserDetails } from "./manager";
 import { Route, Switch } from "react-router-dom";
-import { Header, Footer } from "./components";
+import { Header as Navbar, Footer } from "./components";
 import {
     HomeDisplay,
     SingleProductDisplay,
@@ -37,7 +37,7 @@ function App() {
 
     return (
         <>
-            <Route render={({ history }) => <Header history={history} />} />
+            <Route render={({ history }) => <Navbar history={history} />} />
             <Main>
                 <Container>
                     <Switch>
@@ -66,8 +66,8 @@ function App() {
 }
 
 const Main = styled.main`
-    height: 95vh;
-    padding-top: 2rem;
+    min-height: 100vh;
+    padding: 2rem 0;
 `
 
 export default App;

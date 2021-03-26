@@ -84,6 +84,7 @@ const Wrapper = styled.div`
     padding: 0.5rem 1rem;
     border-radius: 1rem;
     color: whitesmoke;
+    opacity: 0.9;
 
     > div {
         width: 100%;

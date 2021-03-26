@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { store } from "./manager";
 import App from "./App";
 
+import "./manager/styling/inline.css";
 import "./manager/styling/bootstrap.min.css";
 
 ReactDOM.render(

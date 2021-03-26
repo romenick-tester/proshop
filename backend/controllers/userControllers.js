@@ -150,26 +150,19 @@ const getUserById = asyncHandler(async (req, res) => {
 //desc:         return user details
 //access:       private/admin
 const updateUser = asyncHandler(async (req, res) => {
-    const emailExist = await User.findOne({ email: req.body.email });
+    const user = await User.findById(req.params.id);
 
-    if (emailExist) {
-        res.status(400)
-        throw new Error("This email already exist!")
+    if (!user) {
+        res.status(404)
+        throw new Error("User not found!")
     } else {
-        const user = await User.findById(req.params.id);
+        user.name = req.body.name || user.name;
+        user.email = req.body.email || user.email;
+        user.isAdmin = req.body.isAdmin;
 
-        if (!user) {
-            res.status(404)
-            throw new Error("User not found!")
-        } else {
-            user.name = req.body.name || user.name;
-            user.email = req.body.email || user.email;
-            user.isAdmin = req.body.isAdmin;
+        await user.save();
 
-            await user.save();
-
-            res.status(200).json({ updated: true })
-        }
+        res.status(200).json({ updated: true })
     }
 });
 
