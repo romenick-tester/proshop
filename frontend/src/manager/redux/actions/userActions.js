@@ -15,6 +15,12 @@ import {
     DELETE_USER_REQUEST,
     DELETE_USER_SUCCESS,
     DELETE_USER_ERROR,
+    GET_USER_BYID_REQUEST,
+    GET_USER_BYID_SUCCESS,
+    GET_USER_BYID_ERROR,
+    UPDATE_USER_BYID_REQUEST,
+    UPDATE_USER_BYID_SUCCESS,
+    UPDATE_USER_BYID_ERROR,
 } from "../constants/userConstants";
 
 export const loginUser = (form) => async (dispatch) => {
@@ -176,6 +182,56 @@ export const deleteUser = (id) => async (dispatch, getState) => {
         const msg = error.response && error.response.data.message ? error.response.data.message : error.message;
 
         dispatch({ type: DELETE_USER_ERROR, payload: msg })
+    }
+};
+
+export const getUserById = (id) => async (dispatch, getState) => {
+    dispatch({ type: GET_USER_BYID_REQUEST })
+
+    try {
+        const { auth: { token } } = getState();
+
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "Auth-Token": `${token}`
+            }
+        }
+
+        const { data } = await axios.get(`/api/users/user/${id}`, config);
+
+        dispatch({ type: GET_USER_BYID_SUCCESS, payload: data });
+
+    } catch (error) {
+        const msg = error.response && error.response.data.message ? error.response.data.message : error.message;
+
+        dispatch({ type: GET_USER_BYID_ERROR, payload: msg })
+    }
+};
+
+export const updateUserById = (id, form) => async (dispatch, getState) => {
+    dispatch({ type: UPDATE_USER_BYID_REQUEST })
+
+    try {
+        const { auth: { token } } = getState();
+
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "Auth-Token": `${token}`
+            }
+        }
+
+        const body = JSON.stringify(form);
+
+        const { data } = await axios.put(`/api/users/user/${id}`, body, config);
+
+        dispatch({ type: UPDATE_USER_BYID_SUCCESS, payload: data });
+
+    } catch (error) {
+        const msg = error.response && error.response.data.message ? error.response.data.message : error.message;
+
+        dispatch({ type: UPDATE_USER_BYID_ERROR, payload: msg })
     }
 };
 

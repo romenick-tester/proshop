@@ -3,7 +3,7 @@ import { addToCart, removeFromCart, getShippingAddress, getPaymentMethod } from 
 import { createOrder, getOrderDetails, getOrders, payOrder } from "./orderActions";
 import {
     loginUser, registerUser, updateDetails, logoutUser,
-    getUserDetails, getUsers, deleteUser
+    getUserDetails, getUsers, deleteUser, getUserById, updateUserById,
 } from "./userActions";
 
 
@@ -17,6 +17,8 @@ export {
     updateDetails,
     getUsers,
     deleteUser,
+    getUserById,
+    updateUserById,
     addToCart,
     removeFromCart,
     getShippingAddress,

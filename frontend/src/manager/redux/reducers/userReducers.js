@@ -12,6 +12,12 @@ import {
     DELETE_USER_REQUEST,
     DELETE_USER_SUCCESS,
     DELETE_USER_ERROR,
+    GET_USER_BYID_REQUEST,
+    GET_USER_BYID_SUCCESS,
+    GET_USER_BYID_ERROR,
+    UPDATE_USER_BYID_REQUEST,
+    UPDATE_USER_BYID_SUCCESS,
+    UPDATE_USER_BYID_ERROR,
 } from "../constants/userConstants";
 
 const tokenFromStorage = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : null;
@@ -89,23 +95,13 @@ export const usersReducer = (state = usersInitialState, action) => {
     switch (type) {
 
         case GET_USER_LIST_REQUEST:
-            return { ...state, loading: true }
+            return { ...state, loading: true };
 
         case GET_USER_LIST_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                list: payload.users,
-                error: null,
-            }
+            return { ...state, loading: false, list: payload.users, error: null };
 
         case GET_USER_LIST_ERROR:
-            return {
-                ...state,
-                loading: false,
-                list: [],
-                error: payload
-            }
+            return { ...state, loading: false, list: [], error: payload };
 
         default:
             return state;
@@ -121,20 +117,40 @@ export const userDeleteReducer = (state = { deleted: false }, action) => {
             return { ...state, loading: true };
 
         case DELETE_USER_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                deleted: true,
-                error: null,
-            }
+            return { ...state, loading: false, deleted: true, error: null };
 
         case DELETE_USER_ERROR:
             return {
-                ...state,
-                loading: false,
-                deleted: false,
-                error: payload
-            }
+                ...state, loading: false, deleted: false, error: payload
+            };
+
+        default:
+            return state;
+    }
+}
+
+export const userByIdReducer = (state = { user: {}, updated: false }, action) => {
+    const { type, payload } = action;
+
+    switch (type) {
+
+        case GET_USER_BYID_REQUEST:
+            return { ...state, loading: true };
+
+        case UPDATE_USER_BYID_REQUEST:
+            return { ...state, loading: true };
+
+        case GET_USER_BYID_SUCCESS:
+            return { ...state, loading: false, user: payload.user, error: null };
+
+        case UPDATE_USER_BYID_SUCCESS:
+            return { ...state, loading: false, updated: true, error: null };
+
+        case GET_USER_BYID_ERROR:
+            return { ...state, loading: false, user: {}, error: payload };
+
+        case UPDATE_USER_BYID_ERROR:
+            return { ...state, loading: false, updated: false, error: payload };
 
         default:
             return state;
