@@ -2,6 +2,7 @@ import {
     store,
     getProducts,
     getProductDetails,
+    createProduct,
     deleteProductById,
     addToCart,
     removeFromCart,
@@ -24,7 +25,7 @@ import {
 
 import formatPrice from "./utils/helper";
 import addPaypalScript from "./utils/addScript";
-import { PAY_ORDER_RESET, NEW_ORDER_RESET } from "./redux/constants/orderConstants";
+import { PAY_ORDER_RESET, NEW_ORDER_RESET } from "./redux";
 
 export {
     store,
@@ -32,6 +33,7 @@ export {
     addPaypalScript,
     getProducts,
     getProductDetails,
+    createProduct,
     deleteProductById,
     addToCart,
     removeFromCart,

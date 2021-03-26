@@ -12,15 +12,16 @@ import {
     GET_USER_LIST_REQUEST,
     GET_USER_LIST_SUCCESS,
     GET_USER_LIST_ERROR,
-    DELETE_USER_REQUEST,
-    DELETE_USER_SUCCESS,
-    DELETE_USER_ERROR,
     GET_USER_BYID_REQUEST,
     GET_USER_BYID_SUCCESS,
     GET_USER_BYID_ERROR,
     UPDATE_USER_BYID_REQUEST,
     UPDATE_USER_BYID_SUCCESS,
     UPDATE_USER_BYID_ERROR,
+    DELETE_USER_BYID_REQUEST,
+    DELETE_USER_BYID_SUCCESS,
+    DELETE_USER_BYID_ERROR,
+    USER_RESET,
 } from "../constants/userConstants";
 
 export const loginUser = (form) => async (dispatch) => {
@@ -152,6 +153,8 @@ export const getUsers = () => async (dispatch, getState) => {
 
         dispatch({ type: GET_USER_LIST_SUCCESS, payload: data });
 
+        dispatch({ type: USER_RESET });
+
     } catch (error) {
         const msg = error.response && error.response.data.message ? error.response.data.message : error.message;
 
@@ -160,7 +163,7 @@ export const getUsers = () => async (dispatch, getState) => {
 };
 
 export const deleteUser = (id) => async (dispatch, getState) => {
-    dispatch({ type: DELETE_USER_REQUEST })
+    dispatch({ type: DELETE_USER_BYID_REQUEST })
 
     try {
         const { auth: { token } } = getState();
@@ -176,12 +179,12 @@ export const deleteUser = (id) => async (dispatch, getState) => {
 
         console.log(data.msg);
 
-        dispatch({ type: DELETE_USER_SUCCESS });
+        dispatch({ type: DELETE_USER_BYID_SUCCESS });
 
     } catch (error) {
         const msg = error.response && error.response.data.message ? error.response.data.message : error.message;
 
-        dispatch({ type: DELETE_USER_ERROR, payload: msg })
+        dispatch({ type: DELETE_USER_BYID_ERROR, payload: msg })
     }
 };
 

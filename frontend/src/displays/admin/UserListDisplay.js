@@ -10,9 +10,9 @@ import { getUsers, deleteUser } from "../../manager";
 function UserListDisplay() {
 
     const dispatch = useDispatch();
-    const usersList = useSelector(state => state.usersList);
-    const { loading, error, list: users } = usersList;
-    const userDelete = useSelector(state => state.userDelete);
+    const userList = useSelector(state => state.userList);
+    const { loading, error, list: users } = userList;
+    const userDelete = useSelector(state => state.userById);
     const { loading: deleting, error: delete_error, deleted } = userDelete;
 
     useEffect(() => {

@@ -2,6 +2,7 @@ import store from "./store";
 import {
     getProducts,
     getProductDetails,
+    createProduct,
     deleteProductById,
     addToCart,
     removeFromCart,
@@ -22,10 +23,14 @@ import {
     payOrder,
 } from "./actions";
 
+import { NEW_ORDER_RESET, PAY_ORDER_RESET } from "./constants/orderConstants";
+import { PRODUCT_RESET } from "./constants/productConstants";
+
 export {
     store,
     getProducts,
     getProductDetails,
+    createProduct,
     deleteProductById,
     addToCart,
     removeFromCart,
@@ -44,4 +49,7 @@ export {
     getOrderDetails,
     getOrders,
     payOrder,
+    NEW_ORDER_RESET,
+    PAY_ORDER_RESET,
+    PRODUCT_RESET,
 };

@@ -9,8 +9,7 @@ import {
     userReducer,
     orderReducer,
     payReducer,
-    usersReducer,
-    userDeleteReducer,
+    userListReducer,
     userByIdReducer
 } from "./reducers";
 
@@ -20,8 +19,7 @@ const reducers = combineReducers({
     cart: cartReducer,
     order: orderReducer,
     orderPay: payReducer,
-    usersList: usersReducer,
-    userDelete: userDeleteReducer,
+    userList: userListReducer,
     userById: userByIdReducer,
     productById: productByIdReducer,
 });

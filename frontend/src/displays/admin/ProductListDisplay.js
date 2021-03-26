@@ -7,7 +7,7 @@ import { Table, Button, Row, Col } from "react-bootstrap";
 import { Loader, Message } from "../../components";
 import { getProducts, deleteProductById } from "../../manager";
 
-function ProductListDisplay({ match }) {
+function ProductListDisplay() {
 
     const dispatch = useDispatch();
 
