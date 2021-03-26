@@ -1,4 +1,4 @@
-import { getProducts, getProductDetails, createProduct, deleteProductById } from "./productActions";
+import { getProducts, getProductDetails, createProduct, updateProduct, deleteProductById } from "./productActions";
 import { addToCart, removeFromCart, getShippingAddress, getPaymentMethod } from "./cartActions";
 import { createOrder, getOrderDetails, getOrders, payOrder } from "./orderActions";
 import {
@@ -11,6 +11,7 @@ export {
     getProducts,
     getProductDetails,
     createProduct,
+    updateProduct,
     deleteProductById,
     loginUser,
     logoutUser,

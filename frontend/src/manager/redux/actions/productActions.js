@@ -9,6 +9,9 @@ import {
     CREATE_PRODUCT_REQUEST,
     CREATE_PRODUCT_SUCCESS,
     CREATE_PRODUCT_ERROR,
+    UPDATE_PRODUCT_REQUEST,
+    UPDATE_PRODUCT_SUCCESS,
+    UPDATE_PRODUCT_ERROR,
     DELETE_PRODUCT_BYID_REQUEST,
     DELETE_PRODUCT_BYID_SUCCESS,
     DELETE_PRODUCT_BYID_ERROR,
@@ -73,6 +76,33 @@ export const createProduct = (form) => async (dispatch, getState) => {
         const msg = error.response && error.response.data.message ? error.response.data.message : error.message;
         dispatch({
             type: CREATE_PRODUCT_ERROR,
+            payload: msg,
+        });
+    }
+};
+
+export const updateProduct = (id, form) => async (dispatch, getState) => {
+    dispatch({ type: UPDATE_PRODUCT_REQUEST });
+
+    try {
+        const { auth: { token } } = getState();
+
+        const config = {
+            headers: {
+                "auth-token": `${token}`
+            }
+        }
+
+        const body = JSON.stringify(form);
+
+        const { data } = await axios.put(`/api/products/product/${id}`, body, config);
+
+        dispatch({ type: UPDATE_PRODUCT_SUCCESS, payload: data.updated });
+
+    } catch (error) {
+        const msg = error.response && error.response.data.message ? error.response.data.message : error.message;
+        dispatch({
+            type: UPDATE_PRODUCT_ERROR,
             payload: msg,
         });
     }
