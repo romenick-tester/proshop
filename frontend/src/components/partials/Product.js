@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import { RatingStar } from "../reuseable";
 
+import "../../manager/styling/inline.css";
+
 function Product({ product }) {
     const {
         _id, name, image, price, rating, numReviews
@@ -11,7 +13,7 @@ function Product({ product }) {
     return (
         <Card className="my-3 p-2 rounded">
             <Link to={`/product/${_id}`}>
-                <Card.Img src={image} variant="top" />
+                <Card.Img src={image} variant="top" style={{ height: "200px", objectFit: "fill" }} />
             </Link>
             <Card.Body>
                 <Link to={`/product/${_id}`}>
