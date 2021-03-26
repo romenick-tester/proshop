@@ -1,8 +1,8 @@
 import React from 'react';
 import { Row, Col } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { createOrder } from "../manager";
-import { CheckoutSteps, OrderDetails, OrderPricings } from "../components";
+import { createOrder } from "../../manager";
+import { CheckoutSteps, OrderDetails, OrderPricings } from "../../components";
 
 function PlaceOrderDisplay({ history }) {
     const dispatch = useDispatch();

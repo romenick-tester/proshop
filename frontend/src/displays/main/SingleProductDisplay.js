@@ -1,9 +1,13 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { formatPrice, getProductDetails } from "../manager"
 import { Row, Col, Image } from "react-bootstrap";
-import { Message, Loader, ProductDetails, ProductAddToCart } from "../components";
+import { formatPrice, getProductDetails } from "../../manager"
+import {
+    Message, Loader,
+    ProductDetails,
+    ProductAddToCart
+} from "../../components";
 
 function SingleProductDisplay({ match, history }) {
     const productId = match.params.id;

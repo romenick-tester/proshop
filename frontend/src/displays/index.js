@@ -1,19 +1,19 @@
-import HomeDisplay from "./HomeDisplay";
-import SingleProductDisplay from "./SingleProductDisplay";
-import ErrorDisplay from "./ErrorDisplay";
-import CartDisplay from "./CartDisplay";
-import LoginDisplay from "./LoginDisplay";
-import RegisterDisplay from "./RegisterDisplay";
-import PrivateRoute from "./PrivateRoute";
-import DashboardDisplay from "./DashboardDisplay";
-import ShippingDisplay from "./ShippingDisplay";
-import PaymentDisplay from "./PaymentDisplay";
-import PlaceOrderDisplay from "./PlaceOrderDisplay";
-import OrderDisplay from "./OrderDisplay";
-import UserListDisplay from "./UserListDisplay";
-import ProductListDisplay from "./ProductListDisplay";
-import OrderListDisplay from "./OrderListDisplay";
-import UserEditDisplay from "./UserEditDisplay";
+import HomeDisplay from "./main/HomeDisplay";
+import SingleProductDisplay from "./main/SingleProductDisplay";
+import ErrorDisplay from "./main/ErrorDisplay";
+import CartDisplay from "./main/CartDisplay";
+import LoginDisplay from "./main/LoginDisplay";
+import RegisterDisplay from "./main/RegisterDisplay";
+import PrivateRoute from "./main/PrivateRoute";
+import DashboardDisplay from "./main/DashboardDisplay";
+import ShippingDisplay from "./checkout/ShippingDisplay";
+import PaymentDisplay from "./checkout/PaymentDisplay";
+import PlaceOrderDisplay from "./checkout/PlaceOrderDisplay";
+import OrderDisplay from "./checkout/OrderDisplay";
+import UserListDisplay from "./admin/UserListDisplay";
+import ProductListDisplay from "./admin/ProductListDisplay";
+import OrderListDisplay from "./admin/OrderListDisplay";
+import UserEditDisplay from "./admin/UserEditDisplay";
 
 export {
     HomeDisplay,

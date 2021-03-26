@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserById, updateUserById } from "../manager";
 import { Form, Button } from "react-bootstrap";
-import { FormContainer, Loader, Message } from "../components";
+import { getUserById, updateUserById } from "../../manager";
+import { FormContainer, Loader, Message } from "../../components";
 
 function UserEditDisplay({ match }) {
     const [name, setName] = useState("");

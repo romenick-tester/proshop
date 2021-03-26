@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, ListGroup, Table, Image, Card } from "react-bootstrap";
 import { PayPalButton } from "react-paypal-button-v2";
-import { getOrderDetails, payOrder, formatPrice } from "../manager";
-import { Message, Loader } from "../components";
+import { getOrderDetails, payOrder, formatPrice } from "../../manager";
+import { Message, Loader } from "../../components";
+import { PAY_ORDER_RESET, NEW_ORDER_RESET } from '../../manager';
 import axios from "axios";
-import { PAY_ORDER_RESET, NEW_ORDER_RESET } from '../manager/redux/constants/orderConstants';
 
 function OrderDisplay({ match }) {
     const [sdkReady, setSdkReady] = useState(false);

@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
 import { Row, Col } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { getOrders } from "../manager";
-import { DashboardForm as DetailsForm, DashboardOrders as OrdersList } from "../components";
+import { getOrders } from "../../manager";
+import {
+    DashboardForm as DetailsForm,
+    DashboardOrders as OrdersList
+} from "../../components";
 
 function DashboardDisplay() {
     const dispatch = useDispatch();

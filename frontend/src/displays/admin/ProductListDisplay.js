@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 //import { useDispatch, useSelector } from "react-redux";
 //import { getUsers } from "../manager";
 //import { Table, Button } from "react-bootstrap";
-import { Loader, Message } from "../components";
+import { Loader, Message } from "../../components";
 //import { FaCheck, FaEdit, FaTimes, FaTrash } from 'react-icons/fa';
 //import { LinkContainer } from 'react-router-bootstrap';
 

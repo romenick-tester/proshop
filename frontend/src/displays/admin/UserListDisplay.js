@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers, deleteUser } from "../manager";
-import { Table, Button } from "react-bootstrap";
-import { Loader, Message } from "../components";
 import { FaCheck, FaEdit, FaTimes, FaTrash } from 'react-icons/fa';
 import { LinkContainer } from 'react-router-bootstrap';
+import { Table, Button } from "react-bootstrap";
+import { Loader, Message } from "../../components";
+import { getUsers, deleteUser } from "../../manager";
 
 function UserListDisplay() {
 

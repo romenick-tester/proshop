@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
-import { addToCart } from "../manager";
-import { CartItems, CartInfo } from "../components";
+import { addToCart } from "../../manager";
+import { CartItems, CartInfo } from "../../components";
 
 function CartDisplay({ match, location, history }) {
 
     const productId = match.params.id;
-    
+
     const qty = location.search ? Number(location.search.split("=")[1]) : 1;
-    
+
     const dispatch = useDispatch();
-    
+
     const { cartItems: items } = useSelector(state => state.cart);
 
     useEffect(() => {

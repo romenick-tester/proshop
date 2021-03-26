@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { getShippingAddress } from "../manager";
-import { FormContainer, CheckoutSteps } from "../components";
+import { getShippingAddress } from "../../manager";
+import { FormContainer, CheckoutSteps } from "../../components";
 
 function ShippingDisplay({ history }) {
     const cart = useSelector(state => state.cart);

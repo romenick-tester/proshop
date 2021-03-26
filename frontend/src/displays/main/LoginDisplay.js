@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../manager";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import { Message, Loader, FormContainer } from "../components";
+import { loginUser } from "../../manager";
+import { Message, Loader, FormContainer } from "../../components";
 
 function LoginDisplay({ history, location }) {
     const [form, setForm] = useState({

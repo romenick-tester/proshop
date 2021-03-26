@@ -23,6 +23,7 @@ import {
 
 import formatPrice from "./utils/helper";
 import addPaypalScript from "./utils/addScript";
+import { PAY_ORDER_RESET, NEW_ORDER_RESET } from "./redux/constants/orderConstants";
 
 export {
     store,
@@ -47,4 +48,6 @@ export {
     getOrderDetails,
     getOrders,
     payOrder,
+    PAY_ORDER_RESET,
+    NEW_ORDER_RESET,
 };

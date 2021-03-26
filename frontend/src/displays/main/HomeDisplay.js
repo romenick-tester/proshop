@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../manager";
 import { Row, Col } from "react-bootstrap";
-import { Message, Product, Loader } from "../components";
+import { getProducts } from "../../manager";
+import { Message, Product, Loader } from "../../components";
 
 function HomeDisplay() {
     const dispatch = useDispatch();
