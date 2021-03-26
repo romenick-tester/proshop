@@ -5,34 +5,37 @@ import { FaPlus, FaEdit, FaTrash } from 'react-icons/fa';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Row, Col } from "react-bootstrap";
 import { Loader, Message } from "../../components";
-import { getProducts } from "../../manager";
+import { getProducts, deleteProductById } from "../../manager";
 
 function ProductListDisplay({ match }) {
 
     const dispatch = useDispatch();
+
     const { loading, error, list: products } = useSelector(state => state.product);
+
+    const productById = useSelector(state => state.productById);
+    const { loading: deleting, error: delete_error, deleted } = productById;
 
     useEffect(() => {
         dispatch(getProducts());
-    }, [dispatch]);
+    }, [dispatch, deleted]);
 
-    if (loading) {
+    if (loading || (!loading && deleting)) {
         return <Loader />
     }
 
-    if (error) {
+    if (error || (!error && delete_error)) {
         return <Message variant="danger">{error}</Message>
     }
 
     const createProductHandler = (product) => {
-        console.log("create product");
+        console.log(product);
     }
 
     const deleteProductHandler = (productId) => {
         const confirmed = window.confirm("Are you sure you want to delete this product?");
         if (confirmed) {
-            console.log(`${productId} deleted!`);
-            //dispatch(deleteProduct(productId))
+            dispatch(deleteProductById(productId));
         }
     }
 
@@ -43,7 +46,7 @@ function ProductListDisplay({ match }) {
                     <h1>Products</h1>
                 </Col>
                 <Col className="text-right">
-                    <Button className="btn-sm my-3" onClick={createProductHandler}>
+                    <Button className="btn-sm my-3" onClick={() => createProductHandler("created!")}>
                         CREATE NEW <FaPlus />
                     </Button>
                 </Col>
