@@ -13,6 +13,7 @@ import OrderDisplay from "./OrderDisplay";
 import UserListDisplay from "./UserListDisplay";
 import ProductListDisplay from "./ProductListDisplay";
 import OrderListDisplay from "./OrderListDisplay";
+import UserEditDisplay from "./UserEditDisplay";
 
 export {
     HomeDisplay,
@@ -30,4 +31,5 @@ export {
     UserListDisplay,
     ProductListDisplay,
     OrderListDisplay,
+    UserEditDisplay,
 };
