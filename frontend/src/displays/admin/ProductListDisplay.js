@@ -24,7 +24,7 @@ function ProductListDisplay({ match }) {
         return <Message variant="danger">{error}</Message>
     }
 
-    const createProductHandler = () => {
+    const createProductHandler = (product) => {
         console.log("create product");
     }
 
@@ -43,8 +43,8 @@ function ProductListDisplay({ match }) {
                     <h1>Products</h1>
                 </Col>
                 <Col className="text-right">
-                    <Button className="my-3" onClick={createProductHandler}>
-                        <FaPlus />Create Product
+                    <Button className="btn-sm my-3" onClick={createProductHandler}>
+                        CREATE NEW <FaPlus />
                     </Button>
                 </Col>
             </Row>
