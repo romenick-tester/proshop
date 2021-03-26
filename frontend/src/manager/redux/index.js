@@ -2,6 +2,7 @@ import store from "./store";
 import {
     getProducts,
     getProductDetails,
+    deleteProductById,
     addToCart,
     removeFromCart,
     getShippingAddress,
@@ -25,6 +26,7 @@ export {
     store,
     getProducts,
     getProductDetails,
+    deleteProductById,
     addToCart,
     removeFromCart,
     getShippingAddress,
