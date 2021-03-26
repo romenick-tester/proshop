@@ -63,7 +63,7 @@ function UserListDisplay() {
                             </td>
                             <td>{isAdmin ? <FaCheck className="admin-check" /> : <FaTimes className="admin-x" />}</td>
                             <td>
-                                <LinkContainer to={`/user/${user._id}/edit`} >
+                                <LinkContainer to={`/admin/user/${_id}/edit`} >
                                     <Button variant="light" className="btn-sm">
                                         <FaEdit />
                                     </Button>

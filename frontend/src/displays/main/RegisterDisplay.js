@@ -5,7 +5,7 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import { registerUser } from "../../manager";
 import { FormContainer, Loader, Message } from "../../components";
 
-import "../manager/styling/inline.css"
+import "../../manager/styling/inline.css"
 
 function RegisterDisplay({ history, location }) {
     const [form, setForm] = useState({

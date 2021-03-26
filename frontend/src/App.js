@@ -40,7 +40,7 @@ function App() {
             <Main>
                 <Container>
                     <Switch>
-                        <PrivateRoute path="/user/:id/edit" component={UserEditDisplay} />
+                        <PrivateRoute path="/admin/user/:id/edit" component={UserEditDisplay} />
                         <PrivateRoute path="/admin/orders" component={OrderListDisplay} />
                         <PrivateRoute path="/admin/products" component={ProductListDisplay} />
                         <PrivateRoute path="/admin/users" component={UserListDisplay} />
