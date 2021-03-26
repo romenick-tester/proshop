@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const { userDetails, loginUser, registerUser, updateUserDetails, getUsers, deleteUser } = require("../../controllers");
 const { auth, admin } = require("../../settings");
+const {
+    userDetails, loginUser, registerUser, updateUserDetails,
+    getUsers, deleteUser, updateUser, getUserById } = require("../../controllers");
 
 router
     .route("/user")
@@ -22,6 +24,8 @@ router
 
 router
     .route("/user/:id")
+    .get(auth, admin, getUserById)
+    .put(auth, admin, updateUser)
     .delete(auth, admin, deleteUser);
 
 module.exports = router;
