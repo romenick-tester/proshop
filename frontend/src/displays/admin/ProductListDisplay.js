@@ -5,31 +5,27 @@ import { FaPlus, FaEdit, FaTrash } from 'react-icons/fa';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Row, Col } from "react-bootstrap";
 import { Loader, Message } from "../../components";
-import { getProducts, deleteProductById } from "../../manager";
+import { getProducts, deleteProductById, formatPrice, createProduct } from "../../manager";
 
 function ProductListDisplay() {
 
     const dispatch = useDispatch();
 
-    const { loading, error, list: products } = useSelector(state => state.product);
+    const { loading: product_loading, error: product_error, list: products } = useSelector(state => state.product);
 
     const productById = useSelector(state => state.productById);
-    const { loading: deleting, error: delete_error, deleted } = productById;
+    const { loading, error, deleted, created } = productById;
 
     useEffect(() => {
         dispatch(getProducts());
-    }, [dispatch, deleted]);
+    }, [dispatch, deleted, created]);
 
-    if (loading || (!loading && deleting)) {
+    if (product_loading || (!product_loading && loading)) {
         return <Loader />
     }
 
-    if (error || (!error && delete_error)) {
+    if (product_error || (!product_error && error)) {
         return <Message variant="danger">{error}</Message>
-    }
-
-    const createProductHandler = (product) => {
-        console.log(product);
     }
 
     const deleteProductHandler = (productId) => {
@@ -46,7 +42,7 @@ function ProductListDisplay() {
                     <h1>Products</h1>
                 </Col>
                 <Col className="text-right">
-                    <Button className="btn-sm my-3" onClick={() => createProductHandler("created!")}>
+                    <Button className="btn-sm my-3" onClick={() => dispatch(createProduct())}>
                         CREATE NEW <FaPlus />
                     </Button>
                 </Col>
@@ -70,7 +66,7 @@ function ProductListDisplay() {
                             <tr key={_id}>
                                 <td>{_id}</td>
                                 <td>{name}</td>
-                                <td>{price}</td>
+                                <td>{formatPrice(price)}</td>
                                 <td>{category}</td>
                                 <td>{brand}</td>
                                 <td>

@@ -15,7 +15,6 @@ import {
     DELETE_PRODUCT_BYID_REQUEST,
     DELETE_PRODUCT_BYID_SUCCESS,
     DELETE_PRODUCT_BYID_ERROR,
-    PRODUCT_RESET,
 } from "../constants/productConstants";
 
 export const getProducts = () => async (dispatch) => {
@@ -25,8 +24,6 @@ export const getProducts = () => async (dispatch) => {
         const { data } = await axios.get("/api/products");
 
         dispatch({ type: GET_PRODUCT_LIST_SUCCESS, payload: data });
-
-        dispatch({ type: PRODUCT_RESET });
 
     } catch (error) {
         const msg = error.response && error.response.data.message ? error.response.data.message : error.message;
@@ -54,7 +51,7 @@ export const getProductDetails = (id) => async (dispatch) => {
     }
 };
 
-export const createProduct = (form) => async (dispatch, getState) => {
+export const createProduct = () => async (dispatch, getState) => {
     dispatch({ type: CREATE_PRODUCT_REQUEST });
 
     try {
@@ -62,13 +59,12 @@ export const createProduct = (form) => async (dispatch, getState) => {
 
         const config = {
             headers: {
+                "content-type": "application/json",
                 "auth-token": `${token}`
             }
         }
 
-        const body = JSON.stringify(form);
-
-        const { data } = await axios.post(`/api/products`, body, config);
+        const { data } = await axios.post(`/api/products`, {}, config);
 
         dispatch({ type: CREATE_PRODUCT_SUCCESS, payload: data.created });
 
@@ -89,6 +85,7 @@ export const updateProduct = (id, form) => async (dispatch, getState) => {
 
         const config = {
             headers: {
+                "content-type": "application/json",
                 "auth-token": `${token}`
             }
         }

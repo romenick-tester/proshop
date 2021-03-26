@@ -22,6 +22,7 @@ import {
     ProductListDisplay,
     OrderListDisplay,
     UserEditDisplay,
+    ProductEditDisplay,
 } from "./displays";
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
             <Main>
                 <Container>
                     <Switch>
+                        <PrivateRoute path="/admin/product/:id/edit" component={ProductEditDisplay} />
                         <PrivateRoute path="/admin/user/:id/edit" component={UserEditDisplay} />
                         <PrivateRoute path="/admin/orders" component={OrderListDisplay} />
                         <PrivateRoute path="/admin/products" component={ProductListDisplay} />
