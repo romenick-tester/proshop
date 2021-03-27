@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { auth, admin } = require("../../settings");
+const { auth, admin } = require("../settings");
 const {
     getAllProducts, getProductDetails, createProduct,
     updateProduct, deleteProduct
-} = require("../../controllers");
+} = require("../controllers");
 
 router
     .route("/")

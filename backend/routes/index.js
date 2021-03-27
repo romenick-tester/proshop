@@ -1,5 +1,6 @@
-const productsRoutes = require("./api/productsRoutes");
-const userRoutes = require("./api/userRoutes");
-const orderRoutes = require("./api/orderRoutes");
+const productsRoutes = require("./productsRoutes");
+const userRoutes = require("./userRoutes");
+const orderRoutes = require("./orderRoutes");
+const uploadRoutes = require("./uploadRoutes");
 
-module.exports = { productsRoutes, userRoutes, orderRoutes };
+module.exports = { productsRoutes, userRoutes, orderRoutes, uploadRoutes };

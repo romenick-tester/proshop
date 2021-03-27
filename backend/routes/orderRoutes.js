@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { createOrder, getOrders, getOrder, updateOrderPaid } = require("../../controllers");
-const { auth } = require("../../settings");
+const { createOrder, getOrders, getOrder, updateOrderPaid } = require("../controllers");
+const { auth } = require("../settings");
 
 router
     .route("/")

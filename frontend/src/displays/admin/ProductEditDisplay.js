@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Form, Button } from "react-bootstrap";
 import { getProductDetails, updateProduct, PRODUCT_RESET } from "../../manager";
 import { FormContainer, Loader, Message } from "../../components";
+import axios from "axios";
 
 function ProductEditDisplay({ match }) {
     const [name, setName] = useState("");
@@ -13,7 +14,8 @@ function ProductEditDisplay({ match }) {
     const [brand, setBrand] = useState("");
     const [category, setCategory] = useState("");
     const [description, setDescription] = useState("");
-    const [notification, setNotification] = useState({ show: false, msg: "Updated!" });
+    const [uploading, setUploading] = useState(false);
+    const [notification, setNotification] = useState({ show: false, type: "", msg: "Updated!" });
 
     const productId = match.params.id;
 
@@ -38,6 +40,31 @@ function ProductEditDisplay({ match }) {
         return <Message variant="danger">{error}</Message>
     }
 
+    const uploadFileHandler = async (e) => {
+        const file = e.target.files[0];
+        const formData = new FormData();
+
+        formData.append("image", file);
+        setUploading(true);
+
+        try {
+            const config = {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
+            }
+
+            const { data } = await axios.post("/api/upload", formData, config);
+
+            setImage(data);
+            setUploading(false);
+        } catch (err) {
+            console.log(err.message);
+            setUploading(false);
+            setNotification({ show: true, type: "danger", msg: err.message });
+        }
+    }
+
     const submitHandler = (e) => {
         e.preventDefault();
 
@@ -50,15 +77,18 @@ function ProductEditDisplay({ match }) {
             category: category ? category : details.category,
             description: description ? description : details.description,
         }
+
         dispatch(updateProduct(productId, data));
-        setNotification({ show: true, msg: "Updated!" })
+        setNotification({ show: true, type: "success", msg: "Updated!" })
     }
 
     return (
         <>
             <Link to={`/admin/products`} className="btn btn-dark my3" >Go Back</Link>
+
             <FormContainer>
                 <h1>Edit Product</h1>
+
                 <Form onSubmit={submitHandler} className="mb-2">
                     <Form.Group controlId="name">
                         <Form.Label>Product Name</Form.Label>
@@ -69,15 +99,26 @@ function ProductEditDisplay({ match }) {
                             onChange={(e) => setName(e.target.value)}
                         />
                     </Form.Group>
+
                     <Form.Group controlId="image">
                         <Form.Label>Image</Form.Label>
                         <Form.Control
                             type="text"
-                            placeholder={details.image || "Upload Image"}
+                            placeholder={details.image || "Enter Web-URL (inc. https//)"}
                             value={image}
                             onChange={(e) => setImage(e.target.value)}
                         />
                     </Form.Group>
+
+                    <Form.File
+                        id="image-file"
+                        label="Choose File"
+                        custom
+                        onChange={uploadFileHandler}
+                    >
+                        {uploading && <Loader />}
+                    </Form.File>
+
                     <Form.Group controlId="brand">
                         <Form.Label>Brand</Form.Label>
                         <Form.Control
@@ -87,6 +128,7 @@ function ProductEditDisplay({ match }) {
                             onChange={(e) => setBrand(e.target.value)}
                         />
                     </Form.Group>
+
                     <Form.Group controlId="category">
                         <Form.Label>Category</Form.Label>
                         <Form.Control
@@ -96,6 +138,7 @@ function ProductEditDisplay({ match }) {
                             onChange={(e) => setCategory(e.target.value)}
                         />
                     </Form.Group>
+
                     <Form.Group controlId="description">
                         <Form.Label>Description</Form.Label>
                         <Form.Control
@@ -106,6 +149,7 @@ function ProductEditDisplay({ match }) {
                             onChange={(e) => setDescription(e.target.value)}
                         />
                     </Form.Group>
+
                     <Form.Group controlId="price">
                         <Form.Label>Price (£)</Form.Label>
                         <Form.Control
@@ -115,6 +159,7 @@ function ProductEditDisplay({ match }) {
                             onChange={(e) => setPrice(e.target.value)}
                         />
                     </Form.Group>
+
                     <Form.Group controlId="countinstock">
                         <Form.Label>Count-In-Stock</Form.Label>
                         <Form.Control
@@ -124,12 +169,14 @@ function ProductEditDisplay({ match }) {
                             onChange={(e) => setCountInStock(e.target.value)}
                         />
                     </Form.Group>
+
                     <Button type="submit" variant="primary">
                         Update
                     </Button>
+
                 </Form>
                 {notification.show && (
-                    <Message variant="success">{notification.msg}</Message>
+                    <Message variant={notification.type}>{notification.msg}</Message>
                 )}
             </FormContainer>
         </>
