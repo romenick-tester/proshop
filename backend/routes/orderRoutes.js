@@ -3,7 +3,7 @@ const router = express.Router();
 const { auth, admin } = require("../settings");
 const {
     createOrder, getMyOrders, getMyOrderDetails,
-    updateOrderPaid, getAllOrders } = require("../controllers");
+    updateOrderPaid, getAllOrders, updateOrderDelivered } = require("../controllers");
 
 router
     .route("/")
@@ -21,5 +21,9 @@ router
 router
     .route("/order/:id/pay")
     .put(auth, updateOrderPaid);
+
+router
+    .route("/order/:id/deliver")
+    .put(auth, admin, updateOrderDelivered);
 
 module.exports = router;

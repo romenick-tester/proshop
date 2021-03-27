@@ -25,7 +25,7 @@ import {
     getAllOrders,
 } from "./actions";
 
-import { NEW_ORDER_RESET, PAY_ORDER_RESET } from "./constants/orderConstants";
+import { NEW_ORDER_RESET, PAY_ORDER_RESET, DELIVER_ORDER_RESET } from "./constants/orderConstants";
 import { PRODUCT_RESET } from "./constants/productConstants";
 
 export {
@@ -56,4 +56,5 @@ export {
     NEW_ORDER_RESET,
     PAY_ORDER_RESET,
     PRODUCT_RESET,
+    DELIVER_ORDER_RESET,
 };

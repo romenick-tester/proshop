@@ -103,4 +103,24 @@ const getAllOrders = asyncHandler(async (req, res) => {
     }
 });
 
-module.exports = { createOrder, getMyOrderDetails, getMyOrders, updateOrderPaid, getAllOrders };
+
+//route:        PUT /api/orders/order/:id/pay
+//desc:         update order to paid
+//access:       private
+const updateOrderDelivered = asyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id);
+
+    if (!order) {
+        res.status(404)
+        throw new Error("Order not found!");
+    } else {
+        order.isDelivered = true;
+        order.deliveredAt = Date.now()
+
+        await order.save();
+
+        res.status(200).json({ msg: "Delivery successful!" });
+    }
+});
+
+module.exports = { createOrder, getMyOrderDetails, getMyOrders, updateOrderPaid, getAllOrders, updateOrderDelivered };

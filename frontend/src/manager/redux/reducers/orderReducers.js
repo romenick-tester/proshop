@@ -17,6 +17,10 @@ import {
     GET_ORDER_ALL_REQUEST,
     GET_ORDER_ALL_SUCCESS,
     GET_ORDER_ALL_ERROR,
+    DELIVER_ORDER_REQUEST,
+    DELIVER_ORDER_SUCCESS,
+    DELIVER_ORDER_ERROR,
+    DELIVER_ORDER_RESET,
 } from "../constants/orderConstants";
 
 const orderInitialState = {
@@ -172,7 +176,7 @@ const orderAdminInitialState = {
     loading: false,
     error: null,
     list: [],
-    details: {},
+    delivered: false,
 }
 
 const orderAdminReducer = (state = orderAdminInitialState, action) => {
@@ -183,11 +187,23 @@ const orderAdminReducer = (state = orderAdminInitialState, action) => {
         case GET_ORDER_ALL_REQUEST:
             return { ...state, loading: true };
 
+        case DELIVER_ORDER_REQUEST:
+            return { ...state, loading: true };
+
         case GET_ORDER_ALL_SUCCESS:
             return { ...state, loading: false, list: payload.orders, error: null };
 
+        case DELIVER_ORDER_SUCCESS:
+            return { ...state, loading: false, delivered: true, error: null };
+
         case GET_ORDER_ALL_ERROR:
             return { ...state, loading: false, list: {}, error: payload };
+
+        case DELIVER_ORDER_ERROR:
+            return { ...state, loading: false, delivered: false, error: payload };
+
+        case DELIVER_ORDER_RESET:
+            return { ...state, loading: false, delivered: false, error: null };
 
         default:
             return state;
