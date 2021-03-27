@@ -54,7 +54,7 @@ function OrderListDisplay() {
             </THEAD>
             <TBODY>
                 {orders.map((order) => {
-                    const { _id, user, totalPrice, isPaid, isDelivered, createdAt, paidAt } = order;
+                    const { _id, user, totalPrice, isPaid, isDelivered, createdAt, paidAt, deliveredAt } = order;
 
                     return (
                         <tr key={_id}>
@@ -73,7 +73,12 @@ function OrderListDisplay() {
                                 )}
                             </td>
                             <td style={{ width: "100px" }}>
-                                {isDelivered ? <FaCheck className="icon-check" /> : <FaTimes className="icon-x" />}
+                                {!isDelivered ? <FaTimes className="icon-x" /> : (
+                                    <>
+                                        <FaCheck className="icon-check" />
+                                        {deliveredAt.substring(0, 10)}
+                                    </>
+                                )}
                             </td>
                             <td>{createdAt.substring(0, 10)}</td>
                             <td>

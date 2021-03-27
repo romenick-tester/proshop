@@ -23,6 +23,7 @@ import {
     getOrders,
     payOrder,
     getAllOrders,
+    deliverOrder,
 } from "./redux";
 import formatPrice from "./utils/helper";
 import addPaypalScript from "./utils/addScript";
@@ -60,6 +61,7 @@ export {
     getOrders,
     payOrder,
     getAllOrders,
+    deliverOrder,
     PAY_ORDER_RESET,
     NEW_ORDER_RESET,
     PRODUCT_RESET,
