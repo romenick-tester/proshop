@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const path = require("path");
+const morgan = require("morgan");
 const {
     productsRoutes,
     userRoutes,
@@ -16,6 +17,10 @@ const {
 const app = express();
 dotenv.config();
 connectDB();
+
+if (process.env.NODE_ENV === "development") {
+    app.use(morgan("dev"));
+}
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ extended: false }));

@@ -80,7 +80,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
         const newUser = await user.save();
 
-        const payload = { id: newUser._id, isAdmin: newUser.isAdmin };
+        const payload = { id: newUser._id, name: newUser.name, isAdmin: newUser.isAdmin };
 
         const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 36000 });
 
@@ -96,7 +96,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
     if (user && (await bcrypt.compare(req.body.password, user.password))) {
 
-        const payload = { id: user._id, isAdmin: user.isAdmin };
+        const payload = { id: user._id, name: user.name, isAdmin: user.isAdmin };
 
         const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 36000 });
 
