@@ -56,12 +56,13 @@ function OrderListDisplay() {
                 {orders.map((order) => {
                     const { _id, user, totalPrice, isPaid, isDelivered, createdAt, paidAt, deliveredAt } = order;
 
+                    const { _id: id = "", name = "" } = user ? user : {};
                     return (
                         <tr key={_id}>
                             <td style={{ width: "200px" }}>{_id}</td>
                             <td style={{ width: "275px" }}>
-                                {user.name} {" "}
-                                {show && `(${user._id})`}
+                                {name} {" "}
+                                {show && `(${id})`}
                             </td>
                             <td>{formatPrice(totalPrice)}</td>
                             <td style={{ width: "100px" }}>

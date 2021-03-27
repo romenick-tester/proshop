@@ -69,7 +69,7 @@ function UserEditDisplay({ match }) {
                         <Form.Check
                             type="checkbox"
                             label="Is Admin"
-                            checked={user.isAdmin}
+                            checked={isAdmin}
                             onChange={(e) => setIsAdmin(e.target.checked)}
                         />
                     </Form.Group>

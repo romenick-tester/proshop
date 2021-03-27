@@ -45,6 +45,14 @@ function OrderDisplay({ match }) {
         }
     }, [dispatch, orderId, details, paid, delivered, created]);
 
+    if (loading) {
+        return <Loader />
+    }
+
+    if (error) {
+        return <Message variant="danger">{error}</Message>
+    }
+
     const successPaymentHandler = (paymentResult) => {
         dispatch(payOrder(orderId, paymentResult));
     }
