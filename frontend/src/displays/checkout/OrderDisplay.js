@@ -5,7 +5,7 @@ import { Row, Col, ListGroup, Table, Image, Card, Button } from "react-bootstrap
 import { PayPalButton } from "react-paypal-button-v2";
 import { getOrderDetails, payOrder, formatPrice, deliverOrder } from "../../manager";
 import { Message, Loader } from "../../components";
-import { PAY_ORDER_RESET, NEW_ORDER_RESET, DELIVER_ORDER_RESET } from '../../manager';
+import { ORDER_RESET } from '../../manager';
 import axios from "axios";
 
 function OrderDisplay({ match }) {
@@ -16,11 +16,8 @@ function OrderDisplay({ match }) {
 
     const { user: info } = useSelector(state => state.auth);
 
-    const orderPay = useSelector(state => state.orderPay);
-    const { loading, success } = orderPay;
-
     const orderAdmin = useSelector(state => state.orderAdmin);
-    const { delivered } = orderAdmin;
+    const { loading, error, created, paid, delivered } = orderAdmin;
 
     const { details } = useSelector(state => state.order);
 
@@ -36,10 +33,8 @@ function OrderDisplay({ match }) {
     }
 
     useEffect(() => {
-        if (!details || orderId !== details._id || success || delivered) {
-            dispatch({ type: NEW_ORDER_RESET });
-            dispatch({ type: PAY_ORDER_RESET });
-            dispatch({ type: DELIVER_ORDER_RESET });
+        if (!details || orderId !== details._id || (paid || delivered || created)) {
+            dispatch({ type: ORDER_RESET });
             dispatch(getOrderDetails(orderId));
         } else if (!details.isPaid) {
             if (!window.paypal) {
@@ -48,7 +43,7 @@ function OrderDisplay({ match }) {
                 setSdkReady(true);
             }
         }
-    }, [dispatch, orderId, details, success, delivered]);
+    }, [dispatch, orderId, details, paid, delivered, created]);
 
     const successPaymentHandler = (paymentResult) => {
         dispatch(payOrder(orderId, paymentResult));

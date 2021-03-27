@@ -7,8 +7,8 @@ import { Loader, Message } from "../reuseable";
 function OrderPricing({ history, submitOrder }) {
     const cart = useSelector(state => state.cart);
 
-    const order = useSelector(state => state.order);
-    const { loading, error, newOrder } = order;
+    const orderAdmin = useSelector(state => state.orderAdmin);
+    const { loading, error, newOrder } = orderAdmin;
 
     //calculations
     cart.itemsPrice = cart.cartItems.reduce((acc, { price, qty }) => acc + price * qty, 0);

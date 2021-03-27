@@ -28,10 +28,8 @@ import {
 import formatPrice from "./utils/helper";
 import addPaypalScript from "./utils/addScript";
 import {
-    PAY_ORDER_RESET,
-    NEW_ORDER_RESET,
     PRODUCT_RESET,
-    DELIVER_ORDER_RESET
+    ORDER_RESET
 } from "./redux";
 
 export {
@@ -62,8 +60,6 @@ export {
     payOrder,
     getAllOrders,
     deliverOrder,
-    PAY_ORDER_RESET,
-    NEW_ORDER_RESET,
     PRODUCT_RESET,
-    DELIVER_ORDER_RESET,
+    ORDER_RESET,
 };
