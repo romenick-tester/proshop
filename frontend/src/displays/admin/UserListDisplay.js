@@ -61,7 +61,7 @@ function UserListDisplay() {
                             <td>
                                 <a href={`mailto:${email}`}>{email}</a>
                             </td>
-                            <td>{isAdmin ? <FaCheck className="admin-check" /> : <FaTimes className="admin-x" />}</td>
+                            <td>{isAdmin ? <FaCheck className="icon-check" /> : <FaTimes className="icon-x" />}</td>
                             <td>
                                 <LinkContainer to={`/admin/user/${_id}/edit`} >
                                     <Button variant="light" className="btn-sm">

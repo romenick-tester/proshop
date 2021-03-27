@@ -12,6 +12,9 @@ import {
     PAY_ORDER_REQUEST,
     PAY_ORDER_SUCCESS,
     PAY_ORDER_ERROR,
+    GET_ORDER_ALL_REQUEST,
+    GET_ORDER_ALL_SUCCESS,
+    GET_ORDER_ALL_ERROR,
 } from "../constants/orderConstants";
 
 export const createOrder = (order) => async (dispatch, getState) => {
@@ -123,6 +126,33 @@ export const payOrder = (orderId, paymentResult) => async (dispatch, getState) =
 
         dispatch({
             type: PAY_ORDER_ERROR,
+            payload: msg
+        });
+    }
+}
+
+export const getAllOrders = () => async (dispatch, getState) => {
+    dispatch({ type: GET_ORDER_ALL_REQUEST });
+
+    try {
+        const { auth: { token } } = getState();
+
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "Auth-Token": `${token}`
+            }
+        }
+
+        const { data } = await axios.get("/api/orders/all", config);
+
+        dispatch({ type: GET_ORDER_ALL_SUCCESS, payload: data });
+
+    } catch (error) {
+        const msg = error.response && error.response.data.message ? error.response.data.message : error.message;
+
+        dispatch({
+            type: GET_ORDER_ALL_ERROR,
             payload: msg
         });
     }

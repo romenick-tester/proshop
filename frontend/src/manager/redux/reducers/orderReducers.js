@@ -14,6 +14,9 @@ import {
     ALL_ORDER_RESET,
     PAY_ORDER_RESET,
     NEW_ORDER_RESET,
+    GET_ORDER_ALL_REQUEST,
+    GET_ORDER_ALL_SUCCESS,
+    GET_ORDER_ALL_ERROR,
 } from "../constants/orderConstants";
 
 const orderInitialState = {
@@ -165,4 +168,30 @@ const payReducer = (state = payInitialState, action) => {
     }
 }
 
-export { orderReducer, payReducer };
+const orderAdminInitialState = {
+    loading: false,
+    error: null,
+    list: [],
+    details: {},
+}
+
+const orderAdminReducer = (state = orderAdminInitialState, action) => {
+    const { type, payload } = action;
+
+    switch (type) {
+
+        case GET_ORDER_ALL_REQUEST:
+            return { ...state, loading: true };
+
+        case GET_ORDER_ALL_SUCCESS:
+            return { ...state, loading: false, list: payload.orders, error: null };
+
+        case GET_ORDER_ALL_ERROR:
+            return { ...state, loading: false, list: {}, error: payload };
+
+        default:
+            return state;
+    }
+}
+
+export { orderReducer, payReducer, orderAdminReducer };

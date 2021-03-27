@@ -1,6 +1,6 @@
 import { getProducts, getProductDetails, createProduct, updateProduct, deleteProductById } from "./productActions";
 import { addToCart, removeFromCart, getShippingAddress, getPaymentMethod } from "./cartActions";
-import { createOrder, getOrderDetails, getOrders, payOrder } from "./orderActions";
+import { createOrder, getOrderDetails, getOrders, payOrder, getAllOrders } from "./orderActions";
 import {
     loginUser, registerUser, updateDetails, logoutUser,
     getUserDetails, getUsers, deleteUser, getUserById, updateUserById,
@@ -29,5 +29,6 @@ export {
     createOrder,
     getOrderDetails,
     getOrders,
-    payOrder
+    payOrder,
+    getAllOrders,
 }

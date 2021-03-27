@@ -1,7 +1,7 @@
 import { cartReducer } from "./cartReducers";
 import { productReducer, productByIdReducer } from "./productReducers";
 import { userReducer, userListReducer, userByIdReducer } from "./userReducers";
-import { orderReducer, payReducer } from "./orderReducers";
+import { orderReducer, payReducer, orderAdminReducer } from "./orderReducers";
 
 
 export {
@@ -13,4 +13,5 @@ export {
     userByIdReducer,
     orderReducer,
     payReducer,
+    orderAdminReducer,
 };

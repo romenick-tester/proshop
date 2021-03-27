@@ -1,29 +1,22 @@
 import React, { useEffect, useState } from 'react';
-//import styled from "styled-components";
-//import { useDispatch, useSelector } from "react-redux";
-//import { getUsers } from "../manager";
-//import { Table, Button } from "react-bootstrap";
+import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { FaCheck, FaEdit, FaTimes } from 'react-icons/fa';
+import { LinkContainer } from 'react-router-bootstrap';
+import { Table, Button } from "react-bootstrap";
 import { Loader, Message } from "../../components";
-//import { FaCheck, FaEdit, FaTimes, FaTrash } from 'react-icons/fa';
-//import { LinkContainer } from 'react-router-bootstrap';
+import { formatPrice, getAllOrders } from '../../manager';
 
 function OrderListDisplay() {
-    const [loading, setLoading] = useState(true);
-    const error = false;
+    const [show, setShow] = useState(false);
+    const dispatch = useDispatch();
 
-    //const dispatch = useDispatch();
-
-    //useSelector
+    const orderAdmin = useSelector(state => state.orderAdmin);
+    const { loading, error, list: orders } = orderAdmin;
 
     useEffect(() => {
-        const show = setTimeout(() => {
-            setLoading(false);
-        }, 3000);
-
-        return () => {
-            clearTimeout(show);
-        }
-    }, []);
+        dispatch(getAllOrders());
+    }, [dispatch]);
 
     if (loading) {
         return <Loader />
@@ -33,13 +26,82 @@ function OrderListDisplay() {
         return <Message variant="danger">{error}</Message>
     }
 
-    // const deleteOrderHandler = (orderId) => {
-    //     console.log(orderId);
-    // }
-
     return (
-        <h4>order list display component</h4>
+        <Table striped bordered hover responsive className="table-sm">
+            <THEAD>
+                <tr>
+                    <th>
+                        <h2>ORDERS</h2>
+                    </th>
+                </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>
+                        USER {" "}
+                        <span
+                            style={{ color: "skyblue", cursor: "pointer" }}
+                            onClick={() => setShow(!show)}
+                        >
+                            (show id)
+                        </span>
+                    </th>
+                    <th>TOTAL</th>
+                    <th>PAID</th>
+                    <th>DELIVERED</th>
+                    <th>DATE</th>
+                    <th></th>
+                </tr>
+            </THEAD>
+            <TBODY>
+                {orders.map((order) => {
+                    const { _id, user, totalPrice, isPaid, isDelivered, createdAt, paidAt } = order;
+
+                    return (
+                        <tr key={_id}>
+                            <td style={{ width: "200px" }}>{_id}</td>
+                            <td style={{ width: "275px" }}>
+                                {user.name} {" "}
+                                {show && `(${user._id})`}
+                            </td>
+                            <td>{formatPrice(totalPrice)}</td>
+                            <td style={{ width: "100px" }}>
+                                {!isPaid ? <FaTimes className="icon-x" /> : (
+                                    <>
+                                        <FaCheck className="icon-check" />
+                                        {paidAt.substring(0, 10)}
+                                    </>
+                                )}
+                            </td>
+                            <td style={{ width: "100px" }}>
+                                {isDelivered ? <FaCheck className="icon-check" /> : <FaTimes className="icon-x" />}
+                            </td>
+                            <td>{createdAt.substring(0, 10)}</td>
+                            <td>
+                                <LinkContainer to={`/order/${_id}`} >
+                                    <Button variant="light" className="btn-sm">
+                                        <FaEdit />
+                                    </Button>
+                                </LinkContainer>
+                                {/* <Button variant="danger" className="btn-sm" onClick={() => deleteUserHandler(_id)}>
+                                    <FaTrash />
+                                </Button> */}
+                            </td>
+                        </tr>
+                    )
+                })}
+            </TBODY>
+        </Table>
     )
 }
+
+const THEAD = styled.thead`
+    text-align: center;
+    background: #333;
+    color: white;
+`
+
+const TBODY = styled.tbody`
+    text-align: center;
+`
 
 export default OrderListDisplay;

@@ -10,7 +10,8 @@ import {
     orderReducer,
     payReducer,
     userListReducer,
-    userByIdReducer
+    userByIdReducer,
+    orderAdminReducer
 } from "./reducers";
 
 const reducers = combineReducers({
@@ -22,6 +23,7 @@ const reducers = combineReducers({
     userList: userListReducer,
     userById: userByIdReducer,
     productById: productByIdReducer,
+    orderAdmin: orderAdminReducer,
 });
 
 const initialState = {};

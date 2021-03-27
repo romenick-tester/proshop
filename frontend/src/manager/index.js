@@ -22,6 +22,7 @@ import {
     getOrderDetails,
     getOrders,
     payOrder,
+    getAllOrders,
 } from "./redux";
 
 import formatPrice from "./utils/helper";
@@ -54,6 +55,7 @@ export {
     getOrderDetails,
     getOrders,
     payOrder,
+    getAllOrders,
     PAY_ORDER_RESET,
     NEW_ORDER_RESET,
     PRODUCT_RESET,

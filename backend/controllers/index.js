@@ -1,5 +1,5 @@
 const { getAllProducts, getProductDetails, createProduct, updateProduct, deleteProduct } = require("./productsControllers");
-const { createOrder, getMyOrders, getMyOrderDetails, updateOrderPaid } = require("./orderControllers");
+const { createOrder, getMyOrders, getMyOrderDetails, updateOrderPaid, getAllOrders } = require("./orderControllers");
 const {
     userDetails, loginUser, registerUser, updateUserDetails,
     getUsers, deleteUser, updateUser, getUserById } = require("./userControllers");
@@ -18,6 +18,7 @@ module.exports = {
     getMyOrderDetails,
     getMyOrders,
     updateOrderPaid,
+    getAllOrders,
     getUsers,
     deleteUser,
     updateUser,

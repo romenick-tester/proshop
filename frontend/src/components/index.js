@@ -3,7 +3,6 @@ import { Footer, Header, Product, CheckoutSteps } from "./partials";
 import { DashboardForm, DashboardOrders } from "./dashboard";
 import { CartInfo, CartItems, OrderDetails, OrderPricings } from "./cart";
 import { ProductDetails, ProductAddToCart } from "./product";
-import { OrderedDetails, OrderedPrices } from "./order";
 
 export {
     Header,
@@ -22,6 +21,4 @@ export {
     OrderDetails,
     OrderPricings,
     ProductAddToCart,
-    OrderedDetails,
-    OrderedPrices,
 };

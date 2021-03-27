@@ -1,13 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const { createOrder, getMyOrders, getMyOrderDetails, updateOrderPaid } = require("../controllers");
-const { auth } = require("../settings");
+const { auth, admin } = require("../settings");
+const {
+    createOrder, getMyOrders, getMyOrderDetails,
+    updateOrderPaid, getAllOrders } = require("../controllers");
 
 router
     .route("/")
     .get(auth, getMyOrders)
     .post(auth, createOrder);
 
+router
+    .route("/all")
+    .get(auth, admin, getAllOrders);
 
 router
     .route("/order/:id")
