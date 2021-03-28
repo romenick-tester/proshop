@@ -5,15 +5,19 @@ const { Product } = require("../settings");
 //desc:         return all products
 //access:       public
 const getAllProducts = asyncHandler(async (req, res) => {
-    const products = await Product.find({});
+    const keyword = req.query.keyword ? {
+        name: {
+            $regex: req.query.keyword,
+            $options: "i"
+        }
+    } : {};
+
+    const products = await Product.find({ ...keyword });
 
     if (!products) {
-        //return res.status(404).json({ errors: [{ msg: "products not found!" }] });
         res.status(404)
         throw new Error("Products not found!");
     }
-
-    //throw new Error("some error"); for testing...
 
     res.status(200).json({ products });
 })
