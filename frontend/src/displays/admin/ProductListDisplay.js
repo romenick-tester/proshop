@@ -85,7 +85,7 @@ function ProductListDisplay({ match }) {
                     })}
                 </TBODY>
             </Table>
-            <Paginate pages={pages} page={page} isAdmin={true} />
+            <Paginate pages={pages} page={page} isAdmin={true} display="products" />
         </>
     )
 }

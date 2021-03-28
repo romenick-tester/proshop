@@ -43,7 +43,8 @@ function App() {
                     <Switch>
                         <PrivateRoute path="/admin/product/:id/edit" component={ProductEditDisplay} />
                         <PrivateRoute path="/admin/user/:id/edit" component={UserEditDisplay} />
-                        <PrivateRoute path="/admin/orders" component={OrderListDisplay} />
+                        <PrivateRoute path="/admin/orders/:pageNumber" component={OrderListDisplay} />
+                        <PrivateRoute path="/admin/orders" exact component={OrderListDisplay} />
                         <PrivateRoute path="/admin/products/:pageNumber" component={ProductListDisplay} />
                         <PrivateRoute path="/admin/products" axact component={ProductListDisplay} />
                         <PrivateRoute path="/admin/users" component={UserListDisplay} />

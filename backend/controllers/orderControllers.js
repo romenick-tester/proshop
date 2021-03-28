@@ -93,13 +93,17 @@ const updateOrderPaid = asyncHandler(async (req, res) => {
 //desc:         return current user's orders
 //access:       private
 const getAllOrders = asyncHandler(async (req, res) => {
-    const orders = await Order.find({}).populate("user", "id name");
+    const pageSize = 10;
+    const page = Number(req.query.pageNumber) || 1;
+
+    const count = await Order.count();
+    const orders = await Order.find({}).limit(pageSize).skip(pageSize * (page - 1)).populate("user", "id name");
 
     if (!orders) {
         res.status(404)
         throw new Error("Orders not found!");
     } else {
-        res.status(200).json({ orders });
+        res.status(200).json({ orders, page, pages: Math.ceil(count / pageSize) });
     }
 });
 

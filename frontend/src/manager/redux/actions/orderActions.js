@@ -134,7 +134,7 @@ export const payOrder = (orderId, paymentResult) => async (dispatch, getState) =
     }
 }
 
-export const getAllOrders = () => async (dispatch, getState) => {
+export const getAllOrders = (pageNumber = "") => async (dispatch, getState) => {
     dispatch({ type: GET_ORDER_ALL_REQUEST });
 
     try {
@@ -147,7 +147,7 @@ export const getAllOrders = () => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.get("/api/orders/all", config);
+        const { data } = await axios.get(`/api/orders/all?pageNumber=${pageNumber}`, config);
 
         dispatch({ type: GET_ORDER_ALL_SUCCESS, payload: data });
 

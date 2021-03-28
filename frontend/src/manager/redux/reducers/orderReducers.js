@@ -67,6 +67,8 @@ const orderAdminInitialState = {
     created: false,
     paid: false,
     delivered: false,
+    page: 1,
+    pages: 1,
 }
 
 const orderAdminReducer = (state = orderAdminInitialState, action) => {
@@ -91,7 +93,14 @@ const orderAdminReducer = (state = orderAdminInitialState, action) => {
             return { ...state, loading: false, created: true, newOrder: payload.newOrder, error: null };
 
         case GET_ORDER_ALL_SUCCESS:
-            return { ...state, loading: false, list: payload.orders, error: null };
+            return {
+                ...state,
+                loading: false,
+                list: payload.orders,
+                page: payload.page,
+                pages: payload.pages,
+                error: null
+            };
 
         case PAY_ORDER_SUCCESS:
             return { ...state, loading: false, paid: true, error: null };
