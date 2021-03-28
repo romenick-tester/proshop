@@ -15,6 +15,9 @@ import {
     DELETE_PRODUCT_BYID_SUCCESS,
     DELETE_PRODUCT_BYID_ERROR,
     PRODUCT_RESET,
+    REVIEW_PRODUCT_REQUEST,
+    REVIEW_PRODUCT_SUCCESS,
+    REVIEW_PRODUCT_ERROR,
 } from "../constants/productConstants";
 
 const initialState = {
@@ -79,10 +82,22 @@ const productReducer = (state = initialState, action) => {
     }
 }
 
-const productByIdReducer = (state = { created: false, updated: false, deleted: false }, action) => {
+const productByIdInitialState = {
+    loading: false,
+    error: null,
+    created: false,
+    updated: false,
+    deleted: false,
+    reviewed: false,
+}
+
+const productByIdReducer = (state = productByIdInitialState, action) => {
     const { type, payload } = action;
 
     switch (type) {
+
+        case REVIEW_PRODUCT_REQUEST:
+            return { ...state, loading: true };
 
         case CREATE_PRODUCT_REQUEST:
             return { ...state, loading: true };
@@ -94,6 +109,9 @@ const productByIdReducer = (state = { created: false, updated: false, deleted: f
             return { ...state, loading: true };
 
 
+        case REVIEW_PRODUCT_SUCCESS:
+            return { ...state, loading: false, reviewed: payload, error: null };
+
         case CREATE_PRODUCT_SUCCESS:
             return { ...state, loading: false, created: payload, error: null };
 
@@ -103,6 +121,9 @@ const productByIdReducer = (state = { created: false, updated: false, deleted: f
         case DELETE_PRODUCT_BYID_SUCCESS:
             return { ...state, loading: false, deleted: payload, error: null };
 
+
+        case REVIEW_PRODUCT_ERROR:
+            return { ...state, loading: false, reviewed: false, error: payload };
 
         case CREATE_PRODUCT_ERROR:
             return { ...state, loading: false, created: false, error: payload };
@@ -115,7 +136,15 @@ const productByIdReducer = (state = { created: false, updated: false, deleted: f
 
 
         case PRODUCT_RESET:
-            return { ...state, loading: false, deleted: false, created: false, updated: false, error: null };
+            return {
+                ...state,
+                loading: false,
+                deleted: false,
+                created: false,
+                updated: false,
+                reviewed: false,
+                error: null
+            };
 
         default:
             return state;

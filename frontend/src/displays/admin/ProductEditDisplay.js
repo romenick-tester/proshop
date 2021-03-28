@@ -143,11 +143,13 @@ function ProductEditDisplay({ match }) {
                         <Form.Label>Description</Form.Label>
                         <Form.Control
                             as="textarea"
-                            type="text"
+                            row="3"
                             placeholder={details.description || "Enter Description"}
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
-                        />
+                        >
+
+                        </Form.Control>
                     </Form.Group>
 
                     <Form.Group controlId="price">
