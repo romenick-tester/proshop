@@ -25,6 +25,8 @@ const orderInitialState = {
     loading: false,
     error: null,
     list: [],
+    page: 1,
+    pages: 1,
     details: {},
 }
 
@@ -40,7 +42,15 @@ const orderReducer = (state = orderInitialState, action) => {
             return { ...state, loading: true };
 
         case GET_ORDER_LIST_SUCCESS:
-            return { ...state, loading: false, list: payload.orders, details: {}, error: null };
+            return {
+                ...state,
+                loading: false,
+                list: payload.orders,
+                page: payload.page,
+                pages: payload.pages,
+                details: {},
+                error: null
+            };
 
         case GET_ORDER_DETAILS_SUCCESS:
             return { ...state, loading: false, list: [], details: payload.order, error: null };

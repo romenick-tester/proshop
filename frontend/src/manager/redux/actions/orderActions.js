@@ -49,7 +49,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
     }
 }
 
-export const getOrders = () => async (dispatch, getState) => {
+export const getOrders = (pageNumber = "") => async (dispatch, getState) => {
     dispatch({ type: GET_ORDER_LIST_REQUEST });
 
     try {
@@ -62,7 +62,7 @@ export const getOrders = () => async (dispatch, getState) => {
             }
         }
 
-        const { data } = await axios.get("/api/orders", config);
+        const { data } = await axios.get(`/api/orders?pageNumber=${pageNumber}`, config);
 
         dispatch({ type: GET_ORDER_LIST_SUCCESS, payload: data });
 

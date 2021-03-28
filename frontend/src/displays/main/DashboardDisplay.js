@@ -4,22 +4,23 @@ import { useSelector, useDispatch } from "react-redux";
 import { getOrders } from "../../manager";
 import {
     DashboardForm as DetailsForm,
-    DashboardOrders as OrdersList
+    DashboardOrders as OrdersList,
+    Paginate,
 } from "../../components";
 
-function DashboardDisplay() {
+function DashboardDisplay({ match }) {
     const dispatch = useDispatch();
+
+    const pageNumber = match.params.pageNumber || 1;
 
     const auth = useSelector(state => state.auth);
     const { authenticated, user } = auth;
 
-    const { list, paid } = useSelector(state => state.order);
+    const { list, paid, pages, page } = useSelector(state => state.order);
 
     useEffect(() => {
-        if (authenticated || paid) {
-            dispatch(getOrders());
-        }
-    }, [dispatch, authenticated, paid]);
+        dispatch(getOrders(pageNumber));
+    }, [dispatch, authenticated, paid, pageNumber]);
 
     useEffect(() => {
         if (list) {
@@ -33,9 +34,17 @@ function DashboardDisplay() {
                 <DetailsForm user={user} />
             </Col>
             <Col md={8}>
-                <OrdersList />
+                <Row>
+                    <Col>
+                        <OrdersList />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <Paginate pages={pages} page={page} root="dashboard" />
+                    </Col>
+                </Row>
             </Col>
-
         </Row>
     )
 }

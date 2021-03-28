@@ -48,11 +48,12 @@ function App() {
                         <PrivateRoute path="/admin/products/:pageNumber" component={ProductListDisplay} />
                         <PrivateRoute path="/admin/products" axact component={ProductListDisplay} />
                         <PrivateRoute path="/admin/users" component={UserListDisplay} />
-                        <PrivateRoute path="/order/:id" component={OrderDisplay} />
+                        <PrivateRoute path="/order/:id" exact component={OrderDisplay} />
                         <PrivateRoute path="/placeorder" component={PlaceOrderDisplay} />
                         <PrivateRoute path="/payment" component={PaymentDisplay} />
                         <PrivateRoute path="/shipping" component={ShippingDisplay} />
-                        <PrivateRoute path="/dashboard" component={DashboardDisplay} />
+                        <PrivateRoute path="/dashboard/:pageNumber" component={DashboardDisplay} />
+                        <PrivateRoute path="/dashboard" exact component={DashboardDisplay} />
                         <Route path="/register" component={RegisterDisplay} />
                         <Route path="/login" component={LoginDisplay} />
                         <Route path="/cart/:id?" component={CartDisplay} />
