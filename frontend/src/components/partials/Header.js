@@ -1,9 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutUser } from "../../manager";
 import { LinkContainer } from "react-router-bootstrap";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { FaShoppingCart, FaSignInAlt, FaUserAlt, FaUserFriends, FaGamepad } from "react-icons/fa";
+import { logoutUser } from "../../manager";
+import SearchBox from "./SearchBox";
 
 function Headers({ history }) {
     const dispatch = useDispatch();
@@ -18,6 +19,7 @@ function Headers({ history }) {
                     </LinkContainer>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
+                        <SearchBox history={history} />
                         <Nav className="ml-auto">
                             <LinkContainer to="/cart">
                                 <Nav.Link><FaShoppingCart /> Cart</Nav.Link>
@@ -27,7 +29,7 @@ function Headers({ history }) {
                                     <NavDropdown title={name} id="username">
                                         <NavDropdown.Item onClick={() => history.push("/dashboard")}>
                                             <FaUserAlt /> Dashboard
-                                    </NavDropdown.Item>
+                                        </NavDropdown.Item>
                                         <NavDropdown.Item onClick={() => dispatch(logoutUser())}>
                                             <FaSignInAlt /> Logout
                                     </NavDropdown.Item>

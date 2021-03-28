@@ -4,12 +4,14 @@ import { Row, Col } from "react-bootstrap";
 import { getProducts } from "../../manager";
 import { Message, Product, Loader } from "../../components";
 
-function HomeDisplay() {
+function HomeDisplay({ match }) {
+    const keyword = match.params.keyword;
+
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getProducts());
-    }, [dispatch])
+        dispatch(getProducts(keyword));
+    }, [dispatch, keyword])
 
     const product = useSelector(state => state.product);
     const { loading, error, list: products } = product;

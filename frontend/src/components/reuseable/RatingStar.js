@@ -25,7 +25,7 @@ function RatingStar({ rating, reviews, color }) {
             </span>
             {reviews && (
                 <small>
-                    {" "} | {" "} <strong> {reviews} reviews </strong>
+                    {" "} | {" "} <strong> {reviews} review{reviews > 1 && "s"} </strong>
                 </small>
             )}
         </div>

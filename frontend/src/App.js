@@ -55,6 +55,7 @@ function App() {
                         <Route path="/login" component={LoginDisplay} />
                         <Route path="/cart/:id?" component={CartDisplay} />
                         <Route path="/product/:id" component={SingleProductDisplay} />
+                        <Route path="/search/:keyword" component={HomeDisplay} />
                         <Route path="/" exact component={HomeDisplay} />
                         <Route path="*" component={NotFoundDisplay} />
                     </Switch>
