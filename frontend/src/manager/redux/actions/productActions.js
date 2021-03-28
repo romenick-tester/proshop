@@ -20,11 +20,11 @@ import {
     REVIEW_PRODUCT_ERROR,
 } from "../constants/productConstants";
 
-export const getProducts = (keyword = "") => async (dispatch) => {
+export const getProducts = (keyword = "", pageNumber = "") => async (dispatch) => {
     dispatch({ type: GET_PRODUCT_LIST_REQUEST });
 
     try {
-        const { data } = await axios.get(`/api/products?keyword=${keyword}`);
+        const { data } = await axios.get(`/api/products?keyword=${keyword}&pageNumber=${pageNumber}`);
 
         dispatch({ type: GET_PRODUCT_LIST_SUCCESS, payload: data });
 

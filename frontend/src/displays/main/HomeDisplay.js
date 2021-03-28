@@ -2,19 +2,21 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 import { getProducts } from "../../manager";
-import { Message, Product, Loader } from "../../components";
+import { Message, Product, Loader, Paginate } from "../../components";
 
 function HomeDisplay({ match }) {
     const keyword = match.params.keyword;
 
+    const pageNumber = match.params.pageNumber || 1;
+
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getProducts(keyword));
-    }, [dispatch, keyword])
-
     const product = useSelector(state => state.product);
-    const { loading, error, list: products } = product;
+    const { loading, error, list: products, pages, page } = product;
+
+    useEffect(() => {
+        dispatch(getProducts(keyword, pageNumber));
+    }, [dispatch, keyword, pageNumber])
 
     if (loading) {
         return <Loader />
@@ -36,6 +38,11 @@ function HomeDisplay({ match }) {
                     )
                 })}
             </Row>
+            <Paginate
+                pages={pages}
+                page={page}
+                keyword={keyword ? keyword : ""}
+            />
         </>
     )
 }

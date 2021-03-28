@@ -24,6 +24,8 @@ const initialState = {
     loading: false,
     details: {},
     list: [],
+    pages: 1,
+    page: 1,
     error: null,
 }
 
@@ -48,6 +50,8 @@ const productReducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
                 list: payload.products,
+                pages: payload.pages,
+                page: payload.page,
                 details: {},
                 error: null,
             }
