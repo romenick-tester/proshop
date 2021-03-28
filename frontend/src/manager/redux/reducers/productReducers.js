@@ -18,6 +18,9 @@ import {
     REVIEW_PRODUCT_REQUEST,
     REVIEW_PRODUCT_SUCCESS,
     REVIEW_PRODUCT_ERROR,
+    GET_TOP_PRODUCTS_REQUEST,
+    GET_TOP_PRODUCTS_SUCCESS,
+    GET_TOP_PRODUCTS_ERROR,
 } from "../constants/productConstants";
 
 const initialState = {
@@ -155,4 +158,29 @@ const productByIdReducer = (state = productByIdInitialState, action) => {
     }
 }
 
-export { productReducer, productByIdReducer };
+const carouselInitialState = {
+    loading: false,
+    error: null,
+    topList: [],
+}
+
+const carouselProductsReducer = (state = carouselInitialState, action) => {
+    const { type, payload } = action;
+
+    switch (type) {
+
+        case GET_TOP_PRODUCTS_REQUEST:
+            return { ...state, loading: true };
+
+        case GET_TOP_PRODUCTS_SUCCESS:
+            return { ...state, loading: false, topList: payload.products, error: null };
+
+        case GET_TOP_PRODUCTS_ERROR:
+            return { ...state, loading: false, topList: [], error: payload };
+
+        default:
+            return state;
+    }
+}
+
+export { productReducer, productByIdReducer, carouselProductsReducer };

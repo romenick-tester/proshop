@@ -4,7 +4,8 @@ const {
     createProduct,
     updateProduct,
     deleteProduct,
-    createProductReview
+    createProductReview,
+    getTopProducts
 } = require("./productsControllers");
 const {
     createOrder,
@@ -32,6 +33,7 @@ module.exports = {
     createProduct,
     updateProduct,
     createProductReview,
+    getTopProducts,
     userDetails,
     loginUser,
     registerUser,

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 import { getProducts } from "../../manager";
-import { Message, Product, Loader, Paginate } from "../../components";
+import { Message, Product, Loader, Paginate, ProductCarousel } from "../../components";
 
 function HomeDisplay({ match }) {
     const keyword = match.params.keyword;
@@ -28,6 +28,7 @@ function HomeDisplay({ match }) {
 
     return (
         <>
+            {!keyword && <ProductCarousel />}
             <h1>Latest Products</h1>
             <Row>
                 {products.map((product) => {

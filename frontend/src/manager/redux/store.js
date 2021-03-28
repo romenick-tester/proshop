@@ -5,6 +5,7 @@ import thunk from "redux-thunk";
 import {
     productReducer,
     productByIdReducer,
+    carouselProductsReducer,
     cartReducer,
     userReducer,
     orderReducer,
@@ -18,11 +19,11 @@ const reducers = combineReducers({
     auth: userReducer,
     cart: cartReducer,
     order: orderReducer,
-
     userList: userListReducer,
     userById: userByIdReducer,
     productById: productByIdReducer,
     orderAdmin: orderAdminReducer,
+    carousel: carouselProductsReducer,
 });
 
 const initialState = {};

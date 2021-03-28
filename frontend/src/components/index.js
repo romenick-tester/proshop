@@ -1,5 +1,5 @@
 import { FormContainer, Loader, Message, RatingStar } from "./reuseable";
-import { Footer, Header, Product, CheckoutSteps, Paginate } from "./partials";
+import { Footer, Header, Product, CheckoutSteps, Paginate, ProductCarousel } from "./partials";
 import { DashboardForm, DashboardOrders } from "./dashboard";
 import { CartInfo, CartItems, OrderDetails, OrderPricings } from "./cart";
 import { ProductDetails, ProductAddToCart, ProductReviews } from "./product";
@@ -23,4 +23,5 @@ export {
     ProductAddToCart,
     ProductReviews,
     Paginate,
+    ProductCarousel,
 };

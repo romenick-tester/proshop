@@ -8,12 +8,17 @@ const {
     updateProduct,
     deleteProduct,
     createProductReview,
+    getTopProducts,
 } = require("../controllers");
 
 router
     .route("/")
     .get(getAllProducts)
     .post(auth, admin, createProduct);
+
+router
+    .route("/top")
+    .get(getTopProducts);
 
 router
     .route("/:id")
