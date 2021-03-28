@@ -4,21 +4,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { FaPlus, FaEdit, FaTrash } from 'react-icons/fa';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Row, Col } from "react-bootstrap";
-import { Loader, Message } from "../../components";
+import { Loader, Message, Paginate } from "../../components";
 import { getProducts, deleteProductById, formatPrice, createProduct } from "../../manager";
 
-function ProductListDisplay() {
+function ProductListDisplay({ match }) {
+    const pageNumber = match.params.pageNumber || 1;
 
     const dispatch = useDispatch();
 
-    const { loading: product_loading, error: product_error, list: products } = useSelector(state => state.product);
+    const { loading: product_loading, error: product_error, list: products, pages, page } = useSelector(state => state.product);
 
     const productById = useSelector(state => state.productById);
     const { loading, error, deleted, created } = productById;
 
     useEffect(() => {
-        dispatch(getProducts());
-    }, [dispatch, deleted, created]);
+        dispatch(getProducts("", pageNumber));
+    }, [dispatch, deleted, created, pageNumber]);
 
     if (product_loading || (!product_loading && loading)) {
         return <Loader />
@@ -84,6 +85,7 @@ function ProductListDisplay() {
                     })}
                 </TBODY>
             </Table>
+            <Paginate pages={pages} page={page} isAdmin={true} />
         </>
     )
 }

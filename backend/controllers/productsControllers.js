@@ -5,7 +5,7 @@ const { Product } = require("../settings");
 //desc:         return all products
 //access:       public
 const getAllProducts = asyncHandler(async (req, res) => {
-    const pageSize = 2;
+    const pageSize = 4;
     const page = Number(req.query.pageNumber) || 1;
 
     const keyword = req.query.keyword ? {

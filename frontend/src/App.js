@@ -44,7 +44,8 @@ function App() {
                         <PrivateRoute path="/admin/product/:id/edit" component={ProductEditDisplay} />
                         <PrivateRoute path="/admin/user/:id/edit" component={UserEditDisplay} />
                         <PrivateRoute path="/admin/orders" component={OrderListDisplay} />
-                        <PrivateRoute path="/admin/products" component={ProductListDisplay} />
+                        <PrivateRoute path="/admin/products/:pageNumber" component={ProductListDisplay} />
+                        <PrivateRoute path="/admin/products" axact component={ProductListDisplay} />
                         <PrivateRoute path="/admin/users" component={UserListDisplay} />
                         <PrivateRoute path="/order/:id" component={OrderDisplay} />
                         <PrivateRoute path="/placeorder" component={PlaceOrderDisplay} />
