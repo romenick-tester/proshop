@@ -23,7 +23,7 @@ function ProductReviews({ reviews, createReviewHandler, productId }) {
                 return (
                     <ListGroup.Item key={id}>
                         <strong>{name}</strong>
-                        <RatingStar rating={rating} reviews={reviews.length} />
+                        <RatingStar rating={rating} />
                         <p>{createdAt.substring(0, 10)}</p>
                         <p>{comment}</p>
                     </ListGroup.Item>

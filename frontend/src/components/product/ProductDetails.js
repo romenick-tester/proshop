@@ -13,7 +13,7 @@ function ProductDetails({ name, rating, numReviews, price, description }) {
                 <RatingStar rating={rating} reviews={numReviews} />
             </ListGroup.Item>
             <ListGroup.Item>
-                Price: {formatPrice(price * 100)}
+                Price: {formatPrice(price)}
             </ListGroup.Item>
             <ListGroup.Item>
                 Description: {description}

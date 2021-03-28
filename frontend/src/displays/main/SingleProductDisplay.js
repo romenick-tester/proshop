@@ -60,7 +60,7 @@ function SingleProductDisplay({ match, history }) {
 
                 <Col md={3}>
                     <ProductAddToCart
-                        price={formatPrice(price * 100)}
+                        price={formatPrice(price)}
                         stocks={countInStock}
                         history={history}
                         id={productId}
