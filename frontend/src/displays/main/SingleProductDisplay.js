@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Image } from "react-bootstrap";
+import { Row, Col, Image, ListGroup, Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
     formatPrice,
@@ -12,14 +12,20 @@ import {
     Message, Loader,
     ProductDetails,
     ProductAddToCart,
-    ProductReviews,
+    //ProductReviews,
     Meta,
+    RatingStar
 } from "../../components";
 
 function SingleProductDisplay({ match, history }) {
+    const [rating, setRating] = useState(0);
+    const [comment, setComment] = useState("");
+
     const productId = match.params.id;
 
     const dispatch = useDispatch();
+
+    const { authenticated } = useSelector(state => state.auth);
 
     const productDetails = useSelector(state => state.product);
     const { loading, error, details: product } = productDetails;
@@ -32,16 +38,21 @@ function SingleProductDisplay({ match, history }) {
         dispatch(getProductDetails(productId));
     }, [dispatch, productId, reviewed])
 
-    if (loading) {
+    if (loading || (!loading && reviewing)) {
         return <Loader />;
     }
 
-    if (error) {
+    if (error || (!error && review_error)) {
         return <Message variant="warning" center>{error}</Message>;
     }
 
     const createReviewHandler = (review) => {
         dispatch(reviewProduct(productId, review))
+    }
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+        createReviewHandler({ rating, comment });
     }
 
     const { name, image, price, countInStock, review = [], purchaseable } = product;
@@ -73,14 +84,54 @@ function SingleProductDisplay({ match, history }) {
             <Row>
                 <Col md={6} className="mt-3">
                     <h3>Reviews</h3>
-                    {reviewing && <Loader />}
-                    {review_error && <Message variant="danger">{review_error}</Message>}
-                    {review.length === 0 && <Message variant="info"> No Reviews </Message>}
-                    <ProductReviews
-                        reviews={review}
-                        productId={productId}
-                        createReviewHandler={createReviewHandler}
-                    />
+                    <ListGroup variant="flush">
+                        {review.map((r) => {
+                            return (
+                                <ListGroup.Item key={r._id}>
+                                    <strong>{r.name}</strong>
+                                    <RatingStar rating={r.rating} />
+                                    <p>{r.createdAt.substring(0, 10)}</p>
+                                    <p>{r.comment}</p>
+                                </ListGroup.Item>
+                            )
+                        })}
+
+                        <ListGroup.Item>
+                            <h3>Write a customer review</h3>
+                            {!authenticated ? (
+                                <Message variant="info">
+                                    Please <Link to={`/login?redirect=product/${productId}`} >sign in</Link> to write a review.
+                                </Message>
+                            ) : (
+                                <Form onSubmit={submitHandler}>
+                                    <Form.Group controlId="rating">
+                                        <Form.Label>Rating</Form.Label>
+                                        <Form.Control
+                                            as="select"
+                                            value={rating}
+                                            onChange={(e) => setRating(e.target.value)} >
+                                            <option value="">Select...</option>
+                                            <option value="1">1 - Poor</option>
+                                            <option value="2">2 - Fair</option>
+                                            <option value="3">3 - Good</option>
+                                            <option value="4">4 - Great</option>
+                                            <option value="5">5 - Excellent</option>
+                                        </Form.Control>
+                                    </Form.Group>
+                                    <Form.Group controlId="comment">
+                                        <Form.Label>Comment</Form.Label>
+                                        <Form.Control
+                                            as="textarea"
+                                            row="3"
+                                            value={comment}
+                                            onChange={(e) => setComment(e.target.value)} >
+                                        </Form.Control>
+                                    </Form.Group>
+                                    <Button type="submit" className="btn btn-primary">submit</Button>
+                                </Form>
+                            )}
+                        </ListGroup.Item>
+                    </ListGroup>
                 </Col>
             </Row>
         </>

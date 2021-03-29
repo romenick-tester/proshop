@@ -29,8 +29,8 @@ function ProductEditDisplay({ match }) {
     const { loading, error, updated } = userById;
 
     useEffect(() => {
-        dispatch(getProductDetails(productId));
         dispatch({ type: PRODUCT_RESET });
+        dispatch(getProductDetails(productId));
     }, [dispatch, productId, updated]);
 
     if (product_loading || (!product_loading && loading)) {
@@ -73,7 +73,7 @@ function ProductEditDisplay({ match }) {
             name: name ? name : details.name,
             image: image ? image : details.image,
             price: price ? Number(price) : details.price,
-            purchaseable: purchaseable ? purchaseable : details.purchaseable,
+            purchaseable: purchaseable,
             countInStock: countInStock ? Number(countInStock) : details.countInStock,
             brand: brand ? brand : details.brand,
             category: category ? category : details.category,

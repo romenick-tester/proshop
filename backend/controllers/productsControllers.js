@@ -80,6 +80,7 @@ const updateProduct = asyncHandler(async (req, res) => {
         product.user = req.user.id || product.user
         product.image = req.body.image || product.image
         product.brand = req.body.brand || product.brand
+        product.purchaseable = req.body.purchaseable
         product.category = req.body.category || product.category
         product.countInStock = req.body.countInStock || product.countInStock
         product.description = req.body.description || product.description

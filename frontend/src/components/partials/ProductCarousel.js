@@ -11,7 +11,7 @@ function ProductCarousel() {
     const dispatch = useDispatch();
 
     const carousel = useSelector(state => state.carousel);
-    const { loading, error, topList } = carousel;
+    const { loading, error, topList = [] } = carousel;
 
     useEffect(() => {
         dispatch(getTopProducts());
