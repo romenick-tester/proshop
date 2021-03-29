@@ -26,7 +26,7 @@ function ProductCarousel() {
     }
 
     return (
-        <Carousel pause="hover">
+        <Carousel pause="hover" className="bg-dark">
             {topList.map((product) => {
                 const { _id, name, image, price } = product;
 
