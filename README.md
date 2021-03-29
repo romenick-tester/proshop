@@ -25,11 +25,3 @@
 | "multer": "^1.4.2" |
 
 ![Cert](https://i.ibb.co/Z832YpZ/completion-certificate.jpg)
-
-images:
-https://i.ibb.co/1QLWHCW/airpods.jpg
-https://i.ibb.co/D1r8Css/alexa.jpg
-https://i.ibb.co/zn05Cvq/camera.jpg
-https://i.ibb.co/X3Mdjyp/mouse.jpg
-https://i.ibb.co/pXNBbqJ/phone.jpg
-https://i.ibb.co/9Z20Bdd/playstation.jpg

@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "cd backend && node server",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend",
     "server": "cd backend && nodemon server",
     "client": "cd frontend && npm start",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "data:import": "cd backend && node ./settings/seeder",
-    "data:destroy": "cd backend && node ./settings/seeder -d",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm intall --prefix frontend && npm run build --prefix frontend"
+    "data:destroy": "cd backend && node ./settings/seeder -d"
   },
   "author": "Romenick Tester",
   "license": "MIT",
@@ -27,5 +27,8 @@
     "mongoose": "^5.11.8",
     "morgan": "^1.10.0",
     "multer": "^1.4.2"
+  },
+  "engines": {
+    "node": "14.15.1"
   }
 }

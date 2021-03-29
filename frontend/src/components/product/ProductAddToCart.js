@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Card, ListGroup, Row, Col, Form, Button } from "react-bootstrap";
 
-function ProductAddToCart({ price, stocks, history, id }) {
+function ProductAddToCart({ price, stocks, history, id, purchaseable }) {
     const [qty, setQty] = useState(1);
 
     function addToCart() {
@@ -55,8 +55,12 @@ function ProductAddToCart({ price, stocks, history, id }) {
                     <Button
                         type="button"
                         className="btn-block"
-                        disabled={!stocks}
-                        onClick={addToCart}>Add To Cart</Button>
+                        disabled={!stocks || !purchaseable}
+                        onClick={addToCart}
+                    >
+                        Add To Cart
+                    </Button>
+
                 </ListGroup.Item>
 
             </ListGroup>

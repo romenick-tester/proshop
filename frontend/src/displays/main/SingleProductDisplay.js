@@ -44,7 +44,7 @@ function SingleProductDisplay({ match, history }) {
         dispatch(reviewProduct(productId, review))
     }
 
-    const { name, image, price, countInStock, review = [] } = product;
+    const { name, image, price, countInStock, review = [], purchaseable } = product;
 
     return (
         <>
@@ -66,6 +66,7 @@ function SingleProductDisplay({ match, history }) {
                         stocks={countInStock}
                         history={history}
                         id={productId}
+                        purchaseable={purchaseable}
                     />
                 </Col>
             </Row>

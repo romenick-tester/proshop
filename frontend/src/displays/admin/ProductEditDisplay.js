@@ -13,6 +13,7 @@ function ProductEditDisplay({ match }) {
     const [countInStock, setCountInStock] = useState("");
     const [brand, setBrand] = useState("");
     const [category, setCategory] = useState("");
+    const [purchaseable, setPurchaseable] = useState(true);
     const [description, setDescription] = useState("");
     const [uploading, setUploading] = useState(false);
     const [notification, setNotification] = useState({ show: false, type: "", msg: "Updated!" });
@@ -72,6 +73,7 @@ function ProductEditDisplay({ match }) {
             name: name ? name : details.name,
             image: image ? image : details.image,
             price: price ? Number(price) : details.price,
+            purchaseable: purchaseable ? purchaseable : details.purchaseable,
             countInStock: countInStock ? Number(countInStock) : details.countInStock,
             brand: brand ? brand : details.brand,
             category: category ? category : details.category,
@@ -150,6 +152,15 @@ function ProductEditDisplay({ match }) {
                         >
 
                         </Form.Control>
+                    </Form.Group>
+
+                    <Form.Group controlId="purchaseable">
+                        <Form.Check
+                            type="checkbox"
+                            label="Purchaseable"
+                            checked={purchaseable}
+                            onChange={(e) => setPurchaseable(e.target.checked)}
+                        />
                     </Form.Group>
 
                     <Form.Group controlId="price">

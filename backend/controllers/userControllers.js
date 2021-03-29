@@ -1,6 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonWebToken");
+const jwt = require("jsonwebtoken");
 const { User } = require("../settings");
 
 //route:        GET /api/users

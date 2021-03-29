@@ -16,6 +16,7 @@ const ProductSchema = new Schema({
     category: { type: String, required: true },
     description: { type: String, required: true },
     review: [ReviewSchema],
+    purchaseable: { type: Boolean, required: true, default: true },
     numReviews: { type: Number, required: true, default: 0 },
     rating: { type: Number, required: true, default: 0 },
     price: { type: Number, required: true, default: 0 },
