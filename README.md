@@ -33,7 +33,3 @@ https://i.ibb.co/zn05Cvq/camera.jpg
 https://i.ibb.co/X3Mdjyp/mouse.jpg
 https://i.ibb.co/pXNBbqJ/phone.jpg
 https://i.ibb.co/9Z20Bdd/playstation.jpg
-
-
-### DAILY TASKS:
-1. shipping display form -> fix bug

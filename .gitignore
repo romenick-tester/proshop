@@ -42,3 +42,7 @@ test.js
 # git checkout <existing branch> OR git switch <existing branch>
 # git remote add origin <link from github repository>
 # git push -u origin <branch name>
+
+# resetting to certain commit in remote repos
+# git reset --hard <commit code>
+# git push -f origin 'master'
