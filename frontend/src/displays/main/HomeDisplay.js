@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import { getProducts } from "../../manager";
-import { Message, Product, Loader, Paginate, ProductCarousel } from "../../components";
+import { Message, Product, Loader, Paginate, ProductCarousel, Meta } from "../../components";
 
 function HomeDisplay({ match }) {
     const keyword = match.params.keyword;
@@ -28,7 +29,8 @@ function HomeDisplay({ match }) {
 
     return (
         <>
-            {!keyword && <ProductCarousel />}
+            <Meta />
+            {!keyword ? <ProductCarousel /> : <Link to="/" className="btn btn-dark">Go Back</Link>}
             <h1>Latest Products</h1>
             <Row>
                 {products.map((product) => {

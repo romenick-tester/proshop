@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, Image } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import {
     formatPrice,
     getProductDetails,
@@ -13,6 +13,7 @@ import {
     ProductDetails,
     ProductAddToCart,
     ProductReviews,
+    Meta,
 } from "../../components";
 
 function SingleProductDisplay({ match, history }) {
@@ -47,6 +48,7 @@ function SingleProductDisplay({ match, history }) {
 
     return (
         <>
+            <Meta title={name} />
             <Link to="/" className="btn btn-light my-2 rounded">Go back</Link>
 
             <Row>

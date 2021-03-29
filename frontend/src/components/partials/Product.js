@@ -2,8 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import { RatingStar } from "../reuseable";
-
-import "../../manager/styling/inline.css";
+import { formatPrice } from "../../manager";
 
 function Product({ product }) {
     const {
@@ -27,7 +26,7 @@ function Product({ product }) {
                     </div>
                 </Card.Text>
                 <Card.Text as="h3">
-                    £ {price}
+                    {formatPrice(price)}
                 </Card.Text>
             </Card.Body>
         </Card>
