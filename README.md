@@ -24,7 +24,7 @@
 | "morgan": "^1.10.0" |
 | "multer": "^1.4.2" |
 
-![Cert](https://i.ibb.co/Z832YpZ/completion-certificate.jpg)
+![Cert](https://i.ibb.co/NrcM2Vm/proshop-cert.png)
 
 fully working app:
 https://tester-proshopper.herokuapp.com/
