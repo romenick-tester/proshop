@@ -33,6 +33,8 @@ import {
     PRODUCT_RESET,
     ORDER_RESET
 } from "./redux";
+import logo from "./images/proshop.png";
+import navbar_css from "./styling/navbar.module.css";
 
 export {
     store,
@@ -66,4 +68,6 @@ export {
     deliverOrder,
     PRODUCT_RESET,
     ORDER_RESET,
+    logo,
+    navbar_css,
 };

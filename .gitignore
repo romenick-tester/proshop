@@ -32,7 +32,6 @@ debug.log
 node_modules/
 node_modules
 
-images/
 completion_certificate.jpg
 completion_certificate.pdf
 test.js

@@ -5,6 +5,7 @@ import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { FaShoppingCart, FaSignInAlt, FaUserAlt, FaUserFriends, FaGamepad } from "react-icons/fa";
 import { logoutUser } from "../../manager";
 import SearchBox from "./SearchBox";
+import { logo, navbar_css as css } from "../../manager";
 
 function Headers({ history }) {
     const dispatch = useDispatch();
@@ -13,9 +14,11 @@ function Headers({ history }) {
     return (
         <header>
             <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
-                <Container>
+                <Container id={css.header}>
                     <LinkContainer to="/">
-                        <Navbar.Brand>Proshop</Navbar.Brand>
+                        <Navbar.Brand>
+                            {logo ? <img src={logo} alt="logo" id={css.logo} /> : "ProShop"}
+                        </Navbar.Brand>
                     </LinkContainer>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
